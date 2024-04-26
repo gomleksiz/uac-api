@@ -8,7 +8,9 @@ def main():
     setup(
         name='uac-api',
         version=version,
-        author_email="huseyin.gomleksizoglu@stonebranch.com",
+        author_email="huseyim@gmail.com",
+        license="CC BY-NC 4.0",
+        url="https://github.com/gomleksiz/uac-api",
         packages=find_packages(),
         include_package_data=True,
         install_requires=[
