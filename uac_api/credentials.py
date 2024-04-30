@@ -43,7 +43,7 @@ class Credentials:
     def update_credential(self, payload=None, **args):
         url="/resources/credential"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_credential(self, payload=None, **args):
         '''
@@ -56,7 +56,7 @@ class Credentials:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_credential(self, query=None, **args):
         '''
@@ -76,7 +76,7 @@ class Credentials:
         url="/resources/credential/list"
         return self.uc.get(url)
 
-    def test_provider(self, payload=None, **args):
+    def test_provider(self, query=None, **args):
         '''
         Arguments:
         - credentialid: credentialid 
@@ -87,5 +87,5 @@ class Credentials:
           "credentialid": "credentialid", 
           "credentialname": "credentialname", 
         }
-        _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=parameters, json_data=None)

@@ -6,4 +6,4 @@ class Metrics:
 
     def get_metrics(self):
         url="/resources/metrics"
-        return self.uc.get(url)
+        return self.uc.get(url, parse_response=False)

@@ -35,7 +35,7 @@ class UniversalTemplates:
     def update_universal_template(self, payload=None, **args):
         url="/resources/universaltemplate"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_universal_template(self, payload=None, **args):
         '''
@@ -48,7 +48,7 @@ class UniversalTemplates:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_universal_template(self, query=None, **args):
         '''

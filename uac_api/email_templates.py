@@ -23,7 +23,7 @@ class EmailTemplates:
     def update_email_template(self, payload=None, **args):
         url="/resources/emailtemplate"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_email_template(self, payload=None, **args):
         '''
@@ -36,7 +36,7 @@ class EmailTemplates:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_email_template(self, query=None, **args):
         '''

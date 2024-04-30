@@ -152,3 +152,8 @@ def prepare_query_params(query, field_mapping, args):
                         append_if_not_none(parameters, var, key + "={var}")
         
     return parameters
+
+def prepare_query_payload(query, query_fields, payload, payload_fields, args):
+    _query = prepare_query_params(query, query_fields, args)
+    _payload = prepare_payload(payload, payload_fields, args)
+    return _query, _payload

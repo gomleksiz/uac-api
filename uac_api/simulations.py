@@ -31,7 +31,7 @@ class Simulations:
     def update_simulation(self, payload=None, **args):
         url="/resources/simulation"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_simulation(self, payload=None, **args):
         '''
@@ -44,7 +44,7 @@ class Simulations:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_simulation(self, query=None, **args):
         '''

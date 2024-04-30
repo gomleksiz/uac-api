@@ -41,7 +41,7 @@ class UniversalEventTemplates:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_universal_event_template(self, query=None, **args):
         '''

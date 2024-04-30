@@ -48,7 +48,7 @@ class Triggers:
           "triggername": "triggername", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def create_temp_trigger(self, payload=None, **args):
         '''
@@ -80,7 +80,7 @@ class Triggers:
     def update_trigger(self, payload=None, **args):
         url="/resources/trigger"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_trigger(self, payload=None, **args):
         '''
@@ -93,7 +93,7 @@ class Triggers:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_trigger(self, query=None, **args):
         '''

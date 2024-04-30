@@ -30,7 +30,7 @@ class Connections:
     def update_database_connection(self, payload=None, **args):
         url="/resources/databaseconnection"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_database_connection(self, payload=None, **args):
         '''
@@ -43,7 +43,7 @@ class Connections:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_database_connection(self, query=None, **args):
         '''
@@ -80,7 +80,7 @@ class Connections:
     def update_email_connection(self, payload=None, **args):
         url="/resources/emailconnection"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_email_connection(self, payload=None, **args):
         '''
@@ -93,7 +93,7 @@ class Connections:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_email_connection(self, query=None, **args):
         '''
@@ -130,7 +130,7 @@ class Connections:
     def update_peoplesoft_connection(self, payload=None, **args):
         url="/resources/peoplesoftconnection"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_peoplesoft_connection(self, payload=None, **args):
         '''
@@ -143,7 +143,7 @@ class Connections:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_peoplesoft_connection(self, query=None, **args):
         '''
@@ -180,7 +180,7 @@ class Connections:
     def update_sap_connection(self, payload=None, **args):
         url="/resources/sapconnection"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_sap_connection(self, payload=None, **args):
         '''
@@ -193,7 +193,7 @@ class Connections:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_sap_connection(self, query=None, **args):
         '''
@@ -230,7 +230,7 @@ class Connections:
     def update_snmp_connection(self, payload=None, **args):
         url="/resources/snmpmanager"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_snmp_connection(self, payload=None, **args):
         '''
@@ -243,7 +243,7 @@ class Connections:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_snmp_connection(self, query=None, **args):
         '''

@@ -17,4 +17,4 @@ class Ldaps:
     def update_ldap(self, payload=None, **args):
         url="/resources/ldap"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)

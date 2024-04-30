@@ -21,7 +21,7 @@ class Properties:
     def update_property(self, payload=None, **args):
         url="/resources/property"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def list_properties(self):
         url="/resources/property/list"

@@ -28,7 +28,7 @@ class Webhooks:
           "webhookname": "webhookname", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def get_webhook(self, query=None, **args):
         '''
@@ -47,7 +47,7 @@ class Webhooks:
     def update_webhook(self, payload=None, **args):
         url="/resources/webhook"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_webhook(self, payload=None, **args):
         '''
@@ -60,7 +60,7 @@ class Webhooks:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_webhook(self, query=None, **args):
         '''

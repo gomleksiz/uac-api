@@ -103,12 +103,20 @@ class TaskInstances:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def update_operational_memo(self, payload=None, **args):
+    def update_operational_memo(self, query=None, **args):
         url="/resources/taskinstance/updatememo"
-        _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        field_mapping={
+            "taskinstancename": "taskinstancename", 
+            "taskinstanceid": "taskinstanceid", 
+            "workflowinstancename": "workflowinstancename", 
+            "criteria": "criteria"
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        print(args)
+        payload = args.pop("memo", "")
+        return self.uc.put(url, json_data=payload, query=parameters, headers={"Content-Type": "text/plain", "Accept": "text/plain"}, parse_response=False)
 
-    def task_instance_set_priority(self, payload=None, **args):
+    def set_priority(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -260,7 +268,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_cancel(self, payload=None, **args):
+    def cancel(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -310,7 +318,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_dependencies(self, payload=None, **args):
+    def clear_dependencies(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -360,7 +368,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_exclusive(self, payload=None, **args):
+    def clear_exclusive(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -410,7 +418,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_instance_wait(self, payload=None, **args):
+    def clear_instance_wait(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -460,7 +468,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_predecessors(self, payload=None, **args):
+    def clear_predecessors(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -510,7 +518,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_resources(self, payload=None, **args):
+    def clear_resources(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -560,7 +568,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_clear_timewait(self, payload=None, **args):
+    def clear_timewait(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -610,7 +618,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_force_finish(self, payload=None, **args):
+    def force_finish(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -660,7 +668,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_force_finish_cancel(self, payload=None, **args):
+    def force_finish_cancel(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -710,7 +718,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_hold(self, payload=None, **args):
+    def hold(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -760,7 +768,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_release(self, payload=None, **args):
+    def release(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -810,7 +818,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_rerun(self, payload=None, **args):
+    def rerun(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -860,7 +868,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_retrieve_output(self, query=None, **args):
+    def retrieve_output(self, query=None, **args):
         '''
         Arguments:
         - taskinstancename: taskinstancename 
@@ -888,7 +896,7 @@ class TaskInstances:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def task_instance_skip(self, payload=None, **args):
+    def skip(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -938,7 +946,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_skip_path(self, payload=None, **args):
+    def skip_path(self, payload=None, **args):
         '''
         Arguments:
         - name: name 
@@ -988,7 +996,7 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def task_instance_unskip(self, payload=None, **args):
+    def unskip(self, payload=None, **args):
         '''
         Arguments:
         - name: name 

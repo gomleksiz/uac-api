@@ -1,4 +1,4 @@
-from .utils import prepare_query_params
+from .utils import prepare_query_params, prepare_payload
 
 # - create_business_service(service_data)
 # - delete_business_service(service_id)
@@ -28,7 +28,7 @@ class BusinessServices:
     def update_business_service(self, payload=None, **args):
         url="/resources/businessservice"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_business_service(self, payload=None, **args):
         '''

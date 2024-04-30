@@ -23,7 +23,7 @@ class UserGroups:
     def update_user_group(self, payload=None, **args):
         url="/resources/usergroup"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_user_group(self, payload=None, **args):
         '''
@@ -36,7 +36,7 @@ class UserGroups:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_user_group(self, query=None, **args):
         '''

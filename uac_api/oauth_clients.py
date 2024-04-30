@@ -29,7 +29,7 @@ class OAuthClients:
     def update_oauth_client(self, payload=None, **args):
         url="/resources/oauthclient"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_oauth_client(self, payload=None, **args):
         '''
@@ -42,7 +42,7 @@ class OAuthClients:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_oauth_client(self, query=None, **args):
         '''

@@ -1,6 +1,7 @@
 import requests
 import sys
 import json
+import re
 
 from .server_operations import ServerOperations
 from .metrics import Metrics
@@ -38,7 +39,7 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url
 import logging
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, headers=None) -> None:
@@ -140,6 +141,7 @@ class UniversalController():
                                         json=json_data,
                                         verify=self.ssl_verify)
             elif method == "PUT":
+                self.log.debug(f"Payload = {json_data}")
                 response = requests.put(uri,
                                         headers=_headers,
                                         auth=self.cridential,
@@ -166,7 +168,12 @@ class UniversalController():
                 resp_data = response.json()
                 self.log.debug("received data: %s..." % json.dumps(resp_data))
             else:
-                resp_data = response.text
+                resp_data = {"response": response.text}
+                # Match anything like UUID: 0f2bd3ea0fc34da08bb668ccceee8c5a
+                matched = re.search(r"([0-9a-f]{32})", response.text)
+                if matched:
+                    resp_data["sys_id"] = matched.group(0)
+
                 self.log.debug("received data: %s..." % resp_data)
         except Exception as unknown_exception:
             # no XML returned
