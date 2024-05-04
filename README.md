@@ -11,6 +11,8 @@ This Python package offers a comprehensive interface to the Stonebranch Universa
 - **Resource Management**: Handle connections, credentials, properties, and variables for full control over your automation environment.
 - **Audit and Reporting**: Access audit logs and generate reports for detailed insights into your automation activities.
 - **Customization and Extension**: Manage custom days, email templates, scripts, and more, allowing for extensive customization and functionality extension.
+- **Download Reports**: Download report in CSV, TSV, JSON, XML and PDF formats.
+
 
 ## Installation
 
@@ -210,10 +212,10 @@ print(response)
 - list_oms_servers(self)
 ## Properties:
 - get_property(self, query=None, **args)
-- update_property(self, payload=None, **args)
+- update_property(self, payload=None, query=None, **args)
 - list_properties(self)
 ## Reports:
-- run_report(self, query=None, **args)
+- run_report(self, query=None, report_format="csv", **args)
 ## Scripts:
 - get_script(self, query=None, **args)
 - update_script(self, payload=None, **args)
@@ -257,6 +259,7 @@ print(response)
 - task_instance_unskip(self, payload=None, **args)
 - list_status(self, payload=None, **args) - List Task Instances
 - wait_for_status(self, id, statuses=FINAL_STATUS, timeout=300, interval=10): Waits until the task instance reaches one of the given statuses.
+- set_complete(self, payload=None, **args)
 ## Tasks:
 - get_task(self, query=None, **args)
 - update_task(self, payload=None, **args)
@@ -277,8 +280,12 @@ print(response)
 - task_launch(self, payload=None, **args)
 - task_release(self, payload=None, **args)
 - task_set_timewait(self, payload=None, **args)
+- create_linux_task(self, name, agent, payload=None, command=None, script=None)
+- create_windows_task(self, name, agent, payload=None, command=None, script=None)
+- create_workflow(self, name, payload=None)
 ## Triggers:
 - list_qualifying_times(self, query=None, **args)
+- assign_execution_user_to_trigger(self, query=None, payload=None, **args)
 - unassign_execution_user(self, payload=None, **args)
 - create_temp_trigger(self, payload=None, **args)
 - get_trigger(self, query=None, **args)
@@ -287,6 +294,7 @@ print(response)
 - delete_trigger(self, query=None, **args)
 - list_triggers(self, payload=None, **args)
 - list_triggers_advanced(self, query=None, **args)
+- enable_disable(self, payload=None, **args)
 ## UniversalEventTemplates:
 - get_universal_event_template(self, query=None, **args)
 - update_universal_event_template(self, payload=None, **args)
@@ -359,6 +367,8 @@ print(response)
 - add_vertex(self, payload=None, **args)
 - delete_vertices(self, query=None, **args)
 - get_forecast(self, query=None, **args)
+- add_child_vertex(self, workflow_name, task_name, parent_task_name=None, parent_vertex_id=None, vertex_id=None, auto_arrange=True)
+- auto_arrange_vertices(self, workflow_name=None, payload=None)
 
 # Classes
 - Agents

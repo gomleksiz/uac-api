@@ -6,7 +6,7 @@ class Reports:
         self.headers = uc.headers
         self.uc = uc
 
-    def run_report(self, query=None, **args):
+    def run_report(self, query=None, report_format="csv", **args):
         '''
         Arguments:
         - reporttitle: reporttitle 
@@ -19,5 +19,20 @@ class Reports:
             "visibility": "visibility", 
             "groupname": "groupname", 
         }
+
+        _headers = self.headers
+        if str(report_format) == "csv":
+            _headers.update({"Accept": "text/csv"})
+        elif str(report_format) == "tab":
+            _headers.update({"Accept": "text/tab-separated-values"})
+        elif str(report_format) == "pdf":
+            _headers.update({"Accept": "application/pdf"})
+        elif str(report_format) == "png":
+            _headers.update({"Accept": "image/png"})        
+        elif str(report_format) == "xml":
+            _headers.update({"Accept": "application/xml"})
+        elif str(report_format) == "json":
+            _headers.update({"Accept": "application/json"})
+
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.get(url, query=parameters)
+        return self.uc.get(url, query=parameters, parse_response=False, headers=_headers)

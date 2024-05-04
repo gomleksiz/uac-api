@@ -10,7 +10,7 @@
 # - read_trigger(trigger_id)
 # - trigger_now(trigger_id)
 # - unassign_execution_user_from_trigger(trigger_id)
-from .utils import prepare_payload, prepare_query_params
+from .utils import prepare_payload, prepare_query_params, prepare_query_payload
 
 class Triggers:
     def __init__(self, uc):
@@ -36,7 +36,7 @@ class Triggers:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def unassign_execution_user(self, payload=None, **args):
+    def unassign_execution_user(self, query=None, **args):
         '''
         Arguments:
         - triggerid: triggerid 
@@ -47,8 +47,27 @@ class Triggers:
           "triggerid": "triggerid", 
           "triggername": "triggername", 
         }
-        _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        _query = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=_query, json_data=None, parse_response=False)
+
+    def assign_execution_user_to_trigger(self, query=None, payload=None, **args):
+        '''
+        Arguments:
+        - triggerid: triggerid 
+        - triggername: triggername 
+        '''
+        url="/resources/trigger/assignexecutionuser"
+        query_fields = {
+            "triggername": "triggername",
+            "triggerid": "triggerid"
+        }
+
+        payload_fields={
+          "username": "username", 
+          "username": "username", 
+        }
+        _query, _payload = prepare_query_payload(query, query_fields, payload, payload_fields, args)
+        return self.uc.post(url, query=_query, json_data=_payload, parse_response=False)
 
     def create_temp_trigger(self, payload=None, **args):
         '''
@@ -79,7 +98,10 @@ class Triggers:
 
     def update_trigger(self, payload=None, **args):
         url="/resources/trigger"
-        _payload = payload
+        field_mapping={
+          "enabled": "enabled", 
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_trigger(self, payload=None, **args):
@@ -166,3 +188,12 @@ class Triggers:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
+    
+    def enable_disable(self, payload=None, **args):
+        url="/resources/trigger/ops-enable-disable-trigger"
+        field_mapping={
+          "enable": "enable", 
+          "name": "name", 
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload)

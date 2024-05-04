@@ -25,9 +25,40 @@ import time
 # - unskip_task_instance(instance_id)
 
 class TaskInstances:
-    FINAL_STATUS = ["SUCCESS", "FAILED", "CANCELLED", "SKIPPED", "FINISHED"]
+    class Status:
+      ACTION_REQUIRED=60
+      CANCEL_PENDING=99
+      CANCELLED=130
+      CONFIRMATION_REQUIRED=125
+      DEFINED=0
+      EXCLUSIVE_REQUESTED=22
+      EXCLUSIVE_WAIT=23
+      EXECUTION_WAIT=33
+      FAILED=140
+      FINISHED=190
+      HELD=20
+      IN_DOUBT=110
+      QUEUED=40
+      RESOURCE_REQUESTED=25
+      RESOURCE_WAIT=30
+      RUNNING=80
+      RUNNING_PROBLEMS=81
+      SKIPPED=180
+      START_FAILURE=120
+      STARTED=70
+      SUBMITTED=43
+      SUCCESS=200
+      TIME_WAIT=15
+      UNDELIVERABLE=35
+      WAITING=10
+    
+    FINAL_STATUS = ["SUCCESS", "SKIPPED", "FINISHED", "START_FAILURE", "UNDELIVERABLE", "FAILED", "CANCELLED", "RUNNING/PROBLEMS", "IN_DOUBT"]
+    FINAL_STATUS_ID = [Status.START_FAILURE, Status.SUCCESS, Status.UNDELIVERABLE, Status.RUNNING_PROBLEMS, 
+                       Status.SKIPPED, Status.IN_DOUBT, Status.FINISHED, Status.FAILED, Status.CANCELLED]
     SUCCESS_STATUS = ["SUCCESS", "FINISHED", "SKIPPED"]
-    FAILED_STATUS = ["FAILED", "CANCELLED"]
+    SUCCESS_STATUS_ID = [Status.SUCCESS, Status.FINISHED, Status.SKIPPED]
+    FAILED_STATUS = ["FINISHED", "START_FAILURE", "UNDELIVERABLE", "FAILED", "CANCELLED", "RUNNING/PROBLEMS", "IN_DOUBT"]
+    FAILED_STATUS_ID = [Status.FAILED, Status.CANCELLED, Status.RUNNING_PROBLEMS]
     def __init__(self, uc) -> None:
         self.log = uc.log
         self.headers = uc.headers
@@ -115,6 +146,27 @@ class TaskInstances:
         print(args)
         payload = args.pop("memo", "")
         return self.uc.put(url, json_data=payload, query=parameters, headers={"Content-Type": "text/plain", "Accept": "text/plain"}, parse_response=False)
+
+    def set_complete(self, payload=None, **args):
+        '''
+        Arguments:
+        - name
+        - id
+        - workflowInstanceName
+        - criteria
+        - operationalMemo
+        '''
+        url="/resources/taskinstance/setcompleted"
+        field_mapping={
+            "name": "name", 
+            "id": "id", 
+            "workflowInstanceName": "workflowInstanceName", 
+            "criteria": "criteria",
+            "operationalMemo": "operationalMemo"
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload)
+
 
     def set_priority(self, payload=None, **args):
         '''

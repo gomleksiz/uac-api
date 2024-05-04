@@ -39,7 +39,7 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url
 import logging
 
-__version__ = "0.3.2"
+__version__ = "0.4.0"
 
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, headers=None) -> None:
@@ -113,8 +113,9 @@ class UniversalController():
             _headers = self.headers
         
         if self.token:
-            self.headers["Authorization"] = f"Bearer {self.token}"
+            _headers["Authorization"] = f"Bearer {self.token}"
 
+        self.log.debug(f"HEADERS => {_headers}")
         if len(query) > 0:
             query = "?" + "&".join(query)
         else:
@@ -158,8 +159,8 @@ class UniversalController():
         else:
             self.log.error(f"{uri} Response Code : {response.status_code}")
             self.log.error(f"Failed with reason : {response.text}")
+            response.raise_for_status()
             response = None
-            raise
         # if response:
         #     self.log.debug("response: " + response.text)
         resp_data = None
@@ -179,8 +180,10 @@ class UniversalController():
             # no XML returned
             self.log.error("Couldn't parse the response.")
             resp_data = response.text
-        self.log.debug("received data: %s..." % json.dumps(resp_data)[0:10])
+        # self.log.debug("received data: %s..." % json.dumps(resp_data)[0:10])
         self.log.debug("uac_rest_call end")
+        if _headers.get("Accept") in ["application/pdf", "image/png"]:
+            return response.content
         return resp_data
 
 

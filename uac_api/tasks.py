@@ -1,4 +1,6 @@
 from .utils import prepare_query_params, prepare_payload
+from .payload import LINUX_TASK_PAYLOAD, WINDOWS_TASK_PAYLOAD, WORKFLOW_PAYLOAD
+
 
 # - create_task(task_data)
 # - delete_task(task_id)
@@ -45,6 +47,64 @@ class Tasks:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
     
+    def create_linux_task(self, name, agent, payload=None, command=None, script=None):
+        '''
+        Arguments:
+        - name: name 
+        - agent: agent 
+        - command: command 
+        - script: script 
+        '''
+        if payload is None:
+            payload = LINUX_TASK_PAYLOAD
+
+        if script:
+            payload['script'] = script
+            payload['commandOrScript'] = 'Script'
+        else:
+            payload['command'] = command
+            payload['commandOrScript'] = 'Command'
+        payload['name'] = name
+        payload['agentVar'] = agent
+        return self.create_task(payload, retainSysIds=False)
+    
+    def create_windows_task(self, name, agent, payload=None, command=None, script=None):
+        '''
+        Arguments:
+        - name: name 
+        - agent: agent 
+        - command: command 
+        - script: script 
+        '''
+        if payload is None:
+            payload = WINDOWS_TASK_PAYLOAD
+
+        if script:
+            payload['script'] = script
+            payload['commandOrScript'] = 'Script'
+        else:
+            payload['command'] = command
+            payload['commandOrScript'] = 'Command'
+        payload['name'] = name
+        payload['agentVar'] = agent
+        payload['retainSysIds'] = False
+        return self.create_task(payload, retainSysIds=False)
+
+    def create_workflow(self, name, payload=None):
+        '''
+        Arguments:
+        - name: name 
+        - agent: agent 
+        - command: command 
+        - script: script 
+        '''
+        if payload is None:
+            payload = WORKFLOW_PAYLOAD
+
+        payload['name'] = name
+        return self.create_task(payload, retainSysIds=False)
+
+
     def clone_task(self, task_name, new_task_name):
         '''
         Copy the source task with a new name

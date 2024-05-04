@@ -93,5 +93,9 @@ class VirtualResources:
 
     def update_limit(self, payload=None, **args):
         url="/resources/virtual/ops-update-resource-limit"
-        _payload = payload
+        field_mapping={
+          "name": "name", 
+          "limit": "limit"
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)

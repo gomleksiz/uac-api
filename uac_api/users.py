@@ -24,6 +24,7 @@ class Users:
         url="/resources/user/changepassword"
         field_mapping={
           "userId": "userId", 
+          "name": "userId", 
           "newPassword": "newPassword", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
@@ -86,9 +87,13 @@ class Users:
         url="/resources/user/token"
         field_mapping={
           "retainSysIds": "retainSysIds", 
+          "userId":'userId',
+          "userName": "userName",
+          "name": "name",
+          "expiration": "expiration"
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def revoke_user_token(self, query=None, **args):
         '''

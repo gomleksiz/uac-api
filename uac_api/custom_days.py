@@ -31,7 +31,7 @@ class CustomDays:
     def update_custom_day(self, payload=None, **args):
         url="/resources/customday"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_custom_day(self, payload=None, **args):
         '''
@@ -44,7 +44,7 @@ class CustomDays:
           "retainSysIds": "retainSysIds", 
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_custom_day(self, query=None, **args):
         '''

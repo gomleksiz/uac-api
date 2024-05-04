@@ -4,7 +4,7 @@
 # - list_workflow_forecast(workflow_id)
 # - modify_workflow(workflow_id, **kwargs)
 # - read_workflow(workflow_id)
-from .utils import prepare_payload, prepare_query_params, prepare_query_payload
+from .utils import prepare_payload, prepare_query_params, prepare_query_payload, WorkflowsVertexPositions, safe_str_to_int
 
 class Workflows:
     def __init__(self, uc):
@@ -183,26 +183,31 @@ class Workflows:
         _query, _payload = prepare_query_payload(query, query_fields, payload, payload_fields, args)
         return self.uc.post(url, query=_query, json_data=_payload)
     
-    def add_child_vertex(self, workflow_name, parent_task_name, task_name, vertexX=None, vertexY=None, vertex_x_offset=100, vertex_y_offset=100):
+    def add_child_vertex(self, workflow_name, task_name, parent_task_name=None, parent_vertex_id=None, vertex_id=None, auto_arrange=True):
         '''
         Arguments:
         - workflow_name: workflowname 
         - parent_task_name
         - task_name: task 
-        - vertexX: vertexX 
-        - vertexY: vertexY 
+        - auto_arrange: True
         '''
-        response = self.get_vertices(workflowname=workflow_name, taskname=parent_task_name)
-        parent_task_vertex_id = response[0]["vertexId"]
-        if vertexX is None:
-            vertexX = str(int(response[0]["vertexX"]) + vertex_x_offset)
-        if vertexY is None:
-            vertexY = str(int(response[0]["vertexY"]) + vertex_y_offset)
-
-        response = self.add_vertex(workflowname=workflow_name, task=task_name, vertexX=vertexX, vertexY=vertexY)
-        new_vertex_id = response["vertexId"]
+        if parent_vertex_id:
+          parent_vertex_id = str(parent_vertex_id)
+          response = self.get_vertices(workflowname=workflow_name, vertex_id=parent_vertex_id)
+        else:
+          response = self.get_vertices(workflowname=workflow_name, taskname=parent_task_name)
+          parent_vertex_id = response[0]["vertexId"]
         
-        response = self.add_edge(workflowname=workflow_name, sourceid=parent_task_vertex_id, targetid=new_vertex_id)
+        if vertex_id:
+          new_vertex_id = str(vertex_id)
+          response = self.add_vertex(workflowname=workflow_name, task=task_name, vertex_id=new_vertex_id)
+        else:
+          response = self.add_vertex(workflowname=workflow_name, task=task_name)
+          new_vertex_id = response["vertexId"]
+        
+        response = self.add_edge(workflowname=workflow_name, sourceid=parent_vertex_id, targetid=new_vertex_id)
+        if auto_arrange:
+            _ = self.auto_arrange_vertices(workflow_name=workflow_name)
         return response
 
 
@@ -226,7 +231,33 @@ class Workflows:
           "vertexid": "vertexid", 
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.delete(url, query=parameters, parse_response=False)
+        return self.uc.delete(url, query=parameters)
+  
+    def auto_arrange_vertices(self, workflow_name=None, payload=None):
+        if payload:
+            workflow = payload
+        else:
+            workflow = self.uc.tasks.get_task(task_name=workflow_name)
+        positions = WorkflowsVertexPositions(workflow.get("workflowEdges", [])).get_vertex_positions()
+
+        vertices = workflow.get("workflowVertices", [])
+        large = (150, 135)
+        compact = (130, 100)
+        spacing = large
+        for vertex in vertices:
+            id = vertex['vertexId']
+            current_x = safe_str_to_int(vertex['vertexX'])
+            current_y = safe_str_to_int(vertex['vertexY'])
+            x = int(positions[id][0] * spacing[0] + 45)
+            y = int(positions[id][1] * spacing[1] + 30)
+            if current_x != x or current_y != y:
+                self.log.debug(f"VertexId {id} X: {vertex['vertexX']}=>{x} Y: {vertex['vertexY']}=>{y}")
+                vertex['vertexX'] = str(x)
+                vertex['vertexY'] = str(y)
+        if payload:
+            return workflow
+        else:
+            return self.uc.tasks.update_task(payload=workflow)
 
     def get_forecast(self, query=None, **args):
         '''

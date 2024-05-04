@@ -2,6 +2,7 @@ import json, re
 import requests
 import os
 from datetime import datetime
+import networkx as nx
 
 def append_if_not_none(list_name, variable, format, exclude_empty=True):
     if "{}" in format:
@@ -157,3 +158,67 @@ def prepare_query_payload(query, query_fields, payload, payload_fields, args):
     _query = prepare_query_params(query, query_fields, args)
     _payload = prepare_payload(payload, payload_fields, args)
     return _query, _payload
+
+def safe_str_to_int(s):
+    """
+    Attempts to convert a string to an integer safely. This version also handles
+    strings containing '.' or ',' by removing these characters before conversion,
+    assuming they are used as decimal points or thousand separators.
+
+    Parameters:
+    - s (str): The string to convert.
+
+    Returns:
+    - int: The integer value of the string if conversion is successful.
+    - None: If the string cannot be converted to an integer.
+    """
+    # Remove thousand separators (commas)
+    s = s.replace(',', '')
+    # Handle decimal points by splitting and taking the integer part
+    if '.' in s:
+        s = s.split('.')[0]
+    try:
+        return int(s)
+    except ValueError:
+        # Return None or handle the error as needed
+        return None
+
+class WorkflowsVertexPositions():
+    def __init__(self, egdes) -> None:
+        self.edges = egdes
+        self.positions = {}
+        self.next_leaf_x_position = 0
+
+    def calculate_positions(self, node, level=0):
+        children = list(self.G.successors(node))
+        if not children:
+            # Leaf node, assign X position and increment the counter
+            self.positions[node] = (self.next_leaf_x_position, level)
+            self.next_leaf_x_position += 1
+            return self.positions[node]
+        else:
+            # Calculate positions for children and determine this node's position
+            child_positions = [self.calculate_positions(child, level + 1) for child in children]
+        
+            x_positions = [pos[0] for pos in child_positions]
+            # # Parent's X is the average of its children's X positions
+            # x_position = sum(x_positions) / len(x_positions)
+            # self.positions[node] = (x_position, level)
+            # Centering Logic
+            leftmost_child_x = min(x_positions)
+            rightmost_child_x = max(x_positions)
+            center_x = (leftmost_child_x + rightmost_child_x) / 2  
+            self.positions[node] = (center_x, level)
+            return self.positions[node]
+
+    def get_vertex_positions(self):
+        self.G = nx.DiGraph()
+        for edge in self.edges:
+            self.G.add_edge(edge['sourceId']['value'], edge['targetId']['value'])
+
+        root_nodes = [n for n, d in self.G.in_degree() if d == 0]
+        for root in root_nodes:
+            self.calculate_positions(root)
+
+        return self.positions
+    
