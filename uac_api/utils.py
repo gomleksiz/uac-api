@@ -182,6 +182,20 @@ def safe_str_to_int(s):
     except ValueError:
         # Return None or handle the error as needed
         return None
+    
+def filter_secrets(output, secrets, placeholder='***'):
+    """
+    Replaces occurrences of secrets within the output string with a placeholder.
+    
+    :param output: The output string that may contain secrets.
+    :param secrets: A list of secret strings to be filtered out.
+    :param placeholder: The placeholder text to replace secrets with. Defaults to '<secret>'.
+    :return: The output string with secrets replaced by the placeholder.
+    """
+    for secret in secrets:
+        if secret in output:
+            output = output.replace(secret, placeholder)
+    return output
 
 class WorkflowsVertexPositions():
     def __init__(self, egdes) -> None:

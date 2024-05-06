@@ -36,10 +36,10 @@ from .email_templates import EmailTemplates
 from .oauth_clients import OAuthClients
 from .calendars import Calendars
 from .universal_templates import UniversalTemplates
-from .utils import strip_url
+from .utils import strip_url, filter_secrets
 import logging
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, headers=None) -> None:
@@ -54,10 +54,15 @@ class UniversalController():
         self.token = token
         self.ssl_verify = ssl_verify
         self.cridential = credential
+        self.secrets = []
+        if token:
+            self.secrets.append(token)
+        else:
+            self.secrets.append(credential[1])
         if headers:
             self.headers = headers
         else:
-            self.headers = {"content-type": "application/json"}
+            self.headers = {"content-type": "application/json", "accept": "application/json"}
         self.server_operations = ServerOperations(self)
         self.metrics = Metrics(self)
         self.audits = Audits(self)
@@ -106,7 +111,7 @@ class UniversalController():
         return self.call("DELETE", resource, query, headers, json_data, parse_response)
 
     def call(self, method, resource, query, headers, json_data, parse_response):
-        self.log.debug("uac_rest_call start")
+        self.log.debug(filter_secrets("uac_rest_call start", self.secrets))
         if headers:
             _headers = headers
         else:
@@ -115,7 +120,7 @@ class UniversalController():
         if self.token:
             _headers["Authorization"] = f"Bearer {self.token}"
 
-        self.log.debug(f"HEADERS => {_headers}")
+        self.log.debug(filter_secrets(f"HEADERS => {_headers}", self.secrets))
         if len(query) > 0:
             query = "?" + "&".join(query)
         else:
@@ -129,7 +134,7 @@ class UniversalController():
                                         auth=self.cridential,
                                         verify=self.ssl_verify)
             elif method == "POST":
-                self.log.debug(f"Payload = {json_data}")
+                self.log.debug(filter_secrets(f"Payload = {json_data}", self.secrets))
                 response = requests.post(uri,
                                         headers=_headers,
                                         auth=self.cridential,
@@ -142,7 +147,7 @@ class UniversalController():
                                         json=json_data,
                                         verify=self.ssl_verify)
             elif method == "PUT":
-                self.log.debug(f"Payload = {json_data}")
+                self.log.debug(filter_secrets(f"Payload = {json_data}", self.secrets))
                 response = requests.put(uri,
                                         headers=_headers,
                                         auth=self.cridential,
@@ -162,12 +167,12 @@ class UniversalController():
             response.raise_for_status()
             response = None
         # if response:
-        #     self.log.debug("response: " + response.text)
+        #     self.log.debug(filter_secrets("response: " + response.text, self.secrets))
         resp_data = None
         try:
             if parse_response:
                 resp_data = response.json()
-                self.log.debug("received data: %s..." % json.dumps(resp_data))
+                self.log.debug(filter_secrets("received data: %s..." % json.dumps(resp_data), self.secrets))
             else:
                 resp_data = {"response": response.text}
                 # Match anything like UUID: 0f2bd3ea0fc34da08bb668ccceee8c5a
@@ -175,13 +180,13 @@ class UniversalController():
                 if matched:
                     resp_data["sys_id"] = matched.group(0)
 
-                self.log.debug("received data: %s..." % resp_data)
+                self.log.debug(filter_secrets("received data: %s..." % resp_data, self.secrets))
         except Exception as unknown_exception:
             # no XML returned
             self.log.error("Couldn't parse the response.")
             resp_data = response.text
-        # self.log.debug("received data: %s..." % json.dumps(resp_data)[0:10])
-        self.log.debug("uac_rest_call end")
+        # self.log.debug(filter_secrets("received data: %s..." % json.dumps(resp_data)[0:10], self.secrets))
+        self.log.debug(filter_secrets("uac_rest_call end", self.secrets))
         if _headers.get("Accept") in ["application/pdf", "image/png"]:
             return response.content
         return resp_data

@@ -1,5 +1,5 @@
-from .utils import prepare_query_params, prepare_payload
-from .payload import LINUX_TASK_PAYLOAD, WINDOWS_TASK_PAYLOAD, WORKFLOW_PAYLOAD
+from .utils import prepare_query_params, prepare_payload, set_if_not_none
+from .payload import LINUX_TASK_PAYLOAD, WINDOWS_TASK_PAYLOAD, WORKFLOW_PAYLOAD, FTP_TASK_PAYLOAD
 
 
 # - create_task(task_data)
@@ -78,7 +78,7 @@ class Tasks:
         '''
         if payload is None:
             payload = WINDOWS_TASK_PAYLOAD
-
+        
         if script:
             payload['script'] = script
             payload['commandOrScript'] = 'Script'
@@ -88,6 +88,33 @@ class Tasks:
         payload['name'] = name
         payload['agentVar'] = agent
         payload['retainSysIds'] = False
+        return self.create_task(payload, retainSysIds=False)
+    
+    def create_ftp_task(self, name, agent, payload=None, server=None, credential_name=None, remote_file=None, local_file=None, command="GET", server_type="SFTP"):
+        '''
+        Arguments:
+        - name: name 
+        - agent: agent 
+        - credential_name
+        - remote_file
+        - local_file
+        - command: Default GET
+        - server_type: Default SFTP
+        '''
+        if payload is None:
+            payload = FTP_TASK_PAYLOAD
+
+        payload['name'] = name
+        payload['agentVar'] = agent
+        payload['retainSysIds'] = False
+
+        set_if_not_none(payload, "remoteServer", server)
+        set_if_not_none(payload, "localFilename", local_file)
+        set_if_not_none(payload, "remoteCredVar", credential_name)
+        set_if_not_none(payload, "remoteFilename", remote_file)
+        set_if_not_none(payload, "serverType", server_type)
+        set_if_not_none(payload, "transferDirection", command)
+
         return self.create_task(payload, retainSysIds=False)
 
     def create_workflow(self, name, payload=None):
