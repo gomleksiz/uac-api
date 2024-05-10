@@ -111,7 +111,7 @@ class UniversalTemplates:
             "excludeExtension": "excludeExtension", 
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.get(url, query=parameters)
+        return self.uc.get(url, query=parameters, headers={"Accept": "application/octet-stream"}, parse_response=False)
 
     def set_template_icon(self, payload=None, **args):
         '''
@@ -138,3 +138,19 @@ class UniversalTemplates:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
+    
+    def import_template(self, query=None, data=None, **args):
+        '''
+        Arguments:
+        - templateid: templateid 
+        - templatename: templatename 
+        - excludeExtension: excludeExtension 
+        '''
+        url="/resources/universaltemplate/importtemplate"
+        field_mapping={
+            "templateid": "templateid", 
+            "templatename": "templatename", 
+            "excludeExtension": "excludeExtension", 
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post_data(url, query=parameters, headers={"Content-Type": "application/zip"}, parse_response=False, data=data)

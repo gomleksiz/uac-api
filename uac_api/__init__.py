@@ -39,7 +39,7 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url, filter_secrets
 import logging
 
-__version__ = "0.4.1"
+__version__ = "0.4.5"
 
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, headers=None) -> None:
@@ -99,19 +99,23 @@ class UniversalController():
 
 
     def post(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("POST", resource, query, headers, json_data, parse_response)
-
+        return self.call("POST", resource, query, headers, data=json_data, parse_response=parse_response)
+    
     def put(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("PUT", resource, query, headers, json_data, parse_response)
+        return self.call("PUT", resource, query, headers, data=json_data, parse_response=parse_response)
 
     def get(self, resource, query="", headers=None, parse_response=True):
-        return self.call("GET", resource, query, headers, json_data=None, parse_response=parse_response)
+        return self.call("GET", resource, query, headers, data=None, parse_response=parse_response)
 
     def delete(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("DELETE", resource, query, headers, json_data, parse_response)
+        return self.call("DELETE", resource, query, headers, data=json_data, parse_response=parse_response)
+    
+    def post_data(self, resource, query="", data=None, headers=None, parse_response=True):
+        return self.call("POST", resource, query, headers, data, parse_response, binary=True)
 
-    def call(self, method, resource, query, headers, json_data, parse_response):
+    def call(self, method, resource, query, headers, data, parse_response, binary=False):
         self.log.debug(filter_secrets("uac_rest_call start", self.secrets))
+        self.log.debug(headers)
         if headers:
             _headers = headers
         else:
@@ -134,24 +138,32 @@ class UniversalController():
                                         auth=self.cridential,
                                         verify=self.ssl_verify)
             elif method == "POST":
-                self.log.debug(filter_secrets(f"Payload = {json_data}", self.secrets))
-                response = requests.post(uri,
-                                        headers=_headers,
-                                        auth=self.cridential,
-                                        json=json_data,
-                                        verify=self.ssl_verify)
+                if not binary:
+                    self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
+                    response = requests.post(uri,
+                                            headers=_headers,
+                                            auth=self.cridential,
+                                            json=data,
+                                            verify=self.ssl_verify)
+                else:
+                    self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
+                    response = requests.post(uri,
+                                            headers=_headers,
+                                            auth=self.cridential,
+                                            data=data,
+                                            verify=self.ssl_verify)
             elif method == "DELETE":
                 response = requests.delete(uri,
                                         headers=_headers,
                                         auth=self.cridential,
-                                        json=json_data,
+                                        json=data,
                                         verify=self.ssl_verify)
             elif method == "PUT":
-                self.log.debug(filter_secrets(f"Payload = {json_data}", self.secrets))
+                self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
                 response = requests.put(uri,
                                         headers=_headers,
                                         auth=self.cridential,
-                                        json=json_data,
+                                        json=data,
                                         verify=self.ssl_verify)
             else:
                 self.log.error(f"Unknown method {method}")
@@ -187,7 +199,7 @@ class UniversalController():
             resp_data = response.text
         # self.log.debug(filter_secrets("received data: %s..." % json.dumps(resp_data)[0:10], self.secrets))
         self.log.debug(filter_secrets("uac_rest_call end", self.secrets))
-        if _headers.get("Accept") in ["application/pdf", "image/png"]:
+        if _headers.get("Accept") in ["application/pdf", "image/png", "application/octet-stream"]:
             return response.content
         return resp_data
 
