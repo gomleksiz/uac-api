@@ -51,6 +51,33 @@ class TaskInstances:
       TIME_WAIT=15
       UNDELIVERABLE=35
       WAITING=10
+
+    class StatusValue:
+      ACTION_REQUIRED="ACTION_REQUIRED"
+      CANCEL_PENDING="CANCEL_PENDING"
+      CANCELLED="CANCELLED"
+      CONFIRMATION_REQUIRED="CONFIRMATION_REQUIRED"
+      DEFINED="DEFINED"
+      EXCLUSIVE_REQUESTED="EXCLUSIVE_REQUESTED"
+      EXCLUSIVE_WAIT="EXCLUSIVE_WAIT"
+      EXECUTION_WAIT="EXECUTION_WAIT"
+      FAILED="FAILED"
+      FINISHED="FINISHED"
+      HELD="HELD"
+      IN_DOUBT="IN_DOUBT"
+      QUEUED="QUEUED"
+      RESOURCE_REQUESTED="RESOURCE_REQUESTED"
+      RESOURCE_WAIT="RESOURCE_WAIT"
+      RUNNING="RUNNING"
+      RUNNING_PROBLEMS="RUNNING/PROBLEMS"
+      SKIPPED="SKIPPED"
+      START_FAILURE="START_FAILURE"
+      STARTED="STARTED"
+      SUBMITTED="SUBMITTED"
+      SUCCESS="SUCCESS"
+      TIME_WAIT="TIME_WAIT"
+      UNDELIVERABLE="UNDELIVERABLE"
+      WAITING="WAITING"
     
     FINAL_STATUS = ["SUCCESS", "SKIPPED", "FINISHED", "START_FAILURE", "UNDELIVERABLE", "FAILED", "CANCELLED", "RUNNING/PROBLEMS", "IN_DOUBT"]
     FINAL_STATUS_ID = [Status.START_FAILURE, Status.SUCCESS, Status.UNDELIVERABLE, Status.RUNNING_PROBLEMS, 
@@ -1098,116 +1125,100 @@ class TaskInstances:
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
+    def list(self, payload=None, **args):
+        '''
+        Arguments:
+        - agent_name = agentName
+        - business_services = businessServices
+        - custom_field1 = customField1
+        - custom_field2 = customField2
+        - execution_user = executionUser
+        - instance_number = instanceNumber
+        - late = late
+        - late_early = lateEarly
+        - name = name
+        - operational_memo = operationalMemo
+        - status = status
+        - status_description = statusDescription
+        - sys_id = sysId
+        - task_id = taskId
+        - task_name = taskName
+        - template_id = templateId
+        - template_name = templateName
+        - trigger_id = triggerId
+        - trigger_name = triggerName
+        - type = type
+        - updated_time = updatedTime
+        - updated_time_type = updatedTimeType
+        - workflow_definition_id = workflowDefinitionId
+        - workflow_definition_name = workflowDefinitionName
+        - workflow_instance_criteria = workflowInstanceCriteria
+        - workflow_instance_id = workflowInstanceId
+        - workflow_instance_name = workflowInstanceName
+        '''
+        return self.list_status(payload=payload, **args)
+
     def list_status(self, payload=None, **args):
         '''
         Arguments:
-        - name: name 
-        - id: sysId 
-        - criteria: criteria 
-        - workflowInstanceName: workflowInstanceName 
-        - resourceName: resourceName 
-        - recursive: recursive 
-        - predecessorName: predecessorName 
-        - waitType: waitType 
-        - waitTime: waitTime 
-        - waitDuration: waitDuration 
-        - waitSeconds: waitSeconds 
-        - waitDayConstraint: waitDayConstraint 
-        - delayType: delayType 
-        - delayDuration: delayDuration 
-        - delaySeconds: delaySeconds 
-        - halt: halt 
-        - priorityType: priorityType 
-        - taskStatus: taskStatus 
-        - operationalMemo: operationalMemo 
-        - holdReason: holdReason 
-        - agentName: agentName 
-        - workflowInstanceCriteria: workflowInstanceCriteria 
-        - workflowInstanceId: workflowInstanceId 
-        - status: status 
-        - type: type 
-        - executionUser: executionUser 
-        - lateStart: lateStart 
-        - lateFinish: lateFinish 
-        - earlyFinish: earlyFinish 
-        - startedLate: startedLate 
-        - finishedLate: finishedLate 
-        - finishedEarly: finishedEarly 
-        - late: late 
-        - lateEarly: lateEarly 
-        - businessServices: businessServices 
-        - updatedTimeType: updatedTimeType 
-        - updatedTime: updatedTime 
-        - sysId: sysId 
-        - instanceNumber: instanceNumber 
-        - taskId: taskId 
-        - taskName: taskName 
-        - customField1: customField1 
-        - customField2: customField2 
-        - triggerId: triggerId 
-        - triggerName: triggerName 
-        - workflowDefinitionId: workflowDefinitionId 
-        - workflowDefinitionName: workflowDefinitionName 
-        - statusDescription: statusDescription 
-        - templateId: templateId 
-        - templateName: templateName 
-        - responseFields: responseFields 
-        - instanceOutputType: instanceOutputType 
+        - agent_name = agentName
+        - business_services = businessServices
+        - custom_field1 = customField1
+        - custom_field2 = customField2
+        - execution_user = executionUser
+        - instance_number = instanceNumber
+        - late = late
+        - late_early = lateEarly
+        - name = name
+        - operational_memo = operationalMemo
+        - status = status
+        - status_description = statusDescription
+        - sys_id = sysId
+        - task_id = taskId
+        - task_name = taskName
+        - template_id = templateId
+        - template_name = templateName
+        - trigger_id = triggerId
+        - trigger_name = triggerName
+        - type = type
+        - updated_time = updatedTime
+        - updated_time_type = updatedTimeType
+        - workflow_definition_id = workflowDefinitionId
+        - workflow_definition_name = workflowDefinitionName
+        - workflow_instance_criteria = workflowInstanceCriteria
+        - workflow_instance_id = workflowInstanceId
+        - workflow_instance_name = workflowInstanceName
         '''
         url="/resources/taskinstance/list"
         field_mapping={
-          "name": "name", 
-          "id": "sysId", 
-          "criteria": "criteria", 
-          "workflowInstanceName": "workflowInstanceName", 
-          "resourceName": "resourceName", 
-          "recursive": "recursive", 
-          "predecessorName": "predecessorName", 
-          "waitType": "waitType", 
-          "waitTime": "waitTime", 
-          "waitDuration": "waitDuration", 
-          "waitSeconds": "waitSeconds", 
-          "waitDayConstraint": "waitDayConstraint", 
-          "delayType": "delayType", 
-          "delayDuration": "delayDuration", 
-          "delaySeconds": "delaySeconds", 
-          "halt": "halt", 
-          "priorityType": "priorityType", 
-          "taskStatus": "taskStatus", 
-          "operationalMemo": "operationalMemo", 
-          "holdReason": "holdReason", 
-          "agentName": "agentName", 
-          "workflowInstanceCriteria": "workflowInstanceCriteria", 
-          "workflowInstanceId": "workflowInstanceId", 
-          "status": "status", 
-          "type": "type", 
-          "executionUser": "executionUser", 
-          "lateStart": "lateStart", 
-          "lateFinish": "lateFinish", 
-          "earlyFinish": "earlyFinish", 
-          "startedLate": "startedLate", 
-          "finishedLate": "finishedLate", 
-          "finishedEarly": "finishedEarly", 
-          "late": "late", 
-          "lateEarly": "lateEarly", 
-          "businessServices": "businessServices", 
-          "updatedTimeType": "updatedTimeType", 
-          "updatedTime": "updatedTime", 
-          "sysId": "sysId", 
-          "instanceNumber": "instanceNumber", 
-          "taskId": "taskId", 
-          "taskName": "taskName", 
-          "customField1": "customField1", 
-          "customField2": "customField2", 
-          "triggerId": "triggerId", 
-          "triggerName": "triggerName", 
-          "workflowDefinitionId": "workflowDefinitionId", 
-          "workflowDefinitionName": "workflowDefinitionName", 
-          "statusDescription": "statusDescription", 
-          "templateId": "templateId", 
-          "templateName": "templateName", 
-          "responseFields": "responseFields", 
-          "instanceOutputType": "instanceOutputType", 
+            "agentName":"agentName",
+            "businessServices":"businessServices",
+            "customField1":"customField1",
+            "customField2":"customField2",
+            "executionUser":"executionUser",
+            "instanceNumber":"instanceNumber",
+            "late":"late",
+            "lateEarly":"lateEarly",
+            "name":"name",
+            "operationalMemo":"operationalMemo",
+            "status":"status",
+            "statusDescription":"statusDescription",
+            "sysId":"sysId",
+            "taskId":"taskId",
+            "taskName":"taskName",
+            "templateId":"templateId",
+            "templateName":"templateName",
+            "triggerId":"triggerId",
+            "triggerName":"triggerName",
+            "type":"type",
+            "updatedTime":"updatedTime",
+            "updatedTimeType":"updatedTimeType",
+            "workflowDefinitionId":"workflowDefinitionId",
+            "workflowDefinitionName":"workflowDefinitionName",
+            "workflowInstanceCriteria":"workflowInstanceCriteria",
+            "workflowInstanceId":"workflowInstanceId",
+            "workflowInstanceName":"workflowInstanceName",
+          
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
