@@ -1,10 +1,4 @@
-# - insert_task_into_workflow_with_dependencies(workflow_id, task_data, dependencies)
-# - list_predecessors_successors_of_task_instance_in_a_workflow(workflow_id, instance_id)
-# - create_workflow(workflow_data)
-# - list_workflow_forecast(workflow_id)
-# - modify_workflow(workflow_id, **kwargs)
-# - read_workflow(workflow_id)
-from .utils import prepare_payload, prepare_query_params, prepare_query_payload, WorkflowsVertexPositions, safe_str_to_int
+from .utils import prepare_payload, prepare_query_params, prepare_query_payload, safe_str_to_int
 
 class Workflows:
     def __init__(self, uc):
@@ -238,6 +232,8 @@ class Workflows:
             workflow = payload
         else:
             workflow = self.uc.tasks.get_task(task_name=workflow_name)
+        
+        from .utils_workflow import WorkflowsVertexPositions
         positions = WorkflowsVertexPositions(workflow.get("workflowEdges", [])).get_vertex_positions()
 
         vertices = workflow.get("workflowVertices", [])

@@ -14,8 +14,11 @@ def main():
         packages=find_packages(),
         include_package_data=True,
         install_requires=[
-            "requests", "networkx"
+            "requests",
         ],
+        extras_require={
+            'networkx':  ['networkx'],
+        },
         author='Stonebranch',
         description='A Python wrapper for the Stonebranch UAC API',
         python_requires='>=3.7',
