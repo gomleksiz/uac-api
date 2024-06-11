@@ -5,5 +5,5 @@ pip uninstall uac-api
 pip install --upgrade --find-links=./dist/ --pre uac-api
 a=$PWD
 cd ..
-python -c "import uacapi; print(uacapi.__version__)"
+python -c "import uac_api; print(uac_api.__version__)"
 cd $a

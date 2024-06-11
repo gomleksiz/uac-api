@@ -1236,7 +1236,7 @@ class TaskInstances:
         
         completed = False
         while not completed:
-            response = self.list_status(id=id, status=",".join(statuses))
+            response = self.list_status(sys_id=id, status=",".join(statuses))
             if len(response) > 0:
                 return response[0]
             else:

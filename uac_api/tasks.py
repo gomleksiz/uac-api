@@ -315,6 +315,6 @@ class Tasks:
           "variablesMap": "variablesMap", 
         }
         response = self.task_launch(payload=payload, **args)
-        task_instan_id = response["sysId"]
-        response = self.uc.task_instances.wait_for_status(id=task_instan_id, timeout=timeout, interval=interval)
+        task_instance_id = response["sysId"]
+        response = self.uc.task_instances.wait_for_status(id=task_instance_id, timeout=timeout, interval=interval)
         return response
