@@ -1,0 +1,12 @@
+build/
+dist/
+openapi/
+__pycache__
+*.bckp
+*.egg-info
+test.py
+test.sh
+TODO.md
+test_vertex.py
+output.json
+create_task_add_workflow.py
