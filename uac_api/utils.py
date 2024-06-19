@@ -196,4 +196,18 @@ def filter_secrets(output, secrets, placeholder='***'):
             output = output.replace(secret, placeholder)
     return output
 
+def prepare_variables_payload(**args):
+    """
+    Prepares a payload list of dictionaries based on the provided arguments and variables.
     
+    :param args: The command-line arguments passed to the script.
+    :return: A prepared payload dictionary containing all variables from both the command-line arguments and the variables file.
+    """
+    # Initialize an empty payload dictionary
+    payload = []
+    
+    # Add any variables specified in the command line arguments to the payload
+    for key, value in args.items():
+        payload.append({"name": key, "value": value})
+            
+    return payload
