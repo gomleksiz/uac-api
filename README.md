@@ -20,6 +20,13 @@ This Python package offers a comprehensive interface to the Stonebranch Universa
 pip install uac-api
 ```
 
+To install the extra requirements, run the following command:
+
+```bash
+pip install "uac-api[networkx]"
+```
+
+
 ## Quick Start
 Here's a quick example to demonstrate how to start managing tasks:
 
