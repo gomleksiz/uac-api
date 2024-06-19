@@ -39,13 +39,27 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url, filter_secrets
 import logging
 
-__version__ = "0.4.11"
+__version__ = "0.4.12"
 
 class UniversalController():
-    def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, headers=None) -> None:
+    def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, log_level="INFO", headers=None) -> None:
+        """
+        Initialize the Universal Controller object with base URL and credentials or token.
+        :param base_url: Base URL of the controller server. Example: https://mycontroller.com/uc or https://mycontroller.com
+        :param credential: Credentials object with username and password (optional if token is used) Exanple: ("admin", "password")
+        :param token: Token for authentication (optional if credential is used)
+        :param ssl_verify: Verify SSL certificate (default True)
+        :param logger: Logger object (default None). If not provided, a new logger will be created with the log level defined in the parameter.
+        :param log_level: Log level (default "INFO")
+        :param headers: Headers for requests (default None). Don't change it if you don't know what you are doing.
+        """
         if logger is None:
             logger = logging.getLogger(__name__)
-            logger.setLevel(logging.INFO)
+            # Convert string to log level
+            _log_level = logging.INFO
+            if isinstance(log_level, str):
+                _log_level = getattr(logging, log_level.upper(), logging.INFO)
+            logger.setLevel(_log_level)
             logger.addHandler(logging.StreamHandler())
             self.log = logger
         else:

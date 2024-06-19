@@ -34,7 +34,7 @@ Here's a quick example to demonstrate how to start managing tasks:
 import uac_api
 
 token = "ucp_<personal_access_token>"
-uac = uac_api.UniversalController("https://universal.controller.url", token=token)
+uac = uac_api.UniversalController("https://universal.controller.url", token=token, log_level="DEBUG")
 
 try:
     task = uac.tasks.get_task(task_name="Sleep 0")
