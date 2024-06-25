@@ -39,8 +39,6 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url, filter_secrets
 import logging
 
-__version__ = "0.4.13"
-
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, log_level="INFO", headers=None) -> None:
         """
@@ -114,7 +112,7 @@ class UniversalController():
 
     def post(self, resource, query="", json_data=None, headers=None, parse_response=True):
         return self.call("POST", resource, query, headers, data=json_data, parse_response=parse_response)
-    
+
     def put(self, resource, query="", json_data=None, headers=None, parse_response=True):
         return self.call("PUT", resource, query, headers, data=json_data, parse_response=parse_response)
 
@@ -123,7 +121,7 @@ class UniversalController():
 
     def delete(self, resource, query="", json_data=None, headers=None, parse_response=True):
         return self.call("DELETE", resource, query, headers, data=json_data, parse_response=parse_response)
-    
+
     def post_data(self, resource, query="", data=None, headers=None, parse_response=True):
         return self.call("POST", resource, query, headers, data, parse_response, binary=True)
 
@@ -134,7 +132,7 @@ class UniversalController():
             _headers = headers
         else:
             _headers = self.headers
-        
+
         if self.token:
             _headers["Authorization"] = f"Bearer {self.token}"
 
@@ -216,6 +214,3 @@ class UniversalController():
         if _headers.get("Accept") in ["application/pdf", "image/png", "application/octet-stream"]:
             return response.content
         return resp_data
-
-
-    
