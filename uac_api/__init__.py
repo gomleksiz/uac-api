@@ -39,7 +39,7 @@ from .universal_templates import UniversalTemplates
 from .utils import strip_url, filter_secrets
 import logging
 
-__version__ = "0.4.13"
+__version__ = "0.4.14"
 
 class UniversalController():
     def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, log_level="INFO", headers=None) -> None:
