@@ -15,87 +15,87 @@ class CustomDays:
         self.uc = uc
 
     def get_custom_day(self, query=None, **args):
-        '''
+        """
         Arguments:
-        - customdayid: customdayid 
-        - customdayname: customdayname 
-        '''
-        url="/resources/customday"
-        field_mapping={
-            "customdayid": "customdayid", 
-            "customdayname": "customdayname", 
+        - customdayid: customdayid
+        - customdayname: customdayname
+        """
+        url = "/resources/customday"
+        field_mapping = {
+            "customdayid": "customdayid",
+            "customdayname": "customdayname",
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
     def update_custom_day(self, payload=None, **args):
-        url="/resources/customday"
+        url = "/resources/customday"
         _payload = payload
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_custom_day(self, payload=None, **args):
-        '''
+        """
         Arguments:
-        - retainSysIds: retainSysIds 
-            False will ignore sysIds in the payload and create a new task  
-        '''
-        url="/resources/customday"
-        field_mapping={
-          "retainSysIds": "retainSysIds", 
+        - retainSysIds: retainSysIds
+            False will ignore sysIds in the payload and create a new task
+        """
+        url = "/resources/customday"
+        field_mapping = {
+            "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def delete_custom_day(self, query=None, **args):
-        '''
+        """
         Arguments:
-        - customdayid: customdayid 
-        - customdayname: customdayname 
-        '''
-        url="/resources/customday"
-        field_mapping={
-          "customdayid": "customdayid", 
-          "customdayname": "customdayname", 
+        - customdayid: customdayid
+        - customdayname: customdayname
+        """
+        url = "/resources/customday"
+        field_mapping = {
+            "customdayid": "customdayid",
+            "customdayname": "customdayname",
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.delete(url, query=parameters, parse_response=False)
 
     def list_custom_days(self):
-        url="/resources/customday/list"
+        url = "/resources/customday/list"
         return self.uc.get(url)
 
     def list_qualifying_dates(self, query=None, **args):
-        '''
+        """
         Arguments:
-        - customdayid: customdayid 
-        - customdayname: customdayname 
-        - calendarid: calendarid 
-        - calendarname: calendarname 
-        '''
-        url="/resources/customday/qualifyingdates"
-        field_mapping={
-            "customdayid": "customdayid", 
-            "customdayname": "customdayname", 
-            "calendarid": "calendarid", 
-            "calendarname": "calendarname", 
+        - customdayid: customdayid
+        - customdayname: customdayname
+        - calendarid: calendarid
+        - calendarname: calendarname
+        """
+        url = "/resources/customday/qualifyingdates"
+        field_mapping = {
+            "customdayid": "customdayid",
+            "customdayname": "customdayname",
+            "calendarid": "calendarid",
+            "calendarname": "calendarname",
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
     def list_qualifying_periods(self, query=None, **args):
-        '''
+        """
         Arguments:
-        - customdayid: customdayid 
-        - customdayname: customdayname 
-        - calendarid: calendarid 
-        - calendarname: calendarname 
-        '''
-        url="/resources/customday/qualifyingperiods"
-        field_mapping={
-            "customdayid": "customdayid", 
-            "customdayname": "customdayname", 
-            "calendarid": "calendarid", 
-            "calendarname": "calendarname", 
+        - customdayid: customdayid
+        - customdayname: customdayname
+        - calendarid: calendarid
+        - calendarname: calendarname
+        """
+        url = "/resources/customday/qualifyingperiods"
+        field_mapping = {
+            "customdayid": "customdayid",
+            "customdayname": "customdayname",
+            "calendarid": "calendarid",
+            "calendarname": "calendarname",
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)

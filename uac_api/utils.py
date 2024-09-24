@@ -1,25 +1,28 @@
-import json, re
-import requests
+import json
 import os
+import re
 from datetime import datetime
+
+import requests
+
 
 def append_if_not_none(list_name, variable, format, exclude_empty=True):
     if "{}" in format:
         format = format.replace("{}", "{var}")
 
     if variable is not None:
-        if exclude_empty: # we don't want empty records
+        if exclude_empty:  # we don't want empty records
             if len(variable) == 0:
                 return
-        _value = format.format(var=requests.utils.quote(variable, safe='()'))
+        _value = format.format(var=requests.utils.quote(variable, safe="()"))
         list_name.append(_value)
 
 
 def set_if_not_none(_dict, field, value, format="{}", exclude_empty=True):
     if value is None:
         return
-    
-    if exclude_empty: # we don't want empty records
+
+    if exclude_empty:  # we don't want empty records
         if len(value) == 0:
             return
     set_if_not_equal(_dict, field, value, None, format=format)
@@ -39,12 +42,12 @@ def format_json(json_obj):
     json_string = re.sub(r"\n\s*\{", " {", json_string)
     json_string = re.sub(r"\n\s*\]", " ]", json_string)
     json_string = re.sub(r"\[\],", "[ ],", json_string)
-    json_string = re.sub(r"\":(\s*[^\n]+)", "\" :\\1", json_string)
+    json_string = re.sub(r"\":(\s*[^\n]+)", '" :\\1', json_string)
     return json_string
 
 
 def strip_url(url):
-    return url.strip('/').strip(' ')
+    return url.strip("/").strip(" ")
 
 
 def get_first_element(_list, default=None):
@@ -67,6 +70,7 @@ def is_json(response):
         return False
     return "json" in content_type
 
+
 def remove_sysid_tag(json_structure):
     """Removes the "sysId" tag from all list objects in a JSON structure.
 
@@ -82,8 +86,9 @@ def remove_sysid_tag(json_structure):
             for list_object_item in list_object:
                 if isinstance(list_object_item, dict) and "sysId" in list_object_item:
                     del list_object_item["sysId"]
-    
+
     return json_structure
+
 
 def convert_to_variable_name(string):
     """Converts a string to a Python variable name format.
@@ -113,16 +118,17 @@ def snake_to_camel(snake_case_str):
     Returns:
         The converted string in camelCase format.
     """
-    components = snake_case_str.split('_')
-    return components[0] + ''.join(x.title() for x in components[1:])
-    
+    components = snake_case_str.split("_")
+    return components[0] + "".join(x.title() for x in components[1:])
+
+
 def prepare_payload(payload, field_mapping, args):
     _payload = None
     if payload is not None:
         _payload = payload
     else:
-        _payload = { }
-    
+        _payload = {}
+
     # Process additional arguments (**args)
     for arg_key, arg_value in args.items():
         if arg_key in field_mapping:
@@ -135,28 +141,33 @@ def prepare_payload(payload, field_mapping, args):
                     _payload[key] = arg_value
     return _payload
 
+
 def prepare_query_params(query, field_mapping, args):
     if query is not None:
         parameters = query
     else:
         parameters = []
-        
+
         for field, var in args.items():
             if field in field_mapping:
                 append_if_not_none(parameters, var, field_mapping[field] + "={var}")
             elif snake_to_camel(field) in field_mapping:
-                append_if_not_none(parameters, var, field_mapping[snake_to_camel(field)] + "={var}")
+                append_if_not_none(
+                    parameters, var, field_mapping[snake_to_camel(field)] + "={var}"
+                )
             else:
                 for key, value in field_mapping.items():
                     if key.lower() == snake_to_camel(field).lower():
                         append_if_not_none(parameters, var, key + "={var}")
-        
+
     return parameters
+
 
 def prepare_query_payload(query, query_fields, payload, payload_fields, args):
     _query = prepare_query_params(query, query_fields, args)
     _payload = prepare_payload(payload, payload_fields, args)
     return _query, _payload
+
 
 def safe_str_to_int(s):
     """
@@ -172,20 +183,21 @@ def safe_str_to_int(s):
     - None: If the string cannot be converted to an integer.
     """
     # Remove thousand separators (commas)
-    s = s.replace(',', '')
+    s = s.replace(",", "")
     # Handle decimal points by splitting and taking the integer part
-    if '.' in s:
-        s = s.split('.')[0]
+    if "." in s:
+        s = s.split(".")[0]
     try:
         return int(s)
     except ValueError:
         # Return None or handle the error as needed
         return None
-    
-def filter_secrets(output, secrets, placeholder='***'):
+
+
+def filter_secrets(output, secrets, placeholder="***"):
     """
     Replaces occurrences of secrets within the output string with a placeholder.
-    
+
     :param output: The output string that may contain secrets.
     :param secrets: A list of secret strings to be filtered out.
     :param placeholder: The placeholder text to replace secrets with. Defaults to '<secret>'.
@@ -196,18 +208,19 @@ def filter_secrets(output, secrets, placeholder='***'):
             output = output.replace(secret, placeholder)
     return output
 
+
 def prepare_variables_payload(**args):
     """
     Prepares a payload list of dictionaries based on the provided arguments and variables.
-    
+
     :param args: The command-line arguments passed to the script.
     :return: A prepared payload dictionary containing all variables from both the command-line arguments and the variables file.
     """
     # Initialize an empty payload dictionary
     payload = []
-    
+
     # Add any variables specified in the command line arguments to the payload
     for key, value in args.items():
         payload.append({"name": key, "value": value})
-            
+
     return payload
