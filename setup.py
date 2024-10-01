@@ -13,7 +13,7 @@ def main():
         packages=find_packages(),
         include_package_data=True,
         install_requires=[
-            "requests",
+            "requests==2.31.0",
         ],
         extras_require={
             'networkx':  ['networkx'],

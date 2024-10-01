@@ -1,5 +1,6 @@
 from .utils import prepare_payload, prepare_query_params
 
+
 class UniversalEvents:
     def __init__(self, uc):
         self.log = uc.log
@@ -15,19 +16,19 @@ class UniversalEvents:
     #     return response
 
     def publish(self, payload=None, **args):
-        '''
+        """
         Arguments:
-        - name: name 
-        - businessServices: businessServices 
-        - ttl: ttl 
-        - attributes: attributes 
-        '''
-        url="/resources/universalevent/publish"
-        field_mapping={
-          "name": "name", 
-          "businessServices": "businessServices", 
-          "ttl": "ttl", 
-          "attributes": "attributes", 
+        - name: name
+        - businessServices: businessServices
+        - ttl: ttl
+        - attributes: attributes
+        """
+        url = "/resources/universalevent/publish"
+        field_mapping = {
+            "name": "name",
+            "businessServices": "businessServices",
+            "ttl": "ttl",
+            "attributes": "attributes",
         }
         headers = {"Accept": "*/*"}
         headers["Content-Type"] = "application/json"
@@ -35,19 +36,19 @@ class UniversalEvents:
         return self.uc.post(url, json_data=_payload, parse_response=False, headers=headers)
 
     def pushg(self, query=None, eventName=None, **args):
-        '''
+        """
         This will run a get request to push event
         Arguments:
-        - payload: payload 
-        - eventName: eventName 
-        '''
-        url=f"/resources/universalevent/push/{eventName}"
-        field_mapping={
-            "payload": "payload", 
-            "eventName": "eventName", 
+        - payload: payload
+        - eventName: eventName
+        """
+        url = f"/resources/universalevent/push/{eventName}"
+        field_mapping = {
+            "payload": "payload",
+            "eventName": "eventName",
         }
         # Accept all the query parameters
-        for key, value in args.items(): 
+        for key, value in args.items():
             field_mapping[key] = key
 
         parameters = prepare_query_params(query, field_mapping, args)

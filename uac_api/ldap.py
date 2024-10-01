@@ -4,6 +4,7 @@
 
 from .utils import prepare_payload, prepare_query_params
 
+
 class Ldaps:
     def __init__(self, uc):
         self.log = uc.log
@@ -11,10 +12,10 @@ class Ldaps:
         self.uc = uc
 
     def get_ldap(self):
-        url="/resources/ldap"
+        url = "/resources/ldap"
         return self.uc.get(url)
 
     def update_ldap(self, payload=None, **args):
-        url="/resources/ldap"
+        url = "/resources/ldap"
         _payload = payload
         return self.uc.put(url, json_data=_payload, parse_response=False)

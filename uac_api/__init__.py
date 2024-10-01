@@ -1,48 +1,57 @@
-import requests
-import sys
 import json
+import logging
 import re
+import sys
 
-from .server_operations import ServerOperations
-from .metrics import Metrics
+import requests
+
+from .agents import AgentClusters, Agents
 from .audits import Audits
-from .system import System
+from .bundles import Bundles
+from .business_services import BusinessServices
+from .calendars import Calendars
+from .cluster_nodes import ClusterNodes
+from .connections import Connections
+from .credentials import Credentials
+from .custom_days import CustomDays
+from .email_templates import EmailTemplates
 from .ldap import Ldaps
+from .metrics import Metrics
+from .oauth_clients import OAuthClients
+from .oms_servers import OmsServers
+from .properties import Properties
+from .reports import Reports
+from .scripts import Scripts
+from .server_operations import ServerOperations
+from .simulations import Simulations
+from .system import System
+from .task_instances import TaskInstances
 from .tasks import Tasks
 from .triggers import Triggers
-from .universal_events import UniversalEvents
-from .bundles import Bundles
-from .users import Users
-from .credentials import Credentials
-from .properties import Properties
-from .custom_days import CustomDays
-from .variables import Variables
-from .connections import Connections
-from .simulations import Simulations
-from .business_services import BusinessServices
-from .agents import Agents
-from .agents import AgentClusters
-from .virtual_resources import VirtualResources
-from .oms_servers import OmsServers
 from .universal_event_templates import UniversalEventTemplates
-from .reports import Reports
-from .task_instances import TaskInstances
-from .workflows import Workflows
-from .scripts import Scripts
-from .user_groups import UserGroups
-from .webhooks import Webhooks
-from .cluster_nodes import ClusterNodes
-from .email_templates import EmailTemplates
-from .oauth_clients import OAuthClients
-from .calendars import Calendars
+from .universal_events import UniversalEvents
 from .universal_templates import UniversalTemplates
-from .utils import strip_url, filter_secrets
-import logging
+from .user_groups import UserGroups
+from .users import Users
+from .utils import filter_secrets, strip_url
+from .variables import Variables
+from .virtual_resources import VirtualResources
+from .webhooks import Webhooks
+from .workflows import Workflows
 
 __version__ = "0.4.14"
 
-class UniversalController():
-    def __init__(self, base_url, credential=None, token=None, ssl_verify=True, logger=None, log_level="INFO", headers=None) -> None:
+class UniversalController:
+    def __init__(
+        self,
+        base_url,
+        credential=None,
+        token=None,
+        ssl_verify=True,
+        logger=None,
+        log_level="INFO",
+        headers=None,
+    ) -> None:
         """
         Initialize the Universal Controller object with base URL and credentials or token.
         :param base_url: Base URL of the controller server. Example: https://mycontroller.com/uc or https://mycontroller.com
@@ -76,7 +85,10 @@ class UniversalController():
         if headers:
             self.headers = headers
         else:
-            self.headers = {"content-type": "application/json", "accept": "application/json"}
+            self.headers = {
+                "content-type": "application/json",
+                "accept": "application/json",
+            }
         self.server_operations = ServerOperations(self)
         self.metrics = Metrics(self)
         self.audits = Audits(self)
@@ -111,30 +123,64 @@ class UniversalController():
         self.calendars = Calendars(self)
         self.universal_templates = UniversalTemplates(self)
 
+    def post(
+        self, resource, query="", json_data=None, headers=None, parse_response=True
+    ):
+        return self.call(
+            "POST",
+            resource,
+            query,
+            headers,
+            data=json_data,
+            parse_response=parse_response,
+        )
 
-    def post(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("POST", resource, query, headers, data=json_data, parse_response=parse_response)
-    
-    def put(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("PUT", resource, query, headers, data=json_data, parse_response=parse_response)
+    def put(
+        self, resource, query="", json_data=None, headers=None, parse_response=True
+    ):
+        return self.call(
+            "PUT",
+            resource,
+            query,
+            headers,
+            data=json_data,
+            parse_response=parse_response,
+        )
 
     def get(self, resource, query="", headers=None, parse_response=True):
-        return self.call("GET", resource, query, headers, data=None, parse_response=parse_response)
+        return self.call(
+            "GET", resource, query, headers, data=None, parse_response=parse_response
+        )
 
-    def delete(self, resource, query="", json_data=None, headers=None, parse_response=True):
-        return self.call("DELETE", resource, query, headers, data=json_data, parse_response=parse_response)
-    
-    def post_data(self, resource, query="", data=None, headers=None, parse_response=True):
-        return self.call("POST", resource, query, headers, data, parse_response, binary=True)
+    def delete(
+        self, resource, query="", json_data=None, headers=None, parse_response=True
+    ):
+        return self.call(
+            "DELETE",
+            resource,
+            query,
+            headers,
+            data=json_data,
+            parse_response=parse_response,
+        )
 
-    def call(self, method, resource, query, headers, data, parse_response, binary=False):
+    def post_data(
+        self, resource, query="", data=None, headers=None, parse_response=True
+    ):
+        return self.call(
+            "POST", resource, query, headers, data, parse_response, binary=True
+        )
+
+    def call(
+        self, method, resource, query, headers, data, parse_response, binary=False
+    ):
         self.log.debug(filter_secrets("uac_rest_call start", self.secrets))
         self.log.debug(headers)
         if headers:
             _headers = headers
         else:
             _headers = self.headers
-        
+
         if self.token:
             _headers["Authorization"] = f"Bearer {self.token}"
 
@@ -147,38 +193,45 @@ class UniversalController():
         self.log.info(f"URL = {uri}")
         try:
             if method == "GET":
-                response = requests.get(uri,
-                                        headers=_headers,
-                                        auth=self.cridential,
-                                        verify=self.ssl_verify)
+                response = requests.get(
+                    uri, headers=_headers, auth=self.cridential, verify=self.ssl_verify
+                )
             elif method == "POST":
                 if not binary:
                     self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
-                    response = requests.post(uri,
-                                            headers=_headers,
-                                            auth=self.cridential,
-                                            json=data,
-                                            verify=self.ssl_verify)
+                    response = requests.post(
+                        uri,
+                        headers=_headers,
+                        auth=self.cridential,
+                        json=data,
+                        verify=self.ssl_verify,
+                    )
                 else:
                     self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
-                    response = requests.post(uri,
-                                            headers=_headers,
-                                            auth=self.cridential,
-                                            data=data,
-                                            verify=self.ssl_verify)
+                    response = requests.post(
+                        uri,
+                        headers=_headers,
+                        auth=self.cridential,
+                        data=data,
+                        verify=self.ssl_verify,
+                    )
             elif method == "DELETE":
-                response = requests.delete(uri,
-                                        headers=_headers,
-                                        auth=self.cridential,
-                                        json=data,
-                                        verify=self.ssl_verify)
+                response = requests.delete(
+                    uri,
+                    headers=_headers,
+                    auth=self.cridential,
+                    json=data,
+                    verify=self.ssl_verify,
+                )
             elif method == "PUT":
                 self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
-                response = requests.put(uri,
-                                        headers=_headers,
-                                        auth=self.cridential,
-                                        json=data,
-                                        verify=self.ssl_verify)
+                response = requests.put(
+                    uri,
+                    headers=_headers,
+                    auth=self.cridential,
+                    json=data,
+                    verify=self.ssl_verify,
+                )
             else:
                 self.log.error(f"Unknown method {method}")
                 raise
@@ -198,7 +251,11 @@ class UniversalController():
         try:
             if parse_response:
                 resp_data = response.json()
-                self.log.debug(filter_secrets("received data: %s..." % json.dumps(resp_data), self.secrets))
+                self.log.debug(
+                    filter_secrets(
+                        "received data: %s..." % json.dumps(resp_data), self.secrets
+                    )
+                )
             else:
                 resp_data = {"response": response.text}
                 # Match anything like UUID: 0f2bd3ea0fc34da08bb668ccceee8c5a
@@ -206,13 +263,19 @@ class UniversalController():
                 if matched:
                     resp_data["sys_id"] = matched.group(0)
 
-                self.log.debug(filter_secrets("received data: %s..." % resp_data, self.secrets))
+                self.log.debug(
+                    filter_secrets("received data: %s..." % resp_data, self.secrets)
+                )
         except Exception as unknown_exception:
             # no XML returned
             self.log.error("Couldn't parse the response.")
             resp_data = response.text
         # self.log.debug(filter_secrets("received data: %s..." % json.dumps(resp_data)[0:10], self.secrets))
         self.log.debug(filter_secrets("uac_rest_call end", self.secrets))
-        if _headers.get("Accept") in ["application/pdf", "image/png", "application/octet-stream"]:
+        if _headers.get("Accept") in [
+            "application/pdf",
+            "image/png",
+            "application/octet-stream",
+        ]:
             return response.content
         return resp_data

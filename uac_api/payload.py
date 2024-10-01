@@ -5,21 +5,15 @@ WORKFLOW_PAYLOAD = {
         "emailNotifications": [],
         "setVariableActions": [],
         "snmpNotifications": [],
-        "systemOperations": []
+        "systemOperations": [],
     },
     "calculateCp": False,
     "calendar": None,
     "cpDuration": None,
     "cpDurationUnit": "Minutes",
     "criticalEndpoints": [],
-    "customField1": {
-        "label": "Documentation",
-        "value": None
-    },
-    "customField2": {
-        "label": "Ticket Number",
-        "value": None
-    },
+    "customField1": {"label": "Documentation", "value": None},
+    "customField2": {"label": "Ticket Number", "value": None},
     "efDayConstraint": "None",
     "efDuration": "00:00:00:00",
     "efEnabled": False,
@@ -98,31 +92,31 @@ WORKFLOW_PAYLOAD = {
     "version": 1,
     "virtualResources": [],
     "workflowEdges": [],
-    "workflowVertices": []
+    "workflowVertices": [],
 }
 
 VARIABLE_PAYLOAD = {
-    "allowEmptyOption" : False,
-    "allowUnlistedOption" : False,
-    "description" : None,
-    "name" : "",
-    "options" : [ ],
-    "value" : ""
-  }
+    "allowEmptyOption": False,
+    "allowUnlistedOption": False,
+    "description": None,
+    "name": "",
+    "options": [],
+    "value": "",
+}
 
 SQL_TASK_SET_VARIABLE_ACTION_PAYLOAD = {
-      "description" : None,
-      "exitCodes" : None,
-      "notificationOption" : "Operation Failure",
-      "notifyOnEarlyFinish" : False,
-      "notifyOnLateFinish" : False,
-      "notifyOnLateStart" : False,
-      "notifyOnProjectedLate" : False,
-      "status" : "Success",
-      "variableName" : "",
-      "variableScope" : "Global",
-      "variableValue" : "${_resultsColumnByNo('',1,1)}"
-    }
+    "description": None,
+    "exitCodes": None,
+    "notificationOption": "Operation Failure",
+    "notifyOnEarlyFinish": False,
+    "notifyOnLateFinish": False,
+    "notifyOnLateStart": False,
+    "notifyOnProjectedLate": False,
+    "status": "Success",
+    "variableName": "",
+    "variableScope": "Global",
+    "variableValue": "${_resultsColumnByNo('',1,1)}",
+}
 
 LINUX_TASK_PAYLOAD = {
     "type": "taskUnix",
@@ -131,7 +125,7 @@ LINUX_TASK_PAYLOAD = {
         "emailNotifications": [],
         "setVariableActions": [],
         "snmpNotifications": [],
-        "systemOperations": []
+        "systemOperations": [],
     },
     "agent": None,
     "agentCluster": None,
@@ -145,14 +139,8 @@ LINUX_TASK_PAYLOAD = {
     "cpDurationUnit": "Minutes",
     "credentials": None,
     "credentialsVar": None,
-    "customField1": {
-        "label": "Documentation",
-        "value": None
-    },
-    "customField2": {
-        "label": "Ticket Number",
-        "value": None
-    },
+    "customField1": {"label": "Documentation", "value": None},
+    "customField2": {"label": "Ticket Number", "value": None},
     "efDayConstraint": "None",
     "efDuration": "00:00:00:00",
     "efEnabled": False,
@@ -243,7 +231,7 @@ LINUX_TASK_PAYLOAD = {
     "variables": [],
     "version": 1,
     "virtualResources": [],
-    "waitForOutput": False
+    "waitForOutput": False,
 }
 
 WINDOWS_TASK_PAYLOAD = {
@@ -253,7 +241,7 @@ WINDOWS_TASK_PAYLOAD = {
         "emailNotifications": [],
         "setVariableActions": [],
         "snmpNotifications": [],
-        "systemOperations": []
+        "systemOperations": [],
     },
     "agent": None,
     "agentCluster": None,
@@ -268,14 +256,8 @@ WINDOWS_TASK_PAYLOAD = {
     "createConsole": False,
     "credentials": None,
     "credentialsVar": None,
-    "customField1": {
-        "label": "Documentation",
-        "value": None
-    },
-    "customField2": {
-        "label": "Ticket Number",
-        "value": None
-    },
+    "customField1": {"label": "Documentation", "value": None},
+    "customField2": {"label": "Ticket Number", "value": None},
     "desktopInteract": False,
     "efDayConstraint": "None",
     "efDuration": "00:00:00:00",
@@ -367,7 +349,7 @@ WINDOWS_TASK_PAYLOAD = {
     "variables": [],
     "version": 1,
     "virtualResources": [],
-    "waitForOutput": False
+    "waitForOutput": False,
 }
 
 FTP_TASK_PAYLOAD = {
@@ -377,7 +359,7 @@ FTP_TASK_PAYLOAD = {
         "emailNotifications": [],
         "setVariableActions": [],
         "snmpNotifications": [],
-        "systemOperations": []
+        "systemOperations": [],
     },
     "agent": None,
     "agentCluster": None,
@@ -394,14 +376,8 @@ FTP_TASK_PAYLOAD = {
     "createop": "-- None --",
     "credentials": None,
     "credentialsVar": None,
-    "customField1": {
-        "label": None,
-        "value": None
-    },
-    "customField2": {
-        "label": None,
-        "value": None
-    },
+    "customField1": {"label": None, "value": None},
+    "customField2": {"label": None, "value": None},
     "efDayConstraint": "None",
     "efDuration": "00:00:00:00",
     "efEnabled": False,
@@ -521,5 +497,5 @@ FTP_TASK_PAYLOAD = {
     "variables": [],
     "verifyHostName": False,
     "version": 1,
-    "virtualResources": []
+    "virtualResources": [],
 }
