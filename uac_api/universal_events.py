@@ -33,7 +33,9 @@ class UniversalEvents:
         headers = {"Accept": "*/*"}
         headers["Content-Type"] = "application/json"
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False, headers=headers)
+        return self.uc.post(
+            url, json_data=_payload, parse_response=False, headers=headers
+        )
 
     def pushg(self, query=None, eventName=None, **args):
         """
@@ -56,20 +58,22 @@ class UniversalEvents:
         headers["Content-Type"] = "plain/text"
         return self.uc.get(url, query=parameters, parse_response=False, headers=headers)
 
-    def push(self, payload=None, eventName=None, payload_format='json'):
-        '''
+    def push(self, payload=None, eventName=None, payload_format="json"):
+        """
         Payload is required
         Arguments:
-        - eventName: eventName 
+        - eventName: eventName
         - payload_format: json|xml|text
-        '''
-        url=f"/resources/universalevent/push/{eventName}"
-        
+        """
+        url = f"/resources/universalevent/push/{eventName}"
+
         headers = {"Accept": "*/*"}
-        if payload_format == 'json':
+        if payload_format == "json":
             headers["Content-Type"] = "application/json"
-        elif payload_format == 'xml':
+        elif payload_format == "xml":
             headers["Content-Type"] = "application/xml"
         else:
             headers["Content-Type"] = "plain/text"
-        return self.uc.post(url, json_data=payload, parse_response=False, headers=headers)
+        return self.uc.post(
+            url, json_data=payload, parse_response=False, headers=headers
+        )
