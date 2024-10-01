@@ -1,15 +1,5 @@
 from setuptools import setup, find_packages
-import importlib.util
-import sys
-
-# workaround the import `uac_api/__version__.py` directly to avoid executing
-# uac_api/__init_.py at import
-spec = importlib.util.spec_from_file_location('__version__', './uac_api/__version__.py')
-module = importlib.util.module_from_spec(spec)
-sys.modules['__version__'] = module
-spec.loader.exec_module(module)
-
-version = module.__version__
+version = "0.4.14"
 
 def main():
     with open('README.md', 'r') as readme:
