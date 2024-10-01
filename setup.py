@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
-from uac_api import __version__
-version = __version__
+version = "0.4.14"
 
 def main():
     with open('README.md', 'r') as readme:

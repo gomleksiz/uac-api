@@ -216,6 +216,3 @@ class UniversalController():
         if _headers.get("Accept") in ["application/pdf", "image/png", "application/octet-stream"]:
             return response.content
         return resp_data
-
-
-    
