@@ -39,7 +39,7 @@ from .virtual_resources import VirtualResources
 from .webhooks import Webhooks
 from .workflows import Workflows
 
-__version__ = "0.4.14"
+__version__ = "0.4.15"
 
 
 class UniversalController:
