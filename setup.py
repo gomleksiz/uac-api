@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-version = "0.4.14"
+version = "0.4.15"
 
 def main():
     with open('README.md', 'r') as readme:
@@ -7,9 +7,9 @@ def main():
     setup(
         name='uac-api',
         version=version,
-        author_email="huseyim@gmail.com",
+        author_email="support@stonebranch.com",
         license="CC BY-NC 4.0",
-        url="https://github.com/gomleksiz/uac-api",
+        url="https://github.com",
         packages=find_packages(),
         include_package_data=True,
         install_requires=[

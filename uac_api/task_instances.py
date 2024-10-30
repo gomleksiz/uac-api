@@ -121,7 +121,7 @@ class TaskInstances:
         self.headers = uc.headers
         self.uc = uc
 
-    def delete_task_instance(self, query=None, **args):
+    def delete_task_instance(self, payload=None, **args):
         """
         Arguments:
         - name: name
@@ -168,7 +168,7 @@ class TaskInstances:
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
         }
-        parameters = prepare_query_params(query, field_mapping, args)
+        parameters = prepare_payload(payload, field_mapping, args)
         return self.uc.delete(url, query=parameters, parse_response=False)
 
     def show_variables(self, query=None, **args):

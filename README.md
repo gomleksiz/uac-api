@@ -241,7 +241,7 @@ print(response)
 ## System:
 - get_status(self)
 ## TaskInstances:
-- delete_task_instance(self, query=None, **args)
+- delete_task_instance(self, payload=None, **args)
 - show_variables(self, query=None, **args)
 - update_operational_memo(self, payload=None, **args)
 - task_instance_set_priority(self, payload=None, **args)
