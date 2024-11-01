@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-version = "0.4.15"
+version = "0.4.16"
 
 def main():
     with open('README.md', 'r') as readme:
