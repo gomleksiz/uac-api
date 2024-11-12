@@ -169,7 +169,7 @@ class TaskInstances:
             "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.delete(url, json_data=_payload)
+        return self.uc.delete(url, json_data=_payload, parse_response=False)
 
     def show_variables(self, query=None, **args):
         """
