@@ -168,8 +168,8 @@ class TaskInstances:
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
         }
-        parameters = prepare_payload(payload, field_mapping, args)
-        return self.uc.delete(url, query=parameters, parse_response=False)
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.delete(url, json_data=_payload, parse_response=False)
 
     def show_variables(self, query=None, **args):
         """

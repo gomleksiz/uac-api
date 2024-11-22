@@ -39,7 +39,7 @@ from .virtual_resources import VirtualResources
 from .webhooks import Webhooks
 from .workflows import Workflows
 
-__version__ = "0.4.15"
+__version__ = "0.4.16"
 
 
 class UniversalController:
@@ -74,6 +74,7 @@ class UniversalController:
             self.log = logger
         else:
             self.log = logger
+        self.log.debug(f"UAC API (Version: {__version__})")
         self.base_url = strip_url(base_url)
         self.token = token
         self.ssl_verify = ssl_verify
