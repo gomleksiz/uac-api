@@ -356,7 +356,7 @@ print(response)
 - list_virtual_resources_advanced(self, query=None, **args)
 - update_limit(self, payload=None, **args)
 ## Webhooks:
-- unassign_execution_user_1(self, payload=None, **args)
+- unassign_execution_user(self, payload=None, **args)
 - get_webhook(self, query=None, **args)
 - update_webhook(self, payload=None, **args)
 - create_webhook(self, payload=None, **args)

@@ -17,7 +17,7 @@ class Webhooks:
         self.headers = uc.headers
         self.uc = uc
 
-    def unassign_execution_user_1(self, payload=None, **args):
+    def unassign_execution_user(self, payload=None, **args):
         """
         Arguments:
         - webhookid: webhookid
