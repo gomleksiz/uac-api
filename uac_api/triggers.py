@@ -36,6 +36,71 @@ class Triggers:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
+    
+    def list_component_events(self, query=None, **args):
+        """
+        Arguments:
+        - triggerid: triggerid
+        - triggername: triggername
+        - count: count
+        - startdate: startdate
+        """
+        url = "/resources/trigger/listcomponentevents"
+        field_mapping = {
+            "triggerid": "triggerid",
+            "triggername": "triggername",
+            "count": "count",
+            "startdate": "startdate",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.get(url, query=parameters)
+    
+    def set_skip_count(self, query=None, **args):
+        """
+        Arguments:
+        - triggerid: triggerid
+        - triggername: triggername
+        - skipCount
+        """
+        url = "/resources/trigger/setskipcount"
+        field_mapping = {
+            "triggerid": "triggerid",
+            "triggername": "triggername",
+            "skipCount": "skipCount"
+        }
+        _query = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=_query, json_data=None, parse_response=False)
+    
+    def set_time(self, payload=None, **args):
+        url = "/resources/trigger/settime"
+        payload_fields = {
+            "name": "name",
+            "time": "time",
+            "id": "id"
+        }
+        _payload = prepare_payload(payload, payload_fields, args)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
+
+    def trigger_now(self, payload=None, **args):
+        url = "/resources/trigger/triggernow"
+        payload_fields = {
+            "name": "name",
+            "variables": "variables",
+            "variablesMap": "variablesMap",
+            "virtualResourcePriority": "virtualResourcePriority",
+            "virtualResources": "virtualResources",
+            "hold": "hold",
+            "holdReason": "holdReason",
+            "timeZone": "timeZone",
+            "overrideTriggerDateTime": "overrideTriggerDateTime",
+            "overrideDate": "overrideDate",
+            "overrideTime": "overrideTime",
+            "overrideTimeZone": "overrideTimeZone",
+            "launchReason": "launchReason",
+            "simulate": "simulate"
+        }
+        _payload = prepare_payload(payload, payload_fields, args)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
 
     def unassign_execution_user(self, query=None, **args):
         """
@@ -62,7 +127,8 @@ class Triggers:
 
         payload_fields = {
             "username": "username",
-            "username": "username",
+            "password": "password",
+            "token": "token" 
         }
         _query, _payload = prepare_query_payload(
             query, query_fields, payload, payload_fields, args
