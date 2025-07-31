@@ -107,14 +107,33 @@ class Bundles:
         return self.uc.delete(url, query=parameters, parse_response=False)
 
     def create_bundle_by_date(self, payload=None, **args):
-        """
-        Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
-        """
-        url = "/resources/bundle/{a}"
+        url = "/resources/bundle/bydate"
         field_mapping = {
-            "retainSysIds": "retainSysIds",
+            "sysId": "sysId",
+            "excludeRelated": "excludeRelated",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "businessServices": "businessServices",
+            "typesToInclude": "typesToInclude",
+            "businessServicesToInclude": "businessServicesToInclude",
+            "updatedOnOrAfter": "updatedOnOrAfter"
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
+
+    def create_bundle_by_business_services(self, payload=None, **args):
+        url = "/resources/bundle/bybusinessservices"
+        field_mapping = {
+            "sysId": "sysId",
+            "excludeRelated": "excludeRelated",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "businessServices": "businessServices",
+            "typesToInclude": "typesToInclude",
+            "businessServicesToInclude": "businessServicesToInclude",
+            "updatedOnOrAfter": "updatedOnOrAfter"
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
