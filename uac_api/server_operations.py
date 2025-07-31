@@ -29,6 +29,34 @@ class ServerOperations:
         url = "/resources/serveroperation/bulkexport"
         return self.uc.post(url)
 
+    def bulk_export_activity(self):
+        url = "/resources/serveroperation/bulkexportactivity"
+        return self.uc.post(url)
+    
+    def bulk_export_audit(self):
+        url = "/resources/serveroperation/bulkexportaudit"
+        return self.uc.post(url)
+    
+    def bulk_export_history(self):
+        url = "/resources/serveroperation/bulkexporthistory"
+        return self.uc.post(url)
+
+    def ldap_refresh(self):
+        url = "/resources/serveroperation/ldaprefresh"
+        return self.uc.post(url)
+    
+    def ldap_refresh_async(self):
+        url = "/resources/serveroperation/ldaprefreshasync"
+        return self.uc.post(url)
+    
+    def pause_cluster_node(self):
+        url = "/resources/serveroperation/pauseclusternode"
+        return self.uc.post(url)
+    
+    def resume_cluster_node(self):
+        url = "/resources/serveroperation/resumeclusternode"
+        return self.uc.post(url)
+
     def bulk_export_with_versions(self):
         url = "/resources/serveroperation/bulkexportwithversions"
         return self.uc.post(url)
