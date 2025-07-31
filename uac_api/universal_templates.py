@@ -50,6 +50,15 @@ class UniversalTemplates:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
+    
+    def restore_default_universal_template_icon(self, query=None, **args):
+        url = "/resources/universaltemplate/restoredefaulticon"
+        field_mapping = {
+            "templateid": "templateid",
+            "templatename": "templatename",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=parameters, parse_response=False)
 
     def delete_universal_template(self, query=None, **args):
         """
