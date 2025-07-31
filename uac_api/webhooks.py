@@ -8,7 +8,7 @@
 # - register_webhook(webhook_data)
 # - unassign_execution_user_from_webhook(webhook_id)
 # - unregister_webhook(webhook_id)
-from .utils import prepare_payload, prepare_query_params
+from .utils import prepare_payload, prepare_query_params, prepare_query_payload
 
 
 class Webhooks:
@@ -17,7 +17,30 @@ class Webhooks:
         self.headers = uc.headers
         self.uc = uc
 
-    def unassign_execution_user(self, payload=None, **args):
+    def enable_disable(self, payload=None, **args):
+        url = "/resources/webhook/enabledisable"
+        field_mapping = {
+            "name": "name",
+            "enable": "enable",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
+
+    def assign_execution_user(self, query=None, payload=None, **args):
+        url = "/resources/webhook/assignexecutionuser"
+        query_mapping = {
+            "webhookid": "webhookid",
+            "webhookname": "webhookname",
+        }
+        payload_mapping = {
+            "username": "username",
+            "password": "password",
+            "token": "token"
+        }
+        _query, _payload = prepare_query_payload(query, query_mapping, payload, payload_mapping, args)
+        return self.uc.post(url, query=_query, json_data=_payload, parse_response=False)
+
+    def unassign_execution_user(self, query=None, **args):
         """
         Arguments:
         - webhookid: webhookid
@@ -28,8 +51,8 @@ class Webhooks:
             "webhookid": "webhookid",
             "webhookname": "webhookname",
         }
-        _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        _query = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=_query, parse_response=False)
 
     def get_webhook(self, query=None, **args):
         """
