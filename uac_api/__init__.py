@@ -18,6 +18,7 @@ from .email_templates import EmailTemplates
 from .ldap import Ldaps
 from .metrics import Metrics
 from .oauth_clients import OAuthClients
+from .oauth_single_sign_on import OAuthSingleSignOn
 from .oms_servers import OmsServers
 from .properties import Properties
 from .reports import Reports
@@ -122,6 +123,7 @@ class UniversalController:
         self.cluster_nodes = ClusterNodes(self)
         self.email_templates = EmailTemplates(self)
         self.oauth_clients = OAuthClients(self)
+        self.oauth_single_sign_on = OAuthSingleSignOn(self)
         self.calendars = Calendars(self)
         self.universal_templates = UniversalTemplates(self)
 
