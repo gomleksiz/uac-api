@@ -229,6 +229,26 @@ class TaskInstances:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
+    
+    def set_started(self, payload=None, **args):
+        """
+        Arguments:
+        - name
+        - id
+        - workflowInstanceName
+        - criteria
+        - operationalMemo
+        """
+        url = "/resources/taskinstance/setstarted"
+        field_mapping = {
+            "name": "name",
+            "id": "id",
+            "workflowInstanceName": "workflowInstanceName",
+            "criteria": "criteria",
+            "operationalMemo": "operationalMemo",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload)
 
     def set_priority(self, payload=None, **args):
         """
@@ -1225,6 +1245,70 @@ class TaskInstances:
         - workflow_instance_name = workflowInstanceName
         """
         url = "/resources/taskinstance/list"
+        field_mapping = {
+            "agentName": "agentName",
+            "businessServices": "businessServices",
+            "customField1": "customField1",
+            "customField2": "customField2",
+            "executionUser": "executionUser",
+            "instanceNumber": "instanceNumber",
+            "late": "late",
+            "lateEarly": "lateEarly",
+            "name": "name",
+            "operationalMemo": "operationalMemo",
+            "status": "status",
+            "statusDescription": "statusDescription",
+            "sysId": "sysId",
+            "taskId": "taskId",
+            "taskName": "taskName",
+            "templateId": "templateId",
+            "templateName": "templateName",
+            "triggerId": "triggerId",
+            "triggerName": "triggerName",
+            "type": "type",
+            "updatedTime": "updatedTime",
+            "updatedTimeType": "updatedTimeType",
+            "workflowDefinitionId": "workflowDefinitionId",
+            "workflowDefinitionName": "workflowDefinitionName",
+            "workflowInstanceCriteria": "workflowInstanceCriteria",
+            "workflowInstanceId": "workflowInstanceId",
+            "workflowInstanceName": "workflowInstanceName",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload)
+
+    def list_advanced(self, payload=None, **args):
+        """
+        Arguments:
+        - agent_name = agentName
+        - business_services = businessServices
+        - custom_field1 = customField1
+        - custom_field2 = customField2
+        - execution_user = executionUser
+        - instance_number = instanceNumber
+        - late = late
+        - late_early = lateEarly
+        - name = name
+        - operational_memo = operationalMemo
+        - status = status
+        - status_description = statusDescription
+        - sys_id = sysId
+        - task_id = taskId
+        - task_name = taskName
+        - template_id = templateId
+        - template_name = templateName
+        - trigger_id = triggerId
+        - trigger_name = triggerName
+        - type = type
+        - updated_time = updatedTime
+        - updated_time_type = updatedTimeType
+        - workflow_definition_id = workflowDefinitionId
+        - workflow_definition_name = workflowDefinitionName
+        - workflow_instance_criteria = workflowInstanceCriteria
+        - workflow_instance_id = workflowInstanceId
+        - workflow_instance_name = workflowInstanceName
+        """
+        url = "/resources/taskinstance/listadv"
         field_mapping = {
             "agentName": "agentName",
             "businessServices": "businessServices",
