@@ -1,3 +1,4 @@
+from concurrent.futures.process import _chain_from_iterable_of_lists
 import time
 
 from .utils import prepare_payload, prepare_query_params
@@ -1179,6 +1180,28 @@ class TaskInstances:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
+
+    def get(self, query=None, **args):
+        """
+        Arguments:
+        taskinstancename: taskinstancename
+        taskinstanceid: taskinstanceid
+        workflowinstancename: workflowinstancename
+        criteria: criteria
+        include_output: includeOutput
+        include_sql_results: includeSqlResults
+        """
+        url = "/resources/taskinstance"
+        field_mapping = {
+            "taskinstancename": "taskinstancename",
+            "taskinstanceid": "taskinstanceid",
+            "workflowinstancename": "workflowinstancename",
+            "criteria": "criteria",
+            "includeOutput": "includeOutput",
+            "includeSqlResults": "includeSqlResults",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.get(url, query=parameters)
 
     def list(self, payload=None, **args):
         """
