@@ -62,10 +62,13 @@ class UniversalEvents:
         """
         Payload is required
         Arguments:
-        - eventName: eventName
+        - event_name: eventName
         - payload_format: json|xml|text
         """
         url = f"/resources/universalevent/push/{eventName}"
+        field_mapping = {
+            "eventName": "eventName",
+        }
 
         headers = {"Accept": "*/*"}
         if payload_format == "json":
