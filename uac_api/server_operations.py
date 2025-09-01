@@ -29,6 +29,34 @@ class ServerOperations:
         url = "/resources/serveroperation/bulkexport"
         return self.uc.post(url)
 
+    def bulk_export_activity(self):
+        url = "/resources/serveroperation/bulkexportactivity"
+        return self.uc.post(url)
+
+    def bulk_export_audit(self):
+        url = "/resources/serveroperation/bulkexportaudit"
+        return self.uc.post(url)
+
+    def bulk_export_history(self):
+        url = "/resources/serveroperation/bulkexporthistory"
+        return self.uc.post(url)
+
+    def ldap_refresh(self):
+        url = "/resources/serveroperation/ldaprefresh"
+        return self.uc.post(url)
+
+    def ldap_refresh_async(self):
+        url = "/resources/serveroperation/ldaprefreshasync"
+        return self.uc.post(url)
+
+    def pause_cluster_node(self):
+        url = "/resources/serveroperation/pauseclusternode"
+        return self.uc.post(url)
+
+    def resume_cluster_node(self):
+        url = "/resources/serveroperation/resumeclusternode"
+        return self.uc.post(url)
+
     def bulk_export_with_versions(self):
         url = "/resources/serveroperation/bulkexportwithversions"
         return self.uc.post(url)
@@ -41,8 +69,14 @@ class ServerOperations:
         url = f"/resources/serveroperation/listlog"
         return self.uc.get(url)
 
-    def download_log(self, name):
-        url = f"/resources/serveroperation/downloadlog?logName={name}"
+    def download_log(self, **args):
+        params = prepare_query_params(
+            None,
+            field_mapping={"logName": "logName", "name": "logName"},
+            args=args
+        )
+        query_string = "&".join(params)
+        url = f"/resources/serveroperation/downloadlog?{query_string}"
         return self.uc.get(
             url, headers={"Accept": "application/octet-stream"}, parse_response=False
         )
