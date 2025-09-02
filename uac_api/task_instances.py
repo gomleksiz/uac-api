@@ -193,6 +193,14 @@ class TaskInstances:
         return self.uc.get(url, query=parameters)
 
     def update_operational_memo(self, query=None, **args):
+        """
+        Arguments:
+        - memo: String containing the desired memo
+        - taskinstancename: taskinstancename
+        - taskinstanceid: taskinstanceid
+        - workflowinstancename: workflowinstancename
+        - criteria: criteria
+        """
         url = "/resources/taskinstance/updatememo"
         field_mapping = {
             "taskinstancename": "taskinstancename",
@@ -201,7 +209,6 @@ class TaskInstances:
             "criteria": "criteria",
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        print(args)
         payload = args.pop("memo", "")
         return self.uc.put(
             url,
@@ -230,7 +237,7 @@ class TaskInstances:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
-    
+
     def set_started(self, payload=None, **args):
         """
         Arguments:
