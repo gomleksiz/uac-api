@@ -1391,3 +1391,31 @@ class TaskInstances:
                     raise Exception("Timeout")
                 self.log.debug("Waiting for task instance to complete")
                 time.sleep(interval)
+
+    def set_task_instance_variable(self, query=None, **args):
+        """
+        Arguments:
+        - variablevalue: String containing the desired value
+        - taskinstancename: taskinstancename
+        - taskinstanceid: taskinstanceid
+        - workflowinstancename: workflowinstancename
+        - criteria: criteria
+        - variablename: variablename
+        """
+        url = "/resources/taskinstance/variable"
+        field_mapping = {
+            "taskinstancename": "taskinstancename",
+            "taskinstanceid": "taskinstanceid",
+            "workflowinstancename": "workflowinstancename",
+            "criteria": "criteria",
+            "variablename": "variablename",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        payload = args.pop("variablevalue", "")
+        return self.uc.put(
+            url,
+            json_data=payload,
+            query=parameters,
+            headers={"Content-Type": "application/json", "Accept": "text/plain"},
+            parse_response=False,
+        )
