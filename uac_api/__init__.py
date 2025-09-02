@@ -151,6 +151,18 @@ class UniversalController:
             parse_response=parse_response,
         )
 
+    def patch(
+        self, resource, query="", json_data=None, headers=None, parse_response=True
+    ):
+        return self.call(
+            "PATCH",
+            resource,
+            query,
+            headers,
+            data=json_data,
+            parse_response=parse_response,
+        )
+
     def get(self, resource, query="", headers=None, parse_response=True):
         return self.call(
             "GET", resource, query, headers, data=None, parse_response=parse_response
@@ -230,6 +242,15 @@ class UniversalController:
             elif method == "PUT":
                 self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
                 response = requests.put(
+                    uri,
+                    headers=_headers,
+                    auth=self.credential,
+                    json=data,
+                    verify=self.ssl_verify,
+                )
+            elif method == "PATCH":
+                self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
+                response = requests.patch(
                     uri,
                     headers=_headers,
                     auth=self.credential,
