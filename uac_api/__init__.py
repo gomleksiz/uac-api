@@ -79,7 +79,7 @@ class UniversalController:
         self.base_url = strip_url(base_url)
         self.token = token
         self.ssl_verify = ssl_verify
-        self.cridential = credential
+        self.credential = credential
         self.secrets = []
         if token:
             self.secrets.append(token)
@@ -198,7 +198,7 @@ class UniversalController:
         try:
             if method == "GET":
                 response = requests.get(
-                    uri, headers=_headers, auth=self.cridential, verify=self.ssl_verify
+                    uri, headers=_headers, auth=self.credential, verify=self.ssl_verify
                 )
             elif method == "POST":
                 if not binary:
@@ -206,7 +206,7 @@ class UniversalController:
                     response = requests.post(
                         uri,
                         headers=_headers,
-                        auth=self.cridential,
+                        auth=self.credential,
                         json=data,
                         verify=self.ssl_verify,
                     )
@@ -215,7 +215,7 @@ class UniversalController:
                     response = requests.post(
                         uri,
                         headers=_headers,
-                        auth=self.cridential,
+                        auth=self.credential,
                         data=data,
                         verify=self.ssl_verify,
                     )
@@ -223,7 +223,7 @@ class UniversalController:
                 response = requests.delete(
                     uri,
                     headers=_headers,
-                    auth=self.cridential,
+                    auth=self.credential,
                     json=data,
                     verify=self.ssl_verify,
                 )
@@ -232,7 +232,7 @@ class UniversalController:
                 response = requests.put(
                     uri,
                     headers=_headers,
-                    auth=self.cridential,
+                    auth=self.credential,
                     json=data,
                     verify=self.ssl_verify,
                 )

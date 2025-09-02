@@ -193,6 +193,14 @@ class TaskInstances:
         return self.uc.get(url, query=parameters)
 
     def update_operational_memo(self, query=None, **args):
+        """
+        Arguments:
+        - memo: String containing the desired memo
+        - taskinstancename: taskinstancename
+        - taskinstanceid: taskinstanceid
+        - workflowinstancename: workflowinstancename
+        - criteria: criteria
+        """
         url = "/resources/taskinstance/updatememo"
         field_mapping = {
             "taskinstancename": "taskinstancename",
@@ -201,7 +209,6 @@ class TaskInstances:
             "criteria": "criteria",
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        print(args)
         payload = args.pop("memo", "")
         return self.uc.put(
             url,
@@ -230,7 +237,7 @@ class TaskInstances:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
-    
+
     def set_started(self, payload=None, **args):
         """
         Arguments:
@@ -1384,3 +1391,31 @@ class TaskInstances:
                     raise Exception("Timeout")
                 self.log.debug("Waiting for task instance to complete")
                 time.sleep(interval)
+
+    def set_task_instance_variable(self, query=None, **args):
+        """
+        Arguments:
+        - variablevalue: String containing the desired value
+        - taskinstancename: taskinstancename
+        - taskinstanceid: taskinstanceid
+        - workflowinstancename: workflowinstancename
+        - criteria: criteria
+        - variablename: variablename
+        """
+        url = "/resources/taskinstance/variable"
+        field_mapping = {
+            "taskinstancename": "taskinstancename",
+            "taskinstanceid": "taskinstanceid",
+            "workflowinstancename": "workflowinstancename",
+            "criteria": "criteria",
+            "variablename": "variablename",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        payload = args.pop("variablevalue", "")
+        return self.uc.put(
+            url,
+            json_data=payload,
+            query=parameters,
+            headers={"Content-Type": "application/json", "Accept": "text/plain"},
+            parse_response=False,
+        )
