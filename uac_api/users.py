@@ -30,7 +30,7 @@ class Users:
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
-    
+
     def list_user_preference(self, query=None, **args):
         url = "/resources/user/preference/list"
         field_mapping = {
@@ -167,3 +167,53 @@ class Users:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
+
+    def get_groups_by_user(self, query=None, **args):
+        """
+        Arguments:
+        - userid: userid
+        - username: username
+        """
+        url = "/resources/user/groups"
+        field_mapping = {
+            "userid": "userid",
+            "username": "username",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.get(url, query=parameters)
+
+    def add_user_to_group(self, query=None, **args):
+        """
+        Arguments:
+        - userid: userid
+        - username: username
+        - groupid: groupid
+        - groupname: groupname
+        """
+        url = "/resources/user/groups"
+        field_mapping = {
+            "userid": "userid",
+            "username": "username",
+            "groupid": "groupid",
+            "groupname": "groupname",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=parameters)
+
+    def delete_user_from_group(self, query=None, **args):
+        """
+        Arguments:
+        - userid: userid
+        - username: username
+        - groupid: groupid
+        - groupname: groupname
+        """
+        url = "/resources/user/groups"
+        field_mapping = {
+            "userid": "userid",
+            "username": "username",
+            "groupid": "groupid",
+            "groupname": "groupname",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.delete(url, query=parameters)
