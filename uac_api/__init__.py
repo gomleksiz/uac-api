@@ -57,7 +57,7 @@ class UniversalController:
         """
         Initialize the Universal Controller object with base URL and credentials or token.
         :param base_url: Base URL of the controller server. Example: https://mycontroller.com/uc or https://mycontroller.com
-        :param credential: Credentials object with username and password (optional if token is used) Exanple: ("admin", "password")
+        :param credential: Credentials object with username and password (optional if token is used) Example: ("admin", "password")
         :param token: Token for authentication (optional if credential is used)
         :param ssl_verify: Verify SSL certificate (default True)
         :param logger: Logger object (default None). If not provided, a new logger will be created with the log level defined in the parameter.
