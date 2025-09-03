@@ -145,6 +145,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance"
         field_mapping = {
@@ -168,6 +169,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.delete(url, json_data=_payload, parse_response=False)
@@ -226,6 +228,7 @@ class TaskInstances:
         - workflowInstanceName
         - criteria
         - operationalMemo
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/setcompleted"
         field_mapping = {
@@ -234,6 +237,7 @@ class TaskInstances:
             "workflowInstanceName": "workflowInstanceName",
             "criteria": "criteria",
             "operationalMemo": "operationalMemo",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -246,6 +250,7 @@ class TaskInstances:
         - workflowInstanceName
         - criteria
         - operationalMemo
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/setstarted"
         field_mapping = {
@@ -254,6 +259,7 @@ class TaskInstances:
             "workflowInstanceName": "workflowInstanceName",
             "criteria": "criteria",
             "operationalMemo": "operationalMemo",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -281,6 +287,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/setpriority"
         field_mapping = {
@@ -304,6 +311,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -331,6 +339,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/settimewait"
         field_mapping = {
@@ -354,6 +363,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -433,6 +443,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/cancel"
         field_mapping = {
@@ -456,6 +467,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -483,6 +495,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/cleardependencies"
         field_mapping = {
@@ -506,6 +519,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -533,6 +547,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/clearexclusive"
         field_mapping = {
@@ -556,6 +571,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -583,6 +599,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/clearinstancewait"
         field_mapping = {
@@ -606,6 +623,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -633,6 +651,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/clearpredecessors"
         field_mapping = {
@@ -656,6 +675,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -683,6 +703,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/clearresources"
         field_mapping = {
@@ -706,6 +727,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -733,6 +755,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/cleartimewait"
         field_mapping = {
@@ -756,6 +779,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -783,6 +807,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/forcefinish"
         field_mapping = {
@@ -806,6 +831,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -833,6 +859,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/forcefinishcancel"
         field_mapping = {
@@ -856,6 +883,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -883,6 +911,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/hold"
         field_mapping = {
@@ -906,6 +935,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -933,6 +963,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/release"
         field_mapping = {
@@ -956,6 +987,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -983,6 +1015,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/rerun"
         field_mapping = {
@@ -1006,6 +1039,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -1061,6 +1095,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/skip"
         field_mapping = {
@@ -1084,6 +1119,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -1111,6 +1147,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/skippath"
         field_mapping = {
@@ -1134,6 +1171,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -1161,6 +1199,7 @@ class TaskInstances:
         - taskStatus: taskStatus
         - operationalMemo: operationalMemo
         - holdReason: holdReason
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/unskip"
         field_mapping = {
@@ -1184,6 +1223,7 @@ class TaskInstances:
             "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -1240,6 +1280,7 @@ class TaskInstances:
         - workflow_instance_criteria = workflowInstanceCriteria
         - workflow_instance_id = workflowInstanceId
         - workflow_instance_name = workflowInstanceName
+        - returnInUse: returnInUse
         """
         return self.list_status(payload=payload, **args)
 
@@ -1337,6 +1378,7 @@ class TaskInstances:
         - workflow_instance_criteria = workflowInstanceCriteria
         - workflow_instance_id = workflowInstanceId
         - workflow_instance_name = workflowInstanceName
+        - returnInUse: returnInUse
         """
         url = "/resources/taskinstance/listadv"
         field_mapping = {
@@ -1367,6 +1409,7 @@ class TaskInstances:
             "workflowInstanceCriteria": "workflowInstanceCriteria",
             "workflowInstanceId": "workflowInstanceId",
             "workflowInstanceName": "workflowInstanceName",
+            "returnInUse": "returnInUse",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -1420,7 +1463,9 @@ class TaskInstances:
             parse_response=False,
         )
 
-    def patch_task_instance(self, query=None, payload=None, taskinstanceID=None, **args):
+    def patch_task_instance(
+        self, query=None, payload=None, taskinstanceID=None, **args
+    ):
         """
         Arguments:
         - taskinstanceID: taskinstanceID
@@ -1584,7 +1629,7 @@ class TaskInstances:
             "timeZonePref": "timeZonePref",
             "virtualResources": "virtualResources",
             "exclusiveRequests": "exclusiveRequests",
-            "type": "type"
+            "type": "type",
         }
         _query, _payload = prepare_query_payload(
             query, query_fields, payload, payload_fields, args
