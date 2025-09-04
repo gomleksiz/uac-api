@@ -267,6 +267,7 @@ print(response)
 - list_status(self, payload=None, **args) - List Task Instances
 - wait_for_status(self, id, statuses=FINAL_STATUS, timeout=300, interval=10): Waits until the task instance reaches one of the given statuses.
 - set_complete(self, payload=None, **args)
+- patch_task_instance(self, query=None, payload=None, taskinstanceID=None, **args)
 - set_task_instance_variable(self, query=None, **args)
 ## Tasks:
 - get_task(self, query=None, **args)
