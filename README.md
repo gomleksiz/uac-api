@@ -40,7 +40,7 @@ try:
     task = uac.tasks.get_task(task_name="Sleep 0")
     task["name"] = "Sleep 0 New" # Change task name
     # Create new task based on existing task
-    response = uac.tasks.create_task(task, retainSysIds=False) 
+    response = uac.tasks.create_task(task, retainSysIds=False)
     print(response)
 
     # Read new created task
@@ -339,6 +339,9 @@ print(response)
 - revoke_user_token(self, query=None, **args)
 - list_auth_tokens(self, query=None, **args)
 - list_users(self, query=None, **args)
+- get_groups_by_user(self, query=None, **args)
+- add_user_to_group(self, query=None, **args)
+- delete_user_from_group(self, query=None, **args)
 ## Variables:
 - get_variable(self, query=None, **args)
 - update_variable(self, payload=None, **args)
