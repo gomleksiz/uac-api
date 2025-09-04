@@ -40,7 +40,7 @@ try:
     task = uac.tasks.get_task(task_name="Sleep 0")
     task["name"] = "Sleep 0 New" # Change task name
     # Create new task based on existing task
-    response = uac.tasks.create_task(task, retainSysIds=False) 
+    response = uac.tasks.create_task(task, retainSysIds=False)
     print(response)
 
     # Read new created task
@@ -267,6 +267,7 @@ print(response)
 - list_status(self, payload=None, **args) - List Task Instances
 - wait_for_status(self, id, statuses=FINAL_STATUS, timeout=300, interval=10): Waits until the task instance reaches one of the given statuses.
 - set_complete(self, payload=None, **args)
+- set_task_instance_variable(self, query=None, **args)
 ## Tasks:
 - get_task(self, query=None, **args)
 - update_task(self, payload=None, **args)
