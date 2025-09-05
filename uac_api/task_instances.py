@@ -1282,7 +1282,39 @@ class TaskInstances:
         - workflow_instance_name = workflowInstanceName
         - returnInUse: returnInUse
         """
-        return self.list_status(payload=payload, **args)
+        url = "/resources/taskinstance/listadv"
+        field_mapping = {
+            "agentName": "agentName",
+            "businessServices": "businessServices",
+            "customField1": "customField1",
+            "customField2": "customField2",
+            "executionUser": "executionUser",
+            "instanceNumber": "instanceNumber",
+            "late": "late",
+            "lateEarly": "lateEarly",
+            "name": "name",
+            "operationalMemo": "operationalMemo",
+            "status": "status",
+            "statusDescription": "statusDescription",
+            "sysId": "sysId",
+            "taskId": "taskId",
+            "taskName": "taskName",
+            "templateId": "templateId",
+            "templateName": "templateName",
+            "triggerId": "triggerId",
+            "triggerName": "triggerName",
+            "type": "type",
+            "updatedTime": "updatedTime",
+            "updatedTimeType": "updatedTimeType",
+            "workflowDefinitionId": "workflowDefinitionId",
+            "workflowDefinitionName": "workflowDefinitionName",
+            "workflowInstanceCriteria": "workflowInstanceCriteria",
+            "workflowInstanceId": "workflowInstanceId",
+            "workflowInstanceName": "workflowInstanceName",
+            "returnInUse": "returnInUse",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.post(url, json_data=_payload)
 
     def list_status(self, payload=None, **args):
         """
