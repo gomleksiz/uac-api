@@ -83,9 +83,8 @@ class Triggers:
         payload_fields = {
             "name": "name",
             "variables": "variables",
-            "variablesMap": "variablesMap",
             "virtualResourcePriority": "virtualResourcePriority",
-            "virtualResources": "virtualResources",
+            "virtual-resources": "virtual-resources",
             "hold": "hold",
             "holdReason": "holdReason",
             "timeZone": "timeZone",
@@ -95,6 +94,7 @@ class Triggers:
             "overrideTimeZone": "overrideTimeZone",
             "launchReason": "launchReason",
             "simulate": "simulate",
+            "vertices": "vertices",
         }
         _query, _payload = prepare_query_payload(
             query, query_fields, payload, payload_fields, args
