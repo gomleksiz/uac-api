@@ -1416,6 +1416,6 @@ class TaskInstances:
             url,
             json_data=payload,
             query=parameters,
-            headers={"Content-Type": "application/json", "Accept": "text/plain"},
+            headers={"Accept": "application/json", "Content-Type": "text/plain"},
             parse_response=False,
         )
