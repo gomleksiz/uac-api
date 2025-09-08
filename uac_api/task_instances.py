@@ -1532,7 +1532,7 @@ class TaskInstances:
             json_data=payload,
             query=parameters,
             headers={"Accept": "application/json", "Content-Type": "text/plain"},
-            parse_response=False,
+            parse_response=True,
         )
 
     def patch_task_instance(
