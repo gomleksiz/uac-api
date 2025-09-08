@@ -69,13 +69,13 @@ class Triggers:
             "skipCount": "skipCount",
         }
         _query = prepare_query_params(query, field_mapping, args)
-        return self.uc.post(url, query=_query, json_data=None, parse_response=False)
+        return self.uc.post(url, query=_query, json_data=None, parse_response=True)
 
     def set_time(self, payload=None, **args):
         url = "/resources/trigger/settime"
         payload_fields = {"name": "name", "time": "time", "id": "id"}
         _payload = prepare_payload(payload, payload_fields, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        return self.uc.post(url, json_data=_payload, parse_response=True)
 
     def trigger_now(self, query=None, payload=None, **args):
         url = "/resources/trigger/triggernow"
@@ -99,7 +99,7 @@ class Triggers:
         _query, _payload = prepare_query_payload(
             query, query_fields, payload, payload_fields, args
         )
-        return self.uc.post(url, query=_query, json_data=_payload, parse_response=False)
+        return self.uc.post(url, query=_query, json_data=_payload, parse_response=True)
 
     def unassign_execution_user(self, query=None, **args):
         """
