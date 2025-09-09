@@ -1536,14 +1536,14 @@ class TaskInstances:
         )
 
     def patch_task_instance(
-        self, query=None, payload=None, taskInstanceId=None, **args
+        self, query=None, payload=None, taskinstanceid=None, **args
     ):
         """
         Arguments:
-        - taskInstanceId: taskInstanceId
+        - taskinstanceid: taskInstanceId
         - scope: scope  -- Only the 'fields' scope is supported as of UC 7.9
         """
-        url = f"/resources/taskinstance/{taskInstanceId}"
+        url = f"/resources/taskinstance/{taskinstanceid}"
         query_fields = {
             "scope": "scope",
         }
@@ -1711,5 +1711,5 @@ class TaskInstances:
             json_data=_payload,
             query=_query,
             headers={"Content-Type": "application/json", "Accept": "application/json"},
-            parse_response=False,
+            parse_response=True,
         )
