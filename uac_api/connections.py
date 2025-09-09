@@ -226,7 +226,8 @@ class Connections:
             "managername": "managername",
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.get(url, query=parameters)
+        headers = {"accept": "application/json"}
+        return self.uc.get(url, query=parameters, headers=headers, parse_response=True)
 
     def update_snmp_connection(self, payload=None, **args):
         """
@@ -249,10 +250,13 @@ class Connections:
             "retainSysIds": "retainSysIds",
             "opswiseGroups": "opswiseGroups",
             "trapCommunity": "trapCommunity",
-            "description": "description"
+            "description": "description",
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.put(url, json_data=_payload, parse_response=False)
+        headers = {"accept": "text/plain", "Content-Type": "application/json"}
+        return self.uc.put(
+            url, json_data=_payload, headers=headers, parse_response=False
+        )
 
     def create_snmp_connection(self, payload=None, **args):
         """
@@ -286,7 +290,10 @@ class Connections:
             "description": "description",
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=True)
+        headers = {"accept": "text/plain", "Content-Type": "application/json"}
+        return self.uc.post(
+            url, json_data=_payload, headers=headers, parse_response=False
+        )
 
     def delete_snmp_connection(self, query=None, **args):
         """
@@ -299,9 +306,13 @@ class Connections:
             "managerid": "managerid",
             "managername": "managername",
         }
+        headers = {"accept": "text/plain"}
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.delete(url, query=parameters, parse_response=False)
+        return self.uc.delete(
+            url, query=parameters, headers=headers, parse_response=False
+        )
 
     def list_snmp_connections(self):
         url = "/resources/snmpmanager/list"
-        return self.uc.get(url)
+        headers = {"accept": "application/json"}
+        return self.uc.get(url, headers=headers, parse_response=True)
