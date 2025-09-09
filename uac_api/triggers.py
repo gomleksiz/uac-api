@@ -36,7 +36,7 @@ class Triggers:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
-    
+
     def list_component_events(self, query=None, **args):
         """
         Arguments:
@@ -54,7 +54,7 @@ class Triggers:
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
-    
+
     def set_skip_count(self, query=None, **args):
         """
         Arguments:
@@ -66,29 +66,25 @@ class Triggers:
         field_mapping = {
             "triggerid": "triggerid",
             "triggername": "triggername",
-            "skipCount": "skipCount"
+            "skipCount": "skipCount",
         }
         _query = prepare_query_params(query, field_mapping, args)
-        return self.uc.post(url, query=_query, json_data=None, parse_response=False)
-    
+        return self.uc.post(url, query=_query, json_data=None, parse_response=True)
+
     def set_time(self, payload=None, **args):
         url = "/resources/trigger/settime"
-        payload_fields = {
-            "name": "name",
-            "time": "time",
-            "id": "id"
-        }
+        payload_fields = {"name": "name", "time": "time", "id": "id"}
         _payload = prepare_payload(payload, payload_fields, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        return self.uc.post(url, json_data=_payload, parse_response=True)
 
-    def trigger_now(self, payload=None, **args):
+    def trigger_now(self, query=None, payload=None, **args):
         url = "/resources/trigger/triggernow"
+        query_fields = {"includeTaskInstanceIds": "includeTaskInstanceIds"}
         payload_fields = {
             "name": "name",
             "variables": "variables",
-            "variablesMap": "variablesMap",
             "virtualResourcePriority": "virtualResourcePriority",
-            "virtualResources": "virtualResources",
+            "virtual-resources": "virtual-resources",
             "hold": "hold",
             "holdReason": "holdReason",
             "timeZone": "timeZone",
@@ -97,10 +93,13 @@ class Triggers:
             "overrideTime": "overrideTime",
             "overrideTimeZone": "overrideTimeZone",
             "launchReason": "launchReason",
-            "simulate": "simulate"
+            "simulate": "simulate",
+            "vertices": "vertices",
         }
-        _payload = prepare_payload(payload, payload_fields, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        _query, _payload = prepare_query_payload(
+            query, query_fields, payload, payload_fields, args
+        )
+        return self.uc.post(url, query=_query, json_data=_payload, parse_response=True)
 
     def unassign_execution_user(self, query=None, **args):
         """
@@ -128,7 +127,7 @@ class Triggers:
         payload_fields = {
             "username": "username",
             "password": "password",
-            "token": "token" 
+            "token": "token",
         }
         _query, _payload = prepare_query_payload(
             query, query_fields, payload, payload_fields, args

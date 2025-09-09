@@ -86,12 +86,31 @@ class UniversalTemplates:
             "templatename": "templatename",
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.get(url, query=parameters, parse_response=False, headers={"Accept": "application/octet-stream"})
+        return self.uc.get(
+            url,
+            query=parameters,
+            parse_response=False,
+            headers={"Accept": "application/octet-stream"},
+        )
 
-    def update_extension_archive(self, payload=None, **args):
+    def update_extension_archive(self, query=None, data=None, **args):
+        """
+        Arguments:
+        - templateid: templatei
+        - templatename: templatename
+        """
         url = "/resources/universaltemplate/extension"
-        _payload = payload
-        return self.uc.post(url, json_data=_payload)
+        field_mapping = {
+            "templateid": "templateid",
+            "templatename": "templatename",
+        }
+        parameters = prepare_query_params(query, field_mapping, args)
+        headers = {
+            "Content-Type": "application/zip",
+        }
+        return self.uc.post_data(
+            url, query=parameters, headers=headers, data=data, parse_response=False
+        )
 
     def delete_extension_archive(self, query=None, **args):
         """
