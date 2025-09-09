@@ -286,7 +286,7 @@ class Connections:
             "description": "description",
         }
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        return self.uc.post(url, json_data=_payload, parse_response=True)
 
     def delete_snmp_connection(self, query=None, **args):
         """
