@@ -1536,14 +1536,14 @@ class TaskInstances:
         )
 
     def patch_task_instance(
-        self, query=None, payload=None, taskinstanceID=None, **args
+        self, query=None, payload=None, taskInstanceId=None, **args
     ):
         """
         Arguments:
-        - taskinstanceID: taskinstanceID
+        - taskInstanceId: taskInstanceId
         - scope: scope  -- Only the 'fields' scope is supported as of UC 7.9
         """
-        url = f"/resources/taskinstance/{taskinstanceID}"
+        url = f"/resources/taskinstance/{taskInstanceId}"
         query_fields = {
             "scope": "scope",
         }
