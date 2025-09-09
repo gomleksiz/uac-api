@@ -229,19 +229,61 @@ class Connections:
         return self.uc.get(url, query=parameters)
 
     def update_snmp_connection(self, payload=None, **args):
+        """
+        Arguments:
+            - sysId: sysId
+            - name: name
+            - managerAddress: managerAddress
+            - managerPort: managerPort
+            - retainSysIds: retainSysIds
+            - opswiseGroups: opswiseGroups
+            - trapCommunity: trapCommunity
+            - description: description
+        """
         url = "/resources/snmpmanager"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "managerAddress": "managerAddress",
+            "managerPort": "managerPort",
+            "retainSysIds": "retainSysIds",
+            "opswiseGroups": "opswiseGroups",
+            "trapCommunity": "trapCommunity",
+            "description": "description"
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_snmp_connection(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - version: version
+            - sysId: sysId
+            - retainSysIds: retainSysIds
+            - excludeRelated: excludeRelated
+            - exportReleaseLevel: exportReleaseLevel
+            - exportTable: exportTable
+            - name: name
+            - managerAddress: managerAddress
+            - managerPort: managerPort
+            - opswiseGroups: opswiseGroups
+            - trapCommunity: trapCommunity
+            - description: description
         """
         url = "/resources/snmpmanager"
         field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "excludeRelated": "excludeRelated",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "managerAddress": "managerAddress",
+            "managerPort": "managerPort",
+            "opswiseGroups": "opswiseGroups",
+            "trapCommunity": "trapCommunity",
+            "description": "description",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)

@@ -268,6 +268,7 @@ print(response)
 - wait_for_status(self, id, statuses=FINAL_STATUS, timeout=300, interval=10): Waits until the task instance reaches one of the given statuses.
 - set_complete(self, payload=None, **args)
 - patch_task_instance(self, query=None, payload=None, taskinstanceID=None, **args)
+- set_task_instance_variable(self, query=None, **args)
 ## Tasks:
 - get_task(self, query=None, **args)
 - update_task(self, payload=None, **args)
@@ -340,6 +341,9 @@ print(response)
 - revoke_user_token(self, query=None, **args)
 - list_auth_tokens(self, query=None, **args)
 - list_users(self, query=None, **args)
+- get_groups_by_user(self, query=None, **args)
+- add_user_to_group(self, query=None, **args)
+- delete_user_from_group(self, query=None, **args)
 ## Variables:
 - get_variable(self, query=None, **args)
 - update_variable(self, payload=None, **args)
