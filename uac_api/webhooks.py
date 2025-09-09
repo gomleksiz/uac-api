@@ -23,8 +23,11 @@ class Webhooks:
             "name": "name",
             "enable": "enable",
         }
+        headers = {"accept": "application/json", "Content-Type": "application/json"}
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        return self.uc.post(
+            url, json_data=_payload, headers=headers, parse_response=True
+        )
 
     def assign_execution_user(self, query=None, payload=None, **args):
         url = "/resources/webhook/assignexecutionuser"
@@ -35,9 +38,11 @@ class Webhooks:
         payload_mapping = {
             "username": "username",
             "password": "password",
-            "token": "token"
+            "token": "token",
         }
-        _query, _payload = prepare_query_payload(query, query_mapping, payload, payload_mapping, args)
+        _query, _payload = prepare_query_payload(
+            query, query_mapping, payload, payload_mapping, args
+        )
         return self.uc.post(url, query=_query, json_data=_payload, parse_response=False)
 
     def unassign_execution_user(self, query=None, **args):
