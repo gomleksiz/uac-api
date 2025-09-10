@@ -252,26 +252,6 @@ class Tasks:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def list_dependency_list_1(self, query=None, **args):
-        """
-        Arguments:
-        - taskinstancename: taskinstancename
-        - taskinstanceid: taskinstanceid
-        - workflowinstancename: workflowinstancename
-        - criteria: criteria
-        - dependencytype: dependencytype
-        """
-        url = "/resources/task/dependency/list"
-        field_mapping = {
-            "taskinstancename": "taskinstancename",
-            "taskinstanceid": "taskinstanceid",
-            "workflowinstancename": "workflowinstancename",
-            "criteria": "criteria",
-            "dependencytype": "dependencytype",
-        }
-        parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.get(url, query=parameters)
-
     def task_launch(self, payload=None, **args):
         """
         Arguments:
