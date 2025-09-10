@@ -61,7 +61,9 @@ class UniversalEvents:
         headers["Content-Type"] = "plain/text"
         return self.uc.get(url, query=parameters, parse_response=False, headers=headers)
 
-    def push(self, payload=None, query=None, eventName=None, payload_format="json", args):
+    def push(
+        self, payload=None, query=None, eventName=None, payload_format="json", **args
+    ):
         """
         Payload is required
         Arguments:
@@ -85,5 +87,9 @@ class UniversalEvents:
             headers["Content-Type"] = "plain/text"
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.post(
-            url, query=parameters, json_data=payload, parse_response=False, headers=headers
+            url,
+            query=parameters,
+            json_data=payload,
+            parse_response=False,
+            headers=headers,
         )

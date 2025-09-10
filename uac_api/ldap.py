@@ -19,7 +19,7 @@ class Ldaps:
         url = "/resources/ldap"
         _payload = payload
         return self.uc.put(url, json_data=_payload, parse_response=False)
-    
+
     def update_ldap_bind_password(self, payload=None, **args):
         url = "/resources/ldap/changebindpwd"
         _payload = payload

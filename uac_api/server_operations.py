@@ -71,9 +71,7 @@ class ServerOperations:
 
     def download_log(self, **args):
         params = prepare_query_params(
-            None,
-            field_mapping={"logName": "logName", "name": "logName"},
-            args=args
+            None, field_mapping={"logName": "logName", "name": "logName"}, args=args
         )
         query_string = "&".join(params)
         url = f"/resources/serveroperation/downloadlog?{query_string}"
