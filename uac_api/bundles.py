@@ -126,14 +126,12 @@ class Bundles:
         url = "/resources/bundle/bybusinessservices"
         field_mapping = {
             "sysId": "sysId",
-            "excludeRelated": "excludeRelated",
             "exportReleaseLevel": "exportReleaseLevel",
             "exportTable": "exportTable",
             "name": "name",
             "businessServices": "businessServices",
             "typesToInclude": "typesToInclude",
             "businessServicesToInclude": "businessServicesToInclude",
-            "updatedOnOrAfter": "updatedOnOrAfter"
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)

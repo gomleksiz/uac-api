@@ -43,11 +43,14 @@ class UniversalEvents:
         Arguments:
         - payload: payload
         - eventName: eventName
+        - ttl: ttl
+        - businessService: businessService
         """
         url = f"/resources/universalevent/push/{eventName}"
         field_mapping = {
             "payload": "payload",
-            "eventName": "eventName",
+            "ttl": "ttl",
+            "businessService": "businessService",
         }
         # Accept all the query parameters
         for key, value in args.items():
@@ -58,16 +61,19 @@ class UniversalEvents:
         headers["Content-Type"] = "plain/text"
         return self.uc.get(url, query=parameters, parse_response=False, headers=headers)
 
-    def push(self, payload=None, eventName=None, payload_format="json"):
+    def push(self, payload=None, query=None, eventName=None, payload_format="json", args):
         """
         Payload is required
         Arguments:
         - event_name: eventName
         - payload_format: json|xml|text
+        - ttl: ttl
+        - businessService: businessService
         """
         url = f"/resources/universalevent/push/{eventName}"
         field_mapping = {
-            "eventName": "eventName",
+            "ttl": "ttl",
+            "businessService": "businessService",
         }
 
         headers = {"Accept": "*/*"}
@@ -77,6 +83,7 @@ class UniversalEvents:
             headers["Content-Type"] = "application/xml"
         else:
             headers["Content-Type"] = "plain/text"
+        parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.post(
-            url, json_data=payload, parse_response=False, headers=headers
+            url, query=parameters, json_data=payload, parse_response=False, headers=headers
         )
