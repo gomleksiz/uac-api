@@ -200,34 +200,20 @@ class Triggers:
         """
         Arguments:
         - name: name
-        - enabled: enabled
-        - type: type
         - businessServices: businessServices
-        - updatedTimeType: updatedTimeType
-        - updatedTime: updatedTime
-        - workflowId: workflowId
-        - workflowName: workflowName
-        - agentName: agentName
-        - description: description
+        - type: type
         - tasks: tasks
-        - templateId: templateId
-        - templateName: templateName
+        - enabled: enabled
+        - description: description
         """
         url = "/resources/trigger/list"
         field_mapping = {
             "name": "name",
-            "enabled": "enabled",
-            "type": "type",
             "businessServices": "businessServices",
-            "updatedTimeType": "updatedTimeType",
-            "updatedTime": "updatedTime",
-            "workflowId": "workflowId",
-            "workflowName": "workflowName",
-            "agentName": "agentName",
-            "description": "description",
+            "type": "type",
             "tasks": "tasks",
-            "templateId": "templateId",
-            "templateName": "templateName",
+            "enabled": "enabled",
+            "description": "description",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
