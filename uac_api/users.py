@@ -56,7 +56,7 @@ class Users:
             "userid": "userid",
             "username": "username",
             "preferencename": "preferencename",
-            "value": "value"
+            "value": "value",
         }
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.put(url, query=parameters)
