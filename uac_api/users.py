@@ -59,7 +59,8 @@ class Users:
             "value": "value",
         }
         parameters = prepare_query_params(query, field_mapping, args)
-        return self.uc.put(url, query=parameters)
+        headers = {"accept": "text/plain"}
+        return self.uc.put(url, query=parameters, headers=headers, parse_response=False)
 
     def get_user(self, query=None, **args):
         """
