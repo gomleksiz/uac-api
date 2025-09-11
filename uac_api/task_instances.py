@@ -216,6 +216,7 @@ class TaskInstances:
             query=parameters,
             headers={"Content-Type": "text/plain", "Accept": "text/plain"},
             parse_response=False,
+            plaintext_instead_of_json=True,
         )
 
     def set_complete(self, payload=None, **args):
@@ -1491,6 +1492,7 @@ class TaskInstances:
             query=parameters,
             headers={"Accept": "application/json", "Content-Type": "text/plain"},
             parse_response=True,
+            plaintext_instead_of_json=True,
         )
 
     def patch_task_instance(
