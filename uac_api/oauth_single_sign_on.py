@@ -14,9 +14,73 @@ class OAuthSingleSignOn:
         self.uc = uc
 
     def update_single_sign_on_settings(self, payload=None, **args):
+        """
+        Arguments:
+        - singleSignOn: singleSignOn
+        - issuerUri: issuerUri
+        - scopes: scopes
+        - clientId: clientId
+        - clientSecret: clientSecret
+        - pkce: pkce
+        - userNameClaimName: userNameClaimName
+        - clusterBaseRedirectUrls: clusterBaseRedirectUrls
+        - userProvisioning: userProvisioning
+        - attrFirstName: attrFirstName
+        - attrMiddleName: attrMiddleName
+        - attrLastName: attrLastName
+        - attrPhone: attrPhone
+        - attrHomePhone: attrHomePhone
+        - attrMobilePhone: attrMobilePhone
+        - attrEmail: attrEmail
+        - attrTitle: attrTitle
+        - attrManager: attrManager
+        - attrDepartment: attrDepartment
+        - attrActive: attrActive
+        - attrGroups: attrGroups
+        - tokenValidation: tokenValidation
+        - opaqueIntrospectionUri: opaqueIntrospectionUri
+        - jwtJwkSetUri: jwtJwkSetUri
+        - jwtAudienceClaimValue: jwtAudienceClaimValue
+        - portalClientId: portalClientId
+        - portalApiScopes: portalApiScopes
+        """
+        field_mapping = {
+            "singleSignOn": "singleSignOn",
+            "issuerUri": "issuerUri",
+            "scopes": "scopes",
+            "clientId": "clientId",
+            "clientSecret": "clientSecret",
+            "pkce": "pkce",
+            "userNameClaimName": "userNameClaimName",
+            "clusterBaseRedirectUrls": "clusterBaseRedirectUrls",
+            "userProvisioning": "userProvisioning",
+            "attrFirstName": "attrFirstName",
+            "attrMiddleName": "attrMiddleName",
+            "attrLastName": "attrLastName",
+            "attrPhone": "attrPhone",
+            "attrHomePhone": "attrHomePhone",
+            "attrMobilePhone": "attrMobilePhone",
+            "attrEmail": "attrEmail",
+            "attrTitle": "attrTitle",
+            "attrManager": "attrManager",
+            "attrDepartment": "attrDepartment",
+            "attrActive": "attrActive",
+            "attrGroups": "attrGroups",
+            "tokenValidation": "tokenValidation",
+            "opaqueIntrospectionUri": "opaqueIntrospectionUri",
+            "jwtJwkSetUri": "jwtJwkSetUri",
+            "jwtAudienceClaimValue": "jwtAudienceClaimValue",
+            "portalClientId": "portalClientId",
+            "portalApiScopes": "portalApiScopes",
+        }
         url = "/resources/oauthsettings"
-        _payload = payload
-        return self.uc.put(url, json_data=_payload, parse_response=False)
+        _payload = prepare_payload(
+            payload=payload, field_mapping=field_mapping, args=args
+        )
+        headers = {"accept": "text/plain", "Content-Type": "application/json"}
+        return self.uc.put(
+            url, json_data=_payload, headers=headers, parse_response=False
+        )
 
     def read_single_sign_on_settings(self):
         url = "/resources/oauthsettings"
