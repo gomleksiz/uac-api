@@ -140,7 +140,13 @@ class UniversalController:
         )
 
     def put(
-        self, resource, query="", json_data=None, headers=None, parse_response=True
+        self,
+        resource,
+        query="",
+        json_data=None,
+        headers=None,
+        parse_response=True,
+        plaintext_instead_of_json=False,
     ):
         return self.call(
             "PUT",
@@ -149,6 +155,7 @@ class UniversalController:
             headers,
             data=json_data,
             parse_response=parse_response,
+            plaintext_instead_of_json=plaintext_instead_of_json,
         )
 
     def patch(
@@ -188,7 +195,15 @@ class UniversalController:
         )
 
     def call(
-        self, method, resource, query, headers, data, parse_response, binary=False
+        self,
+        method,
+        resource,
+        query,
+        headers,
+        data,
+        parse_response,
+        binary=False,
+        plaintext_instead_of_json=False,
     ):
         self.log.debug(filter_secrets("uac_rest_call start", self.secrets))
         self.log.debug(headers)
@@ -241,13 +256,18 @@ class UniversalController:
                 )
             elif method == "PUT":
                 self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
-                response = requests.put(
-                    uri,
-                    headers=_headers,
-                    auth=self.credential,
-                    json=data,
-                    verify=self.ssl_verify,
-                )
+                kwargs = {
+                    "headers": _headers,
+                    "auth": self.credential,
+                    "verify": self.ssl_verify,
+                }
+                if plaintext_instead_of_json:
+                    kwargs["data"] = data
+                else:
+                    kwargs["json"] = data
+
+                response = requests.put(uri, **kwargs)
+
             elif method == "PATCH":
                 self.log.debug(filter_secrets(f"Payload = {data}", self.secrets))
                 response = requests.patch(
