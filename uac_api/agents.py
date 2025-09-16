@@ -184,12 +184,57 @@ class AgentClusters:
     def create_agent_cluster(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - name: name
+        - description: description
+        - strictBsrvcMembership: strictBsrvcMembership
+        - distribution: distribution
+        - networkAlias: networkAlias
+        - networkAliasPort: networkAliasPort
+        - resolutionStatus: resolutionStatus
+        - resolutionDescription: resolutionDescription
+        - lastResolution: lastResolution
+        - limitType: limitType
+        - limitAmount: limitAmount
+        - currentCount: currentCount
+        - suspended: suspended
+        - suspendedOn: suspendedOn
+        - resumedOn: resumedOn
+        - agentLimitType: agentLimitType
+        - agentLimitAmount: agentLimitAmount
+        - lastAgentUsed: lastAgentUsed
+        - ignoreInactiveAgents: ignoreInactiveAgents
+        - ignoreSuspendedAgents: ignoreSuspendedAgents
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - type: type
+
+        False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/agentcluster"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
+            "strictBsrvcMembership": "strictBsrvcMembership",
+            "distribution": "distribution",
+            "networkAlias": "networkAlias",
+            "networkAliasPort": "networkAliasPort",
+            "resolutionStatus": "resolutionStatus",
+            "resolutionDescription": "resolutionDescription",
+            "lastResolution": "lastResolution",
+            "limitType": "limitType",
+            "limitAmount": "limitAmount",
+            "currentCount": "currentCount",
+            "suspended": "suspended",
+            "suspendedOn": "suspendedOn",
+            "resumedOn": "resumedOn",
+            "agentLimitType": "agentLimitType",
+            "agentLimitAmount": "agentLimitAmount",
+            "lastAgentUsed": "lastAgentUsed",
+            "ignoreInactiveAgents": "ignoreInactiveAgents",
+            "ignoreSuspendedAgents": "ignoreSuspendedAgents",
             "retainSysIds": "retainSysIds",
+            "type": "type",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
