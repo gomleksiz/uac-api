@@ -36,11 +36,30 @@ class OAuthClients:
         """
         Arguments:
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - sysId: sysId
+        - name: name
+        - description: description
+        - provider: provider
+        - authorizationEndpoint: authorizationEndpoint
+        - tokenEndpoint: tokenEndpoint
+        - tenantId: tenantId
+        - clientId: clientId
+        - clientSecret: clientSecret
+
+        False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/oauthclient"
         field_mapping = {
             "retainSysIds": "retainSysIds",
+            "sysId" : "sysId",
+            "name" : "name",
+            "description" : "description",
+            "provider" : "provider",
+            "authorizationEndpoint" : "authorizationEndpoint",
+            "tokenEndpoint" : "tokenEndpoint",
+            "tenantId" : "tenantId",
+            "clientId" : "clientId",
+            "clientSecret" : "clientSecret",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
