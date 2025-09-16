@@ -14,3 +14,7 @@ class ClusterNodes:
     def list_cluster_nodes(self):
         url = "/resources/clusternode/list"
         return self.uc.get(url)
+
+    def healthcheck(self):
+        url = "/resources/clusternode/healthcheck"
+        return self.uc.get(url)
