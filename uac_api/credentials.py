@@ -49,12 +49,32 @@ class Credentials:
     def create_credential(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        "retainSysIds": "retainSysIds"
+        "sysId": "sysId"
+        "name": "name"
+        "description": "description"
+        "retainSysIds": "retainSysIds"
+        "runtimeUser": "runtimeUser"
+        "runtimePassword": "runtimePassword"
+        "runtimePassPhrase": "runtimePassPhrase"
+        "runtimeToken": "runtimeToken"
+        "provider": "provider"
+        "runtimeKeyLocation": "runtimeKeyLocation"
+        "type": "type"
         """
         url = "/resources/credential"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
             "retainSysIds": "retainSysIds",
+            "runtimeUser": "runtimeUser",
+            "runtimePassword": "runtimePassword",
+            "runtimePassPhrase": "runtimePassPhrase",
+            "runtimeToken": "runtimeToken",
+            "provider": "provider",
+            "runtimeKeyLocation": "runtimeKeyLocation",
+            "type": "type",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
