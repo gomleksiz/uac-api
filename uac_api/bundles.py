@@ -83,11 +83,34 @@ class Bundles:
         """
         Arguments:
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - name: name
+        - sysId: sysId
+        - description: description
+        - defaultPromotionTarget: defaultPromotionTarget
+        - excludeOnExistence: excludeOnExistence
+        - followReferences: followReferences
+        - promoteBundleDefinition: promoteBundleDefinition
+        - visibleTo: visibleTo
+        - updated: updated
+        - updatedBy: updatedBy
+        - created: created
+        - createdBy: createdBy
         """
         url = "/resources/bundle"
         field_mapping = {
             "retainSysIds": "retainSysIds",
+            "name": "name",
+            "sysId": "sysId",
+            "description": "description",
+            "defaultPromotionTarget": "defaultPromotionTarget",
+            "excludeOnExistence": "excludeOnExistence",
+            "followReferences": "followReferences",
+            "promoteBundleDefinition": "promoteBundleDefinition",
+            "visibleTo": "visibleTo",
+            "updated": "updated",
+            "updatedBy": "updatedBy",
+            "created": "created",
+            "createdBy": "createdBy",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
