@@ -125,49 +125,21 @@ class TaskInstances:
     def delete_task_instance(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
         - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
             "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.delete(url, json_data=_payload, parse_response=False)
@@ -262,49 +234,21 @@ class TaskInstances:
     def set_priority(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
         - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/setpriority"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
             "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -312,49 +256,35 @@ class TaskInstances:
     def set_timewait(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
+        - delayType: delayType
         - waitType: waitType
         - waitTime: waitTime
+        - waitDayConstraint: waitDayConstraint
         - waitDuration: waitDuration
         - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
         - delayDuration: delayDuration
         - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
         - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/settimewait"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
+            "delayType": "delayType",
             "waitType": "waitType",
             "waitTime": "waitTime",
+            "waitDayConstraint": "waitDayConstraint",
             "waitDuration": "waitDuration",
             "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
             "delayDuration": "delayDuration",
             "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -614,49 +544,21 @@ class TaskInstances:
     def clear_predecessors(self, payload=None, **args):
         """
         Arguments:
-        - name: name
+        - predecessorName: predecessorName
         - id: id
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
         - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/clearpredecessors"
         field_mapping = {
-            "name": "name",
+            "predecessorName": "predecessorName",
             "id": "id",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
             "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -664,51 +566,23 @@ class TaskInstances:
     def clear_resources(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
-        - criteria: criteria
+        - name: name
         - workflowInstanceName: workflowInstanceName
+        - criteria: criteria
         - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         - returnInUse: returnInUse
+        - operationalMemo: operationalMemo
         """
         url = "/resources/taskinstance/clearresources"
         field_mapping = {
-            "name": "name",
             "id": "id",
-            "criteria": "criteria",
+            "name": "name",
             "workflowInstanceName": "workflowInstanceName",
+            "criteria": "criteria",
             "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
             "returnInUse": "returnInUse",
+            "operationalMemo": "operationalMemo",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -766,49 +640,21 @@ class TaskInstances:
     def force_finish(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
         - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/forcefinish"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
             "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -816,49 +662,21 @@ class TaskInstances:
     def force_finish_cancel(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
         - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/forcefinishcancel"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
             "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -866,48 +684,20 @@ class TaskInstances:
     def hold(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
-        - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
         - holdReason: holdReason
         """
         url = "/resources/taskinstance/hold"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
-            "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
             "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
@@ -916,49 +706,21 @@ class TaskInstances:
     def release(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
         - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
-        - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/release"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
             "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
-            "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -966,49 +728,23 @@ class TaskInstances:
     def rerun(self, payload=None, **args):
         """
         Arguments:
-        - name: name
         - id: id
+        - operationalMemo: operationalMemo
+        - name: name
         - criteria: criteria
         - workflowInstanceName: workflowInstanceName
-        - resourceName: resourceName
         - recursive: recursive
-        - predecessorName: predecessorName
-        - waitType: waitType
-        - waitTime: waitTime
-        - waitDuration: waitDuration
-        - waitSeconds: waitSeconds
-        - waitDayConstraint: waitDayConstraint
-        - delayType: delayType
-        - delayDuration: delayDuration
-        - delaySeconds: delaySeconds
-        - halt: halt
-        - priorityType: priorityType
         - taskStatus: taskStatus
-        - operationalMemo: operationalMemo
-        - holdReason: holdReason
         """
         url = "/resources/taskinstance/rerun"
         field_mapping = {
-            "name": "name",
             "id": "id",
+            "operationalMemo": "operationalMemo",
+            "name": "name",
             "criteria": "criteria",
             "workflowInstanceName": "workflowInstanceName",
-            "resourceName": "resourceName",
             "recursive": "recursive",
-            "predecessorName": "predecessorName",
-            "waitType": "waitType",
-            "waitTime": "waitTime",
-            "waitDuration": "waitDuration",
-            "waitSeconds": "waitSeconds",
-            "waitDayConstraint": "waitDayConstraint",
-            "delayType": "delayType",
-            "delayDuration": "delayDuration",
-            "delaySeconds": "delaySeconds",
-            "halt": "halt",
-            "priorityType": "priorityType",
             "taskStatus": "taskStatus",
-            "operationalMemo": "operationalMemo",
-            "holdReason": "holdReason",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
