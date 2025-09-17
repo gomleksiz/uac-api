@@ -36,11 +36,20 @@ class VirtualResources:
     def create_virtual_resource(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - name: name
+        - limit: limit
+        - summary: summary
+        - type: type
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/virtual"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "limit": "limit",
+            "summary": "summary",
+            "type": "type",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
