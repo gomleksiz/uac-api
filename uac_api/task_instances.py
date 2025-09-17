@@ -1673,3 +1673,23 @@ class TaskInstances:
             headers={"Content-Type": "application/json", "Accept": "application/json"},
             parse_response=True,
         )
+
+    def approval_approve(self, query=None, **args):
+        """
+        Approve a Task Instance Approval
+
+        Arguments:
+        - taskinstancename: taskinstancename
+        - taskinstanceid: taskinstanceid
+        - workflowinstancename: workflowinstancename
+        - criteria: criteria
+        """
+        url = "/resources/taskinstance/approval/approve"
+        field_mapping = {
+            "taskinstancename": "taskinstancename",
+            "taskinstanceid": "taskinstanceid",
+            "workflowinstancename": "workflowinstancename",
+            "criteria": "criteria",
+        }
+        _query = prepare_query_params(query, field_mapping, args)
+        return self.uc.put(url, query=_query, json_data=None, parse_response=True)
