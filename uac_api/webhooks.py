@@ -81,12 +81,43 @@ class Webhooks:
     def create_webhook(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - name: name
+        - description: description
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - action: action
+        - task: task
+        - url: url
+        - enabledBy: enabledBy
+        - enabledTime: enabledTime
+        - disabledBy: disabledBy
+        - disabledTime: disabledTime
+        - executionUser: executionUser
+        - status: status
+        - statusDescription: statusDescription
+        - httpAuth: httpAuth
+        - credentials: credentials
+        - eventBusinessServiceCriteria: eventBusinessServiceCriteria
         """
         url = "/resources/webhook"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
             "retainSysIds": "retainSysIds",
+            "action": "action",
+            "task": "task",
+            "url": "url",
+            "enabledBy": "enabledBy",
+            "enabledTime": "enabledTime",
+            "disabledBy": "disabledBy",
+            "disabledTime": "disabledTime",
+            "executionUser": "executionUser",
+            "status": "status",
+            "statusDescription": "statusDescription",
+            "httpAuth": "httpAuth",
+            "credentials": "credentials",
+            "eventBusinessServiceCriteria": "eventBusinessServiceCriteria",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
