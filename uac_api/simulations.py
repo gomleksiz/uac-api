@@ -37,12 +37,41 @@ class Simulations:
     def create_simulation(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - "sysId": "sysId"
+            - "retainSysIds": "retainSysIds"
+            - "task": "task"
+            - "workflow": "workflow"
+            - "vertexId": "vertexId"
+            - "status": "status"
+            - "exitCode": "exitCode"
+            - "publishStatus": "publishStatus"
+            - "publishLateStart": "publishLateStart"
+            - "publishLateFinish": "publishLateFinish"
+            - "publishEarlyFinish": "publishEarlyFinish"
+            - "abortActions": "abortActions"
+            - "emailNotificationActions": "emailNotificationActions"
+            - "variableActions": "variableActions"
+            - "snmpNotificationActions": "snmpNotificationActions"
+            - "systemOperationActions": "systemOperationActions"
         """
         url = "/resources/simulation"
         field_mapping = {
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "task": "task",
+            "workflow": "workflow",
+            "vertexId": "vertexId",
+            "status": "status",
+            "exitCode": "exitCode",
+            "publishStatus": "publishStatus",
+            "publishLateStart": "publishLateStart",
+            "publishLateFinish": "publishLateFinish",
+            "publishEarlyFinish": "publishEarlyFinish",
+            "abortActions": "abortActions",
+            "emailNotificationActions": "emailNotificationActions",
+            "variableActions": "variableActions",
+            "snmpNotificationActions": "snmpNotificationActions",
+            "systemOperationActions": "systemOperationActions",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
