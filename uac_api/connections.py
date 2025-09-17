@@ -186,11 +186,54 @@ class Connections:
     def create_sap_connection(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - "sysId": "sysId"
+            - "name": "name"
+            - "sapConnectionType": "sapConnectionType"
+            - "sapAshost": "sapAshost"
+            - "sapClient": "sapClient"
+            - "sapSysnr": "sapSysnr"
+            - "sapGwhost": "sapGwhost"
+            - "sapGwserv": "sapGwserv"
+            - "sapR3name": "sapR3name"
+            - "sapMshost": "sapMshost"
+            - "sapGroup": "sapGroup"
+            - "description": "description"
+            - "sapSaprouter": "sapSaprouter"
+            - "sapSncMode": "sapSncMode"
+            - "sapSncLib": "sapSncLib"
+            - "sapSncMyname": "sapSncMyname"
+            - "sapSncPartnername": "sapSncPartnername"
+            - "sapSncQop": "sapSncQop"
+            - "sapSncSso": "sapSncSso"
+            - "sapMysapsso2": "sapMysapsso2"
+            - "sapX509cert": "sapX509cert"
+            - "sapUseSymbolicNames": "sapUseSymbolicNames"
+            - "retainSysIds": "retainSysIds"
         """
         url = "/resources/sapconnection"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "sapConnectionType": "sapConnectionType",
+            "sapAshost": "sapAshost",
+            "sapClient": "sapClient",
+            "sapSysnr": "sapSysnr",
+            "sapGwhost": "sapGwhost",
+            "sapGwserv": "sapGwserv",
+            "sapR3name": "sapR3name",
+            "sapMshost": "sapMshost",
+            "sapGroup": "sapGroup",
+            "description": "description",
+            "sapSaprouter": "sapSaprouter",
+            "sapSncMode": "sapSncMode",
+            "sapSncLib": "sapSncLib",
+            "sapSncMyname": "sapSncMyname",
+            "sapSncPartnername": "sapSncPartnername",
+            "sapSncQop": "sapSncQop",
+            "sapSncSso": "sapSncSso",
+            "sapMysapsso2": "sapMysapsso2",
+            "sapX509cert": "sapX509cert",
+            "sapUseSymbolicNames": "sapUseSymbolicNames",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
