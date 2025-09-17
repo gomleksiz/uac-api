@@ -34,11 +34,30 @@ class UniversalEventTemplates:
     def create_universal_event_template(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - sysId: sysId
+            - name: name
+            - label: label
+            - description: description
+            - ttl: ttl
+            - attributesPolicy: attributesPolicy
+            - metricType: metricType
+            - metricName: metricName
+            - metricValueAttribute: metricValueAttribute
+            - metricUnit: metricUnit
+            - retainSysIds: retainSysIds
         """
         url = "/resources/universaleventtemplate"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "label": "label",
+            "description": "description",
+            "ttl": "ttl",
+            "attributesPolicy": "attributesPolicy",
+            "metricType": "metricType",
+            "metricName": "metricName",
+            "metricValueAttribute": "metricValueAttribute",
+            "metricUnit": "metricUnit",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
