@@ -36,11 +36,26 @@ class Connections:
     def create_database_connection(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - name: name
+        - dbType: dbType
+        - dbUrl: dbUrl
+        - dbDriver: dbDriver
+        - dbMaxRows: dbMaxRows
+        - dbDescription: dbDescription
+        - credentials: credentials
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/databaseconnection"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "dbType": "dbType",
+            "dbUrl": "dbUrl",
+            "dbDriver": "dbDriver",
+            "dbMaxRows": "dbMaxRows",
+            "dbDescription": "dbDescription",
+            "credentials": "credentials",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
