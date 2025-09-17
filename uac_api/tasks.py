@@ -264,7 +264,6 @@ class Tasks:
         - launchReason: launchReason
         - simulate: simulate
         - variables: variables
-        - variablesMap: variablesMap
         """
         url = "/resources/task/ops-task-launch"
         field_mapping = {
@@ -277,7 +276,6 @@ class Tasks:
             "launchReason": "launchReason",
             "simulate": "simulate",
             "variables": "variables",
-            "variablesMap": "variablesMap",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
@@ -294,7 +292,6 @@ class Tasks:
         - launchReason: launchReason
         - simulate: simulate
         - variables: variables
-        - variablesMap: variablesMap
         """
         url = "/resources/task/ops-task-launch"
         field_mapping = {
@@ -307,7 +304,6 @@ class Tasks:
             "launchReason": "launchReason",
             "simulate": "simulate",
             "variables": "variables",
-            "variablesMap": "variablesMap",
         }
         response = self.task_launch(payload=payload, **args)
         task_instance_id = response["sysId"]
