@@ -198,6 +198,7 @@ class Bundles:
         - items: items
         - promotionTargetId: promotionTargetId
         - promotionTargetName: promotionTargetName
+        - promotionDescription: promotionDescription
         - overrideUser: overrideUser
         - overridePassword: overridePassword
         - excludeOnExistence: excludeOnExistence
@@ -210,9 +211,9 @@ class Bundles:
             "itemType": "itemType",
             "itemIds": "itemIds",
             "itemNames": "itemNames",
-            "items": "items",
             "promotionTargetId": "promotionTargetId",
             "promotionTargetName": "promotionTargetName",
+            "promotionDescription": "promotionDescription",
             "overrideUser": "overrideUser",
             "overridePassword": "overridePassword",
             "excludeOnExistence": "excludeOnExistence",
