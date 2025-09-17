@@ -36,12 +36,45 @@ class CustomDays:
     def create_custom_day(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - sysId: sysId
+            - name: name
+            - comments: comments
+            - category: category
+            - ctype: ctype
+            - month: month
+            - dayofweek: dayofweek
+            - relfreq: relfreq
+            - day: day
+            - date: date
+            - adjustment: adjustment
+            - adjustmentAmount: adjustmentAmount
+            - adjustmentType: adjustmentType
+            - nthAmount: nthAmount
+            - nthType: nthType
+            - retainSysIds: retainSysIds
+            - period: period
+            - holiday: holiday
         """
         url = "/resources/customday"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "comments": "comments",
+            "category": "category",
+            "ctype": "ctype",
+            "month": "month",
+            "dayofweek": "dayofweek",
+            "relfreq": "relfreq",
+            "day": "day",
+            "date": "date",
+            "adjustment": "adjustment",
+            "adjustmentAmount": "adjustmentAmount",
+            "adjustmentType": "adjustmentType",
+            "nthAmount": "nthAmount",
+            "nthType": "nthType",
             "retainSysIds": "retainSysIds",
+            "period": "period",
+            "holiday": "holiday",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
