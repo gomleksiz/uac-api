@@ -86,11 +86,52 @@ class Connections:
     def create_email_connection(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - sysId: sysId
+            - name: name
+            - smtp: smtp
+            - smtpPort: smtpPort
+            - smtpSsl: smtpSsl
+            - smtpStarttls: smtpStarttls
+            - emailAddr: emailAddr
+            - defaultUser: defaultUser
+            - defaultPwd: defaultPwd
+            - authentication: authentication
+            - authenticationType: authenticationType
+            - oauthClient: oauthClient
+            - systemConnection: systemConnection
+            - type: type
+            - imap: imap
+            - imapPort: imapPort
+            - imapSsl: imapSsl
+            - imapStarttls: imapStarttls
+            - trashFolder: trashFolder
+            - description: description
+            - authorized: authorized
+            - retainSysIds: retainSysIds
         """
         url = "/resources/emailconnection"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "smtp": "smtp",
+            "smtpPort": "smtpPort",
+            "smtpSsl": "smtpSsl",
+            "smtpStarttls": "smtpStarttls",
+            "emailAddr": "emailAddr",
+            "defaultUser": "defaultUser",
+            "defaultPwd": "defaultPwd",
+            "authentication": "authentication",
+            "authenticationType": "authenticationType",
+            "oauthClient": "oauthClient",
+            "systemConnection": "systemConnection",
+            "type": "type",
+            "imap": "imap",
+            "imapPort": "imapPort",
+            "imapSsl": "imapSsl",
+            "imapStarttls": "imapStarttls",
+            "trashFolder": "trashFolder",
+            "description": "description",
+            "authorized": "authorized",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
