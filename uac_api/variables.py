@@ -37,11 +37,26 @@ class Variables:
     def create_variable(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - sysId: sysId
+            - createdBy: createdBy
+            - created: created
+            - updatedBy: updatedBy
+            - updated: updated
+            - name: name
+            - value: value
+            - description: description
+            - retainSysIds: retainSysIds
         """
         url = "/resources/variable"
         field_mapping = {
+            "sysId": "sysId",
+            "createdBy": "createdBy",
+            "created": "created",
+            "updatedBy": "updatedBy",
+            "updated": "updated",
+            "name": "name",
+            "value": "value",
+            "description": "description",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
