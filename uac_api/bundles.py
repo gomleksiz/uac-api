@@ -262,12 +262,27 @@ class Bundles:
     def create_promotion_target(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+            - "sysId": "sysId"
+            - "retainSysIds": "retainSysIds"
+            - "name": "name"
+            - "description": "description"
+            - "uri": "uri"
+            - "user": "user"
+            - "password": "password"
+            - "authenticationMethod": "authenticationMethod"
+            - "token": "token"
         """
         url = "/resources/promotiontarget"
         field_mapping = {
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "name": "name",
+            "description": "description",
+            "uri": "uri",
+            "user": "user",
+            "password": "password",
+            "authenticationMethod": "authenticationMethod",
+            "token": "token",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
