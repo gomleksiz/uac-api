@@ -1,9 +1,10 @@
 import json
 import re
 import warnings
+from typing import Any, Dict, List, Optional, Set
 
 import requests
-from typing import Optional, Dict, Set, List, Any
+
 
 def append_if_not_none(list_name, variable, format, exclude_empty=True):
     if "{}" in format:
@@ -121,7 +122,11 @@ def snake_to_camel(snake_case_str):
     return components[0] + "".join(x.title() for x in components[1:])
 
 
-def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, str], args:Dict[str, Any], unused_args:Optional[Set[str]] = None
+def prepare_payload(
+    payload: Optional[Dict[str, Any]],
+    field_mapping: Dict[str, str],
+    args: Dict[str, Any],
+    unused_args: Optional[Set[str]] = None,
 ) -> Dict[str, Any]:
 
     _payload = payload if payload is not None else {}
@@ -149,7 +154,11 @@ def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, 
     return _payload
 
 
-def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, str], args: Dict[str, Any], unused_args:Optional[Set[str]] = None
+def prepare_query_params(
+    query: Optional[List[str]],
+    field_mapping: Dict[str, str],
+    args: Dict[str, Any],
+    unused_args: Optional[Set[str]] = None,
 ) -> List[str]:
 
     if query is not None:
@@ -176,7 +185,13 @@ def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, st
     return parameters
 
 
-def prepare_query_payload(query:Optional[List[str]], query_fields:Dict[str, str], payload: Optional[Dict[str, Any]], payload_fields: Dict[str, str], args:Dict[str, Any]):
+def prepare_query_payload(
+    query: Optional[List[str]],
+    query_fields: Dict[str, str],
+    payload: Optional[Dict[str, Any]],
+    payload_fields: Dict[str, str],
+    args: Dict[str, Any],
+):
     unused_args = set()
     _query = prepare_query_params(query, query_fields, args, unused_args)
     _payload = prepare_payload(payload, payload_fields, args, unused_args)

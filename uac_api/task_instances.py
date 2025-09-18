@@ -1,5 +1,5 @@
-from concurrent.futures.process import _chain_from_iterable_of_lists
 import time
+from concurrent.futures.process import _chain_from_iterable_of_lists
 
 from .utils import prepare_payload, prepare_query_params, prepare_query_payload
 

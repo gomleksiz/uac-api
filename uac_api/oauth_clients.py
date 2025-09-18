@@ -51,15 +51,15 @@ class OAuthClients:
         url = "/resources/oauthclient"
         field_mapping = {
             "retainSysIds": "retainSysIds",
-            "sysId" : "sysId",
-            "name" : "name",
-            "description" : "description",
-            "provider" : "provider",
-            "authorizationEndpoint" : "authorizationEndpoint",
-            "tokenEndpoint" : "tokenEndpoint",
-            "tenantId" : "tenantId",
-            "clientId" : "clientId",
-            "clientSecret" : "clientSecret",
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
+            "provider": "provider",
+            "authorizationEndpoint": "authorizationEndpoint",
+            "tokenEndpoint": "tokenEndpoint",
+            "tenantId": "tenantId",
+            "clientId": "clientId",
+            "clientSecret": "clientSecret",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
