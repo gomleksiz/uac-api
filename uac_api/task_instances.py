@@ -180,8 +180,8 @@ class TaskInstances:
             "workflowinstancename": "workflowinstancename",
             "criteria": "criteria",
         }
-        parameters = prepare_query_params(query, field_mapping, args)
         payload = args.pop("memo", "")
+        parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.put(
             url,
             json_data=payload,
@@ -980,8 +980,8 @@ class TaskInstances:
             "criteria": "criteria",
             "variablename": "variablename",
         }
-        parameters = prepare_query_params(query, field_mapping, args)
         payload = args.pop("variablevalue", "")
+        parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.put(
             url,
             json_data=payload,
