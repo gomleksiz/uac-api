@@ -1,10 +1,9 @@
 import json
-import os
 import re
-from datetime import datetime
+import warnings
 
 import requests
-
+from typing import Optional, Dict, Set, List, Any
 
 def append_if_not_none(list_name, variable, format, exclude_empty=True):
     if "{}" in format:
@@ -122,50 +121,70 @@ def snake_to_camel(snake_case_str):
     return components[0] + "".join(x.title() for x in components[1:])
 
 
-def prepare_payload(payload, field_mapping, args):
-    _payload = None
-    if payload is not None:
-        _payload = payload
-    else:
-        _payload = {}
+def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, str], args:Dict[str, Any], used_args:Optional[Set[str]] = None
+) -> Dict[str, Any]:
+
+    _payload = payload if payload is not None else {}
 
     # Process additional arguments (**args)
     for arg_key, arg_value in args.items():
+        target_key = None
+
         if arg_key in field_mapping:
-            _payload[field_mapping[arg_key]] = arg_value
+            target_key = field_mapping[arg_key]
         elif snake_to_camel(arg_key) in field_mapping:
-            _payload[field_mapping[snake_to_camel(arg_key)]] = arg_value
+            target_key = field_mapping[snake_to_camel(arg_key)]
         else:
             for key, value in field_mapping.items():
                 if key.lower() == snake_to_camel(arg_key).lower():
-                    _payload[key] = arg_value
+                    target_key = key
+                    break
+
+        if target_key:
+            _payload[target_key] = arg_value
+        elif used_args:
+            used_args.add(arg_key)
+        else:
+            warnings.warn(f"No usage found for argument '{arg_key}'", UserWarning)
     return _payload
 
 
-def prepare_query_params(query, field_mapping, args):
+def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, str], args: Dict[str, Any], used_args:Optional[Set[str]] = None
+) -> List[str]:
+
     if query is not None:
         parameters = query
     else:
         parameters = []
 
         for field, var in args.items():
+            target_key = None
             if field in field_mapping:
-                append_if_not_none(parameters, var, field_mapping[field] + "={var}")
+                target_key = field_mapping[field]
             elif snake_to_camel(field) in field_mapping:
-                append_if_not_none(
-                    parameters, var, field_mapping[snake_to_camel(field)] + "={var}"
-                )
+                target_key = field_mapping[snake_to_camel(field)]
             else:
                 for key, value in field_mapping.items():
                     if key.lower() == snake_to_camel(field).lower():
-                        append_if_not_none(parameters, var, key + "={var}")
-
+                        target_key = key
+            if target_key:
+                append_if_not_none(parameters, var, f"{target_key}={{var}}")
+            elif used_args:
+                used_args.add(field)
+            else:
+                warnings.warn(f"No usage found for argument '{field}'", UserWarning)
     return parameters
 
 
-def prepare_query_payload(query, query_fields, payload, payload_fields, args):
-    _query = prepare_query_params(query, query_fields, args)
-    _payload = prepare_payload(payload, payload_fields, args)
+def prepare_query_payload(query:Optional[List[str]], query_fields:Dict[str, str], payload: Optional[Dict[str, Any]], payload_fields: Dict[str, str], args:Dict[str, Any]):
+    used_args = set()
+    _query = prepare_query_params(query, query_fields, args, used_args)
+    _payload = prepare_payload(payload, payload_fields, args, used_args)
+
+    unused_args = {k for k in args if k not in used_args}
+    for arg in unused_args:
+        warnings.warn(f"No usage found for argument '{arg}'", UserWarning)
+
     return _query, _payload
 
 
