@@ -128,7 +128,22 @@ def prepare_payload(
     args: Dict[str, Any],
     unused_args: Optional[Set[str]] = None,
 ) -> Dict[str, Any]:
+    """
+    Merge additional arguments into a payload dictionary using a field mapping.
+    Different versions (snake_case, CamelCase, normalizedcamelcase) of each key are checked.
 
+    Args:
+        payload: Initial payload dictionary, or None to start with empty dict.
+        field_mapping: Maps input argument names to payload keys.
+        args: Arguments to merge into the payload.
+        unused_args: Optional set to collect unused argument names.
+
+    Note: If provided, unused_args is updated in place with any arguments
+    that could not be mapped.
+
+    Returns:
+        Updated payload dictionary.
+    """
     _payload = payload if payload is not None else {}
 
     # Process additional arguments (**args)
@@ -160,6 +175,22 @@ def prepare_query_params(
     args: Dict[str, Any],
     unused_args: Optional[Set[str]] = None,
 ) -> List[str]:
+    """
+    Build a list of query parameters from provided arguments and mapping.
+    Different versions (snake_case, CamelCase, normalizedcamelcase) of each key are checked.
+
+    Args:
+        query: Predefined query parameters list, or None to build from args.
+        field_mapping: Maps input argument names to query keys.
+        args: Arguments to convert into query parameters.
+        unused_args: Optional set to collect unused argument names.
+
+    Note: If provided, unused_args is updated in place with any arguments
+    that could not be mapped.
+
+    Returns:
+        List of query parameter strings.
+    """
 
     if query is not None:
         parameters = query
@@ -192,6 +223,25 @@ def prepare_query_payload(
     payload_fields: Dict[str, str],
     args: Dict[str, Any],
 ):
+    """
+    Prepare both query parameters and payload from arguments using mappings.
+
+    Args:
+        query: Optional initial query parameters list.
+        query_fields: Field mapping for query parameters.
+        payload: Optional initial payload dictionary.
+        payload_fields: Field mapping for payload fields.
+        args: All input arguments provided.
+
+    Note:
+        Internally, a set of unused arguments is collected. Any arguments
+        that cannot be mapped to query or payload fields are warned about.
+        This set is updated in place when each of the functions is called
+
+    Returns:
+        Tuple of (query parameters list, payload dictionary).
+    """
+
     unused_args = set()
     _query = prepare_query_params(query, query_fields, args, unused_args)
     _payload = prepare_payload(payload, payload_fields, args, unused_args)
