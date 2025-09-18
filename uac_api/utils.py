@@ -121,7 +121,7 @@ def snake_to_camel(snake_case_str):
     return components[0] + "".join(x.title() for x in components[1:])
 
 
-def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, str], args:Dict[str, Any], used_args:Optional[Set[str]] = None
+def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, str], args:Dict[str, Any], unused_args:Optional[Set[str]] = None
 ) -> Dict[str, Any]:
 
     _payload = payload if payload is not None else {}
@@ -142,14 +142,14 @@ def prepare_payload(payload: Optional[Dict[str, Any]], field_mapping: Dict[str, 
 
         if target_key:
             _payload[target_key] = arg_value
-        elif used_args:
-            used_args.add(arg_key)
+        elif unused_args:
+            unused_args.add(arg_key)
         else:
             warnings.warn(f"No usage found for argument '{arg_key}'", UserWarning)
     return _payload
 
 
-def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, str], args: Dict[str, Any], used_args:Optional[Set[str]] = None
+def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, str], args: Dict[str, Any], unused_args:Optional[Set[str]] = None
 ) -> List[str]:
 
     if query is not None:
@@ -169,19 +169,18 @@ def prepare_query_params(query: Optional[List[str]], field_mapping: Dict[str, st
                         target_key = key
             if target_key:
                 append_if_not_none(parameters, var, f"{target_key}={{var}}")
-            elif used_args:
-                used_args.add(field)
+            elif unused_args:
+                unused_args.add(field)
             else:
                 warnings.warn(f"No usage found for argument '{field}'", UserWarning)
     return parameters
 
 
 def prepare_query_payload(query:Optional[List[str]], query_fields:Dict[str, str], payload: Optional[Dict[str, Any]], payload_fields: Dict[str, str], args:Dict[str, Any]):
-    used_args = set()
-    _query = prepare_query_params(query, query_fields, args, used_args)
-    _payload = prepare_payload(payload, payload_fields, args, used_args)
+    unused_args = set()
+    _query = prepare_query_params(query, query_fields, args, unused_args)
+    _payload = prepare_payload(payload, payload_fields, args, unused_args)
 
-    unused_args = {k for k in args if k not in used_args}
     for arg in unused_args:
         warnings.warn(f"No usage found for argument '{arg}'", UserWarning)
 
