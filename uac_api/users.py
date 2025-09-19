@@ -26,6 +26,7 @@ class Users:
         field_mapping = {
             "userId": "userId",
             "name": "userId",
+            "userName": "userId",
             "newPassword": "newPassword",
         }
         _payload = prepare_payload(payload, field_mapping, args)
