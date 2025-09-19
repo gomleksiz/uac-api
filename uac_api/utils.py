@@ -138,8 +138,16 @@ def prepare_payload(
         args: Arguments to merge into the payload.
         unused_args: Optional set to collect unused argument names.
 
-    Note: If provided, unused_args is updated in place with any arguments
+    Notes:
+    1) If provided, unused_args is updated in place with any arguments
     that could not be mapped.
+
+    2) The current implementation also checks whether each key is already included
+    in the given payload, via the `exists_in_payload` boolean.
+    This is due to the fact that the CLI already processes keys that exist
+    in the original payload, meaning one of the arguments could have
+    already been consumed. This logic is only for warnings and should be changed
+    in future releases so that all processing happens in one place.
 
     Returns:
         Updated payload dictionary.
@@ -149,7 +157,9 @@ def prepare_payload(
     # Process additional arguments (**args)
     for arg_key, arg_value in args.items():
         target_key = None
+        exists_in_payload = False
 
+        # Process arguments based on field_mapping
         if arg_key in field_mapping:
             target_key = field_mapping[arg_key]
         elif snake_to_camel(arg_key) in field_mapping:
@@ -159,12 +169,17 @@ def prepare_payload(
                 if key.lower() == snake_to_camel(arg_key).lower():
                     target_key = key
                     break
+        # Process arguments based on payload
+        if arg_key in _payload:
+            exists_in_payload = True
+        elif snake_to_camel(arg_key) in _payload:
+            exists_in_payload = True
 
         if target_key:
             _payload[target_key] = arg_value
-        elif unused_args:
+        elif unused_args and not exists_in_payload:
             unused_args.add(arg_key)
-        else:
+        elif not exists_in_payload:
             warnings.warn(f"No usage found for argument '{arg_key}'", UserWarning)
     return _payload
 
