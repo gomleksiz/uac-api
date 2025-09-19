@@ -322,6 +322,7 @@ class TaskInstances:
         - vertexX: vertexX
         - vertexY: vertexY
         - inheritTriggerTime: inheritTriggerTime
+        - variables: variables
         """
         url = "/resources/taskinstance/ops-task-insert"
         field_mapping = {
@@ -336,6 +337,7 @@ class TaskInstances:
             "vertexX": "vertexX",
             "vertexY": "vertexY",
             "inheritTriggerTime": "inheritTriggerTime",
+            "variables": "variables",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
