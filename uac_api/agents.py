@@ -39,8 +39,97 @@ class Agents:
         return self.uc.get(url, query=parameters)
 
     def update_agent(self, payload=None, **args):
+        """
+        Arguments:
+        - authVersion: authVersion
+        - build: build
+        - buildDate: buildDate
+        - cpu: cpu
+        - cpuLoad: cpuLoad
+        - credentials: credentials
+        - credentialsRequired: credentialsRequired
+        - currentCount: currentCount
+        - decommissioned: decommissioned
+        - decommissionedDate: decommissionedDate
+        - description: description
+        - excludeRelated: excludeRelated
+        - extAccept: extAccept
+        - extApiLevelMax: extApiLevelMax
+        - extApiLevelMin: extApiLevelMin
+        - hbDate: hbDate
+        - hbGracePeriod: hbGracePeriod
+        - hbIntvl: hbIntvl
+        - hostName: hostName
+        - ipAddress: ipAddress
+        - jobs: jobs
+        - limitAmount: limitAmount
+        - limitType: limitType
+        - logLevel: logLevel
+        - name: name
+        - omsServer: omsServer
+        - os: os
+        - osRelease: osRelease
+        - outputProhibited: outputProhibited
+        - pid: pid
+        - queueName: queueName
+        - secondaryAgentCount: secondaryAgentCount
+        - secondaryAgents: secondaryAgents
+        - startDate: startDate
+        - status: status
+        - suspended: suspended
+        - sysId: sysId
+        - systemName: systemName
+        - tlsSniHostName: tlsSniHostName
+        - transient: transient
+        - type: type
+        - version: version
+        """
         url = "/resources/agent"
-        _payload = payload
+        field_mapping = {
+            "authVersion": "authVersion",
+            "build": "build",
+            "buildDate": "buildDate",
+            "cpu": "cpu",
+            "cpuLoad": "cpuLoad",
+            "credentials": "credentials",
+            "credentialsRequired": "credentialsRequired",
+            "currentCount": "currentCount",
+            "decommissioned": "decommissioned",
+            "decommissionedDate": "decommissionedDate",
+            "description": "description",
+            "excludeRelated": "excludeRelated",
+            "extAccept": "extAccept",
+            "extApiLevelMax": "extApiLevelMax",
+            "extApiLevelMin": "extApiLevelMin",
+            "hbDate": "hbDate",
+            "hbGracePeriod": "hbGracePeriod",
+            "hbIntvl": "hbIntvl",
+            "hostName": "hostName",
+            "ipAddress": "ipAddress",
+            "jobs": "jobs",
+            "limitAmount": "limitAmount",
+            "limitType": "limitType",
+            "logLevel": "logLevel",
+            "name": "name",
+            "omsServer": "omsServer",
+            "os": "os",
+            "osRelease": "osRelease",
+            "outputProhibited": "outputProhibited",
+            "pid": "pid",
+            "queueName": "queueName",
+            "secondaryAgentCount": "secondaryAgentCount",
+            "secondaryAgents": "secondaryAgents",
+            "startDate": "startDate",
+            "status": "status",
+            "suspended": "suspended",
+            "sysId": "sysId",
+            "systemName": "systemName",
+            "tlsSniHostName": "tlsSniHostName",
+            "transient": "transient",
+            "type": "type",
+            "version": "version",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload)
 
     def delete_agent(self, query=None, **args):
