@@ -37,16 +37,16 @@ class UniversalEvents:
             url, json_data=_payload, parse_response=False, headers=headers
         )
 
-    def pushg(self, query=None, eventName=None, **args):
+    def pushg(self, query=None, event_name=None, **args):
         """
         This will run a get request to push event
         Arguments:
         - payload: payload
-        - eventName: eventName
+        - event_name: event_name
         - ttl: ttl
         - businessService: businessService
         """
-        url = f"/resources/universalevent/push/{eventName}"
+        url = f"/resources/universalevent/push/{event_name}"
         field_mapping = {
             "payload": "payload",
             "ttl": "ttl",
@@ -62,17 +62,17 @@ class UniversalEvents:
         return self.uc.get(url, query=parameters, parse_response=False, headers=headers)
 
     def push(
-        self, payload=None, query=None, eventName=None, payload_format="json", **args
+        self, payload=None, query=None, event_name=None, payload_format="json", **args
     ):
         """
         Payload is required
         Arguments:
-        - event_name: eventName
+        - event_name: event_name
         - payload_format: json|xml|text
         - ttl: ttl
         - businessService: businessService
         """
-        url = f"/resources/universalevent/push/{eventName}"
+        url = f"/resources/universalevent/push/{event_name}"
         field_mapping = {
             "ttl": "ttl",
             "businessService": "businessService",
