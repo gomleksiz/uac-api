@@ -119,7 +119,6 @@ class Users:
         """
         url = "/resources/user/token"
         field_mapping = {
-            "retainSysIds": "retainSysIds",
             "userId": "userId",
             "userName": "userName",
             "name": "name",
