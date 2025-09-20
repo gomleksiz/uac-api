@@ -114,6 +114,6 @@ class VirtualResources:
 
     def update_limit(self, payload=None, **args):
         url = "/resources/virtual/ops-update-resource-limit"
-        field_mapping = {"name": "name", "limit": "limit"}
+        field_mapping = {"sysID": "sysID", "name": "name", "limit": "limit"}
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
