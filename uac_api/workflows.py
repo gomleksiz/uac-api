@@ -63,8 +63,6 @@ class Workflows:
         Arguments:
         - workflowid: workflowid
         - workflowname: workflowname
-        - sysId: sysId
-        - workflowId: workflowId
         - condition: condition
         - straightEdge: straightEdge
         - points: points
@@ -77,8 +75,6 @@ class Workflows:
             "workflowname": "workflowname",
         }
         payload_fields = {
-            "sysId": "sysId",
-            "workflowId": "workflowId",
             "condition": "condition",
             "straightEdge": "straightEdge",
             "points": "points",
@@ -135,8 +131,6 @@ class Workflows:
         Arguments:
         - workflowid: workflowid
         - workflowname: workflowname
-        - sysId: sysId
-        - workflowId: workflowId
         - task: task
         - alias: alias
         - vertexId: vertexId
@@ -149,8 +143,6 @@ class Workflows:
             "workflowname": "workflowname",
         }
         payload_fields = {
-            "sysId": "sysId",
-            "workflowId": "workflowId",
             "task": "task",
             "alias": "alias",
             "vertexId": "vertexId",
