@@ -176,16 +176,9 @@ class UniversalTemplates:
     def import_template(self, query=None, data=None, **args):
         """
         Arguments:
-        - templateid: templateid
-        - templatename: templatename
-        - excludeExtension: excludeExtension
         """
         url = "/resources/universaltemplate/importtemplate"
-        field_mapping = {
-            "templateid": "templateid",
-            "templatename": "templatename",
-            "excludeExtension": "excludeExtension",
-        }
+        field_mapping = {}
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.post_data(
             url,

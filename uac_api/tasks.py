@@ -176,7 +176,6 @@ class Tasks:
         """
         Arguments:
         - name: name
-        - enabled: enabled
         - type: type
         - businessServices: businessServices
         - updatedTimeType: updatedTimeType
@@ -184,15 +183,12 @@ class Tasks:
         - workflowId: workflowId
         - workflowName: workflowName
         - agentName: agentName
-        - description: description
-        - tasks: tasks
         - templateId: templateId
         - templateName: templateName
         """
         url = "/resources/task/list"
         field_mapping = {
             "name": "name",
-            "enabled": "enabled",
             "type": "type",
             "businessServices": "businessServices",
             "updatedTimeType": "updatedTimeType",
@@ -200,8 +196,6 @@ class Tasks:
             "workflowId": "workflowId",
             "workflowName": "workflowName",
             "agentName": "agentName",
-            "description": "description",
-            "tasks": "tasks",
             "templateId": "templateId",
             "templateName": "templateName",
         }
