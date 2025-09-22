@@ -177,9 +177,9 @@ def prepare_payload(
 
         if target_key:
             _payload[target_key] = arg_value
-        elif unused_args and not exists_in_payload:
+        elif unused_args and not exists_in_payload and arg_key != "retain_sys_ids":
             unused_args.add(arg_key)
-        elif not exists_in_payload:
+        elif not exists_in_payload and arg_key != "retain_sys_ids":
             warnings.warn(f"No usage found for argument '{arg_key}'", UserWarning)
     return _payload
 
@@ -224,9 +224,9 @@ def prepare_query_params(
                         target_key = key
             if target_key:
                 append_if_not_none(parameters, var, f"{target_key}={{var}}")
-            elif unused_args:
+            elif unused_args and field != "retain_sys_ids":
                 unused_args.add(field)
-            else:
+            elif field != "retain_sys_ids":
                 warnings.warn(f"No usage found for argument '{field}'", UserWarning)
     return parameters
 
