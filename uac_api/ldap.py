@@ -23,4 +23,4 @@ class Ldaps:
     def update_ldap_bind_password(self, password=None, **args):
         url = "/resources/ldap/changebindpwd"
         _payload = password
-        return self.uc.put(url, json_data=_payload, parse_response=False)
+        return self.uc.post(url, json_data=_payload, parse_response=False)
