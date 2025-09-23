@@ -43,7 +43,22 @@ class Credentials:
 
     def update_credential(self, payload=None, **args):
         url = "/resources/credential"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "description": "description",
+            "runtimeUser": "runtimeUser",
+            "runtimePassword": "runtimePassword",
+            "runtimePassPhrase": "runtimePassPhrase",
+            "runtimeToken": "runtimeToken",
+            "provider": "provider",
+            "runtimeKeyLocation": "runtimeKeyLocation",
+            "type": "type",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_credential(self, payload=None, **args):

@@ -945,7 +945,6 @@ class TaskInstances:
             "name": "name",
             "resolveNameImmediately": "resolveNameImmediately",
             "summary": "summary",
-            "opswiseGroups": "opswiseGroups",
             "startHeld": "startHeld",
             "startHeldReason": "startHeldReason",
             "resPriority": "resPriority",

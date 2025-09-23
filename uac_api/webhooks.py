@@ -75,7 +75,29 @@ class Webhooks:
 
     def update_webhook(self, payload=None, **args):
         url = "/resources/webhook"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "description": "description",
+            "action": "action",
+            "task": "task",
+            "url": "url",
+            "enabledBy": "enabledBy",
+            "enabledTime": "enabledTime",
+            "disabledBy": "disabledBy",
+            "disabledTime": "disabledTime",
+            "executionUser": "executionUser",
+            "status": "status",
+            "statusDescription": "statusDescription",
+            "httpAuth": "httpAuth",
+            "credentials": "credentials",
+            "urlParametersFromString": "urlParametersFromString",
+            "httpHeadersFromString": "httpHeadersFromString",
+            "eventBusinessServiceCriteria": "eventBusinessServiceCriteria",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_webhook(self, payload=None, **args):

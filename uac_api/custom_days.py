@@ -30,7 +30,29 @@ class CustomDays:
 
     def update_custom_day(self, payload=None, **args):
         url = "/resources/customday"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "comments": "comments",
+            "category": "category",
+            "ctype": "ctype",
+            "month": "month",
+            "dayofweek": "dayofweek",
+            "relfreq": "relfreq",
+            "day": "day",
+            "date": "date",
+            "adjustment": "adjustment",
+            "adjustmentAmount": "adjustmentAmount",
+            "adjustmentType": "adjustmentType",
+            "nthAmount": "nthAmount",
+            "nthType": "nthType",
+            "period": "period",
+            "holiday": "holiday",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_custom_day(self, payload=None, **args):

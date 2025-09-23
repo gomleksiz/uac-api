@@ -28,7 +28,14 @@ class BusinessServices:
 
     def update_business_service(self, payload=None, **args):
         url = "/resources/businessservice"
-        _payload = payload
+        field_mapping = {
+            "description": "description",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "sysId": "sysId",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_business_service(self, payload=None, **args):
