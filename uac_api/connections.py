@@ -30,7 +30,20 @@ class Connections:
 
     def update_database_connection(self, payload=None, **args):
         url = "/resources/databaseconnection"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "dbType": "dbType",
+            "dbUrl": "dbUrl",
+            "dbDriver": "dbDriver",
+            "dbMaxRows": "dbMaxRows",
+            "dbDescription": "dbDescription",
+            "credentials": "credentials",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_database_connection(self, payload=None, **args):
@@ -95,7 +108,33 @@ class Connections:
 
     def update_email_connection(self, payload=None, **args):
         url = "/resources/emailconnection"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "smtp": "smtp",
+            "smtpPort": "smtpPort",
+            "smtpSsl": "smtpSsl",
+            "smtpStarttls": "smtpStarttls",
+            "emailAddr": "emailAddr",
+            "defaultUser": "defaultUser",
+            "defaultPwd": "defaultPwd",
+            "authentication": "authentication",
+            "authenticationType": "authenticationType",
+            "oauthClient": "oauthClient",
+            "systemConnection": "systemConnection",
+            "type": "type",
+            "imap": "imap",
+            "imapPort": "imapPort",
+            "imapSsl": "imapSsl",
+            "imapStarttls": "imapStarttls",
+            "trashFolder": "trashFolder",
+            "description": "description",
+            "authorized": "authorized",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_email_connection(self, payload=None, **args):
@@ -186,7 +225,19 @@ class Connections:
 
     def update_peoplesoft_connection(self, payload=None, **args):
         url = "/resources/peoplesoftconnection"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "description": "description",
+            "server": "server",
+            "port": "port",
+            "endpoint": "endpoint",
+            "credentials": "credentials",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_peoplesoft_connection(self, payload=None, **args):
@@ -236,7 +287,34 @@ class Connections:
 
     def update_sap_connection(self, payload=None, **args):
         url = "/resources/sapconnection"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "sapConnectionType": "sapConnectionType",
+            "sapAshost": "sapAshost",
+            "sapClient": "sapClient",
+            "sapSysnr": "sapSysnr",
+            "sapGwhost": "sapGwhost",
+            "sapGwserv": "sapGwserv",
+            "sapR3name": "sapR3name",
+            "sapMshost": "sapMshost",
+            "sapGroup": "sapGroup",
+            "description": "description",
+            "sapSaprouter": "sapSaprouter",
+            "sapSncMode": "sapSncMode",
+            "sapSncLib": "sapSncLib",
+            "sapSncMyname": "sapSncMyname",
+            "sapSncPartnername": "sapSncPartnername",
+            "sapSncQop": "sapSncQop",
+            "sapSncSso": "sapSncSso",
+            "sapMysapsso2": "sapMysapsso2",
+            "sapX509cert": "sapX509cert",
+            "sapUseSymbolicNames": "sapUseSymbolicNames",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_sap_connection(self, payload=None, **args):
@@ -346,8 +424,6 @@ class Connections:
             "name": "name",
             "managerAddress": "managerAddress",
             "managerPort": "managerPort",
-            "retainSysIds": "retainSysIds",
-            "opswiseGroups": "opswiseGroups",
             "trapCommunity": "trapCommunity",
             "description": "description",
         }
@@ -384,7 +460,6 @@ class Connections:
             "name": "name",
             "managerAddress": "managerAddress",
             "managerPort": "managerPort",
-            "opswiseGroups": "opswiseGroups",
             "trapCommunity": "trapCommunity",
             "description": "description",
         }

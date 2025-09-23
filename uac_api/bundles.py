@@ -280,7 +280,19 @@ class Bundles:
 
     def update_promotion_target(self, payload=None, **args):
         url = "/resources/promotiontarget"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "description": "description",
+            "uri": "uri",
+            "user": "user",
+            "password": "password",
+            "authenticationMethod": "authenticationMethod",
+            "token": "token",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_promotion_target(self, payload=None, **args):

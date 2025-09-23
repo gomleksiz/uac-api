@@ -35,7 +35,6 @@ class VirtualResources:
             "exportTable": "exportTable",
             "limit": "limit",
             "name": "name",
-            "retainSysIds": "retainSysIds",
             "summary": "summary",
             "sysId": "sysId",
             "type": "type",

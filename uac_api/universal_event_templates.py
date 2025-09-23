@@ -28,8 +28,24 @@ class UniversalEventTemplates:
 
     def update_universal_event_template(self, payload=None, **args):
         url = "/resources/universaleventtemplate"
-        _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "name": "name",
+            "label": "label",
+            "description": "description",
+            "ttl": "ttl",
+            "attributesPolicy": "attributesPolicy",
+            "metricType": "metricType",
+            "metricName": "metricName",
+            "metricValueAttribute": "metricValueAttribute",
+            "metricUnit": "metricUnit",
+            "attributesFromString": "attributesFromString",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_universal_event_template(self, payload=None, **args):
         """

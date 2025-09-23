@@ -23,7 +23,22 @@ class EmailTemplates:
 
     def update_email_template(self, payload=None, **args):
         url = "/resources/emailtemplate"
-        _payload = payload
+        field_mapping = {
+            "version": "version",
+            "sysId": "sysId",
+            "exportReleaseLevel": "exportReleaseLevel",
+            "exportTable": "exportTable",
+            "templateName": "templateName",
+            "description": "description",
+            "connection": "connection",
+            "replyTo": "replyTo",
+            "to": "to",
+            "cc": "cc",
+            "bcc": "bcc",
+            "subject": "subject",
+            "body": "body",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_email_template(self, payload=None, **args):
