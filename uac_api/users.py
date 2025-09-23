@@ -124,8 +124,9 @@ class Users:
             "name": "name",
             "expiration": "expiration",
         }
+        headers = {"accept": "text/plain", "Content-Type": "application/json"}
         _payload = prepare_payload(payload, field_mapping, args)
-        return self.uc.post(url, json_data=_payload, parse_response=False)
+        return self.uc.post(url, json_data=_payload, parse_response=False, headers=headers)
 
     def revoke_user_token(self, query=None, **args):
         """
