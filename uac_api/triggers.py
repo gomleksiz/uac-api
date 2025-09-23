@@ -84,7 +84,7 @@ class Triggers:
             "name": "name",
             "variables": "variables",
             "virtualResourcePriority": "virtualResourcePriority",
-            "virtual-resources": "virtual-resources",
+            "virtualResources": "virtualResources",
             "hold": "hold",
             "holdReason": "holdReason",
             "timeZone": "timeZone",
