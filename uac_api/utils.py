@@ -139,8 +139,8 @@ def prepare_payload(
         unused_args: Optional set to collect unused argument names.
 
     Notes:
-    1) If provided, unused_args is updated in place with any arguments
-    that could not be mapped.
+    1) If provided, unused_args is updated in place by removing any arguments
+    that could not be mapped and were not part of the payload.
 
     2) The current implementation also checks whether each key is already included
     in the given payload, via the `exists_in_payload` boolean.
@@ -177,9 +177,11 @@ def prepare_payload(
 
         if target_key:
             _payload[target_key] = arg_value
-        elif unused_args and not exists_in_payload:
-            unused_args.add(arg_key)
-        elif not exists_in_payload:
+            if unused_args:
+                unused_args.discard(arg_key)
+        elif exists_in_payload and unused_args:
+            unused_args.discard(arg_key)
+        elif not unused_args and not exists_in_payload and arg_key != "retain_sys_ids":
             warnings.warn(f"No usage found for argument '{arg_key}'", UserWarning)
     return _payload
 
@@ -200,8 +202,8 @@ def prepare_query_params(
         args: Arguments to convert into query parameters.
         unused_args: Optional set to collect unused argument names.
 
-    Note: If provided, unused_args is updated in place with any arguments
-    that could not be mapped.
+    Note: If provided, unused_args set is updated in place by removing
+    any arguments that could be mapped (meaning they were used).
 
     Returns:
         List of query parameter strings.
@@ -222,11 +224,12 @@ def prepare_query_params(
                 for key, value in field_mapping.items():
                     if key.lower() == snake_to_camel(field).lower():
                         target_key = key
+
             if target_key:
                 append_if_not_none(parameters, var, f"{target_key}={{var}}")
-            elif unused_args:
-                unused_args.add(field)
-            else:
+                if unused_args:
+                    unused_args.discard(field)
+            elif not unused_args and field != "retain_sys_ids":
                 warnings.warn(f"No usage found for argument '{field}'", UserWarning)
     return parameters
 
@@ -249,15 +252,19 @@ def prepare_query_payload(
         args: All input arguments provided.
 
     Note:
-        Internally, a set of unused arguments is collected. Any arguments
-        that cannot be mapped to query or payload fields are warned about.
-        This set is updated in place when each of the functions is called
+        Internally, all args are placed into a set of 'unused' args.
+        This set is updated in place when each of the functions is called,
+        removing used arguments, as well as ones present in the payload,
+        as those would already have been overwritten via CLI processing.
+        Any arguments that cannot be mapped to query or payload fields
+        are warned about.
 
     Returns:
         Tuple of (query parameters list, payload dictionary).
     """
 
-    unused_args = set()
+    unused_args = set(args.keys())
+
     _query = prepare_query_params(query, query_fields, args, unused_args)
     _payload = prepare_payload(payload, payload_fields, args, unused_args)
 
