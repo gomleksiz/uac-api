@@ -33,11 +33,30 @@ class OmsServers:
     def create_oms_server(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - serverAddress: serverAddress
+        - description: description
+        - status: status
+        - timeout: timeout
+        - sessionStatus: sessionStatus
+        - suspended: suspended
+        - lastConnected: lastConnected
+        - lastConnectedTime: lastConnectedTime
+        - authenticate: authenticate
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/omsserver"
         field_mapping = {
+            "sysId": "sysId",
+            "serverAddress": "serverAddress",
+            "description": "description",
+            "status": "status",
+            "timeout": "timeout",
+            "sessionStatus": "sessionStatus",
+            "suspended": "suspended",
+            "lastConnected": "lastConnected",
+            "lastConnectedTime": "lastConnectedTime",
+            "authenticate": "authenticate",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)

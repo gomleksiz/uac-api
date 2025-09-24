@@ -43,11 +43,219 @@ class Tasks:
     def create_task(self, payload=None, **args):
         """
         Arguments:
-        - retainSysIds: retainSysIds - False will ignore sysIds in the payload and create a new task
+        - sysId: sysId
+        - retainSysIds: retainSysIds
+        - name: name
+        - resolveNameImmediately: resolveNameImmediately
+        - summary: summary
+        - startHeld: startHeld
+        - startHeldReason: startHeldReason
+        - resPriority: resPriority
+        - resPriorityVar: resPriorityVar
+        - holdResources: holdResources
+        - credentials: credentials
+        - credentialsVar: credentialsVar
+        - retryMaximum: retryMaximum
+        - retryIndefinitely: retryIndefinitely
+        - retryInterval: retryInterval
+        - retrySuppressFailure: retrySuppressFailure
+        - lsEnabled: lsEnabled
+        - lsType: lsType
+        - lsTime: lsTime
+        - lsDayConstraint: lsDayConstraint
+        - lsNthAmount: lsNthAmount
+        - lsDuration: lsDuration
+        - lfEnabled: lfEnabled
+        - lfType: lfType
+        - lfTime: lfTime
+        - lfDayConstraint: lfDayConstraint
+        - lfNthAmount: lfNthAmount
+        - lfDuration: lfDuration
+        - lfOffsetType: lfOffsetType
+        - lfOffsetPercentage: lfOffsetPercentage
+        - lfOffsetDuration: lfOffsetDuration
+        - lfOffsetDurationUnit: lfOffsetDurationUnit
+        - efEnabled: efEnabled
+        - efType: efType
+        - efTime: efTime
+        - efDayConstraint: efDayConstraint
+        - efNthAmount: efNthAmount
+        - efDuration: efDuration
+        - efOffsetType: efOffsetType
+        - efOffsetPercentage: efOffsetPercentage
+        - efOffsetDuration: efOffsetDuration
+        - efOffsetDurationUnit: efOffsetDurationUnit
+        - userEstimatedDuration: userEstimatedDuration
+        - cpDuration: cpDuration
+        - cpDurationUnit: cpDurationUnit
+        - twWaitType: twWaitType
+        - twWaitAmount: twWaitAmount
+        - twWaitTime: twWaitTime
+        - twWaitDuration: twWaitDuration
+        - twWaitDayConstraint: twWaitDayConstraint
+        - twDelayType: twDelayType
+        - twDelayAmount: twDelayAmount
+        - twDelayDuration: twDelayDuration
+        - twWorkflowOnly: twWorkflowOnly
+        - executionRestriction: executionRestriction
+        - restrictionPeriod: restrictionPeriod
+        - restrictionPeriodBeforeDate: restrictionPeriodBeforeDate
+        - restrictionPeriodAfterDate: restrictionPeriodAfterDate
+        - restrictionPeriodBeforeTime: restrictionPeriodBeforeTime
+        - restrictionPeriodAfterTime: restrictionPeriodAfterTime
+        - logLevel: logLevel
+        - exclusiveWithSelf: exclusiveWithSelf
+        - minRunTime: minRunTime
+        - maxRunTime: maxRunTime
+        - avgRunTime: avgRunTime
+        - lastRunTime: lastRunTime
+        - minRunTimeDisplay: minRunTimeDisplay
+        - maxRunTimeDisplay: maxRunTimeDisplay
+        - avgRunTimeDisplay: avgRunTimeDisplay
+        - lastRunTimeDisplay: lastRunTimeDisplay
+        - runCount: runCount
+        - runTime: runTime
+        - firstRun: firstRun
+        - lastRun: lastRun
+        - simulation: simulation
+        - enforceVariables: enforceVariables
+        - lockVariables: lockVariables
+        - overrideInstanceWait: overrideInstanceWait
+        - timeZonePref: timeZonePref
+        - type: type
+        - agent: agent
+        - agentVar: agentVar
+        - agentCluster: agentCluster
+        - agentClusterVar: agentClusterVar
+        - broadcastCluster: broadcastCluster
+        - broadcastClusterVar: broadcastClusterVar
+        - command: command
+        - commandOrScript: commandOrScript
+        - script: script
+        - runtimeDir: runtimeDir
+        - parameters: parameters
+        - exitCodes: exitCodes
+        - exitCodeProcessing: exitCodeProcessing
+        - exitCodeText: exitCodeText
+        - exitCodeOutput: exitCodeOutput
+        - outputType: outputType
+        - retryExitCodes: retryExitCodes
+        - waitForOutput: waitForOutput
+        - outputFailureOnly: outputFailureOnly
+        - outputReturnType: outputReturnType
+        - outputReturnFile: outputReturnFile
+        - outputReturnSline: outputReturnSline
+        - outputReturnNline: outputReturnNline
+        - outputReturnText: outputReturnText
+        - runAsSudo: runAsSudo
         """
         url = "/resources/task"
         field_mapping = {
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "name": "name",
+            "resolveNameImmediately": "resolveNameImmediately",
+            "summary": "summary",
+            "startHeld": "startHeld",
+            "startHeldReason": "startHeldReason",
+            "resPriority": "resPriority",
+            "resPriorityVar": "resPriorityVar",
+            "holdResources": "holdResources",
+            "credentials": "credentials",
+            "credentialsVar": "credentialsVar",
+            "retryMaximum": "retryMaximum",
+            "retryIndefinitely": "retryIndefinitely",
+            "retryInterval": "retryInterval",
+            "retrySuppressFailure": "retrySuppressFailure",
+            "lsEnabled": "lsEnabled",
+            "lsType": "lsType",
+            "lsTime": "lsTime",
+            "lsDayConstraint": "lsDayConstraint",
+            "lsNthAmount": "lsNthAmount",
+            "lsDuration": "lsDuration",
+            "lfEnabled": "lfEnabled",
+            "lfType": "lfType",
+            "lfTime": "lfTime",
+            "lfDayConstraint": "lfDayConstraint",
+            "lfNthAmount": "lfNthAmount",
+            "lfDuration": "lfDuration",
+            "lfOffsetType": "lfOffsetType",
+            "lfOffsetPercentage": "lfOffsetPercentage",
+            "lfOffsetDuration": "lfOffsetDuration",
+            "lfOffsetDurationUnit": "lfOffsetDurationUnit",
+            "efEnabled": "efEnabled",
+            "efType": "efType",
+            "efTime": "efTime",
+            "efDayConstraint": "efDayConstraint",
+            "efNthAmount": "efNthAmount",
+            "efDuration": "efDuration",
+            "efOffsetType": "efOffsetType",
+            "efOffsetPercentage": "efOffsetPercentage",
+            "efOffsetDuration": "efOffsetDuration",
+            "efOffsetDurationUnit": "efOffsetDurationUnit",
+            "userEstimatedDuration": "userEstimatedDuration",
+            "cpDuration": "cpDuration",
+            "cpDurationUnit": "cpDurationUnit",
+            "twWaitType": "twWaitType",
+            "twWaitAmount": "twWaitAmount",
+            "twWaitTime": "twWaitTime",
+            "twWaitDuration": "twWaitDuration",
+            "twWaitDayConstraint": "twWaitDayConstraint",
+            "twDelayType": "twDelayType",
+            "twDelayAmount": "twDelayAmount",
+            "twDelayDuration": "twDelayDuration",
+            "twWorkflowOnly": "twWorkflowOnly",
+            "executionRestriction": "executionRestriction",
+            "restrictionPeriod": "restrictionPeriod",
+            "restrictionPeriodBeforeDate": "restrictionPeriodBeforeDate",
+            "restrictionPeriodAfterDate": "restrictionPeriodAfterDate",
+            "restrictionPeriodBeforeTime": "restrictionPeriodBeforeTime",
+            "restrictionPeriodAfterTime": "restrictionPeriodAfterTime",
+            "logLevel": "logLevel",
+            "exclusiveWithSelf": "exclusiveWithSelf",
+            "minRunTime": "minRunTime",
+            "maxRunTime": "maxRunTime",
+            "avgRunTime": "avgRunTime",
+            "lastRunTime": "lastRunTime",
+            "minRunTimeDisplay": "minRunTimeDisplay",
+            "maxRunTimeDisplay": "maxRunTimeDisplay",
+            "avgRunTimeDisplay": "avgRunTimeDisplay",
+            "lastRunTimeDisplay": "lastRunTimeDisplay",
+            "runCount": "runCount",
+            "runTime": "runTime",
+            "firstRun": "firstRun",
+            "lastRun": "lastRun",
+            "simulation": "simulation",
+            "enforceVariables": "enforceVariables",
+            "lockVariables": "lockVariables",
+            "overrideInstanceWait": "overrideInstanceWait",
+            "timeZonePref": "timeZonePref",
+            "type": "type",
+            "agent": "agent",
+            "agentVar": "agentVar",
+            "agentCluster": "agentCluster",
+            "agentClusterVar": "agentClusterVar",
+            "broadcastCluster": "broadcastCluster",
+            "broadcastClusterVar": "broadcastClusterVar",
+            "command": "command",
+            "commandOrScript": "commandOrScript",
+            "script": "script",
+            "runtimeDir": "runtimeDir",
+            "parameters": "parameters",
+            "exitCodes": "exitCodes",
+            "exitCodeProcessing": "exitCodeProcessing",
+            "exitCodeText": "exitCodeText",
+            "exitCodeOutput": "exitCodeOutput",
+            "outputType": "outputType",
+            "retryExitCodes": "retryExitCodes",
+            "waitForOutput": "waitForOutput",
+            "outputFailureOnly": "outputFailureOnly",
+            "outputReturnType": "outputReturnType",
+            "outputReturnFile": "outputReturnFile",
+            "outputReturnSline": "outputReturnSline",
+            "outputReturnNline": "outputReturnNline",
+            "outputReturnText": "outputReturnText",
+            "runAsSudo": "runAsSudo",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)

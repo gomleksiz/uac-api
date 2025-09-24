@@ -243,11 +243,24 @@ class Connections:
     def create_peoplesoft_connection(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - name: name
+        - description: description
+        - server: server
+        - port: port
+        - endpoint: endpoint
+        - credentials: credentials
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/peoplesoftconnection"
         field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
+            "server": "server",
+            "port": "port",
+            "endpoint": "endpoint",
+            "credentials": "credentials",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)

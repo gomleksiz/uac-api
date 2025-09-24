@@ -29,11 +29,22 @@ class Scripts:
     def create_script(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - scriptName: scriptName
+        - scriptType: scriptType
+        - description: description
+        - content: content
+        - resolveVariables: resolveVariables
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/script"
         field_mapping = {
+            "sysId": "sysId",
+            "scriptName": "scriptName",
+            "scriptType": "scriptType",
+            "description": "description",
+            "content": "content",
+            "resolveVariables": "resolveVariables",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
