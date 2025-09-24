@@ -29,12 +29,23 @@ class UserGroups:
     def create_user_group(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - name: name
+        - email: email
+        - description: description
+        - parent: parent
+        - ctrlNavigationVisibility: ctrlNavigationVisibility
         """
         url = "/resources/usergroup"
         field_mapping = {
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "name": "name",
+            "email": "email",
+            "description": "description",
+            "parent": "parent",
+            "ctrlNavigationVisibility": "ctrlNavigationVisibility",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
