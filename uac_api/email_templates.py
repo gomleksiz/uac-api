@@ -44,11 +44,30 @@ class EmailTemplates:
     def create_email_template(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
+        - templateName: templateName
+        - description: description
+        - connection: connection
+        - replyTo: replyTo
+        - to: to
+        - cc: cc
+        - bcc: bcc
+        - subject: subject
+        - body: body
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
         """
         url = "/resources/emailtemplate"
         field_mapping = {
+            "sysId": "sysId",
+            "templateName": "templateName",
+            "description": "description",
+            "connection": "connection",
+            "replyTo": "replyTo",
+            "to": "to",
+            "cc": "cc",
+            "bcc": "bcc",
+            "subject": "subject",
+            "body": "body",
             "retainSysIds": "retainSysIds",
         }
         _payload = prepare_payload(payload, field_mapping, args)
