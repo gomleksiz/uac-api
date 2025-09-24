@@ -259,7 +259,7 @@ class Tasks:
         - simulate: simulate
         - variables: variables
         """
-        url = "/resources/task/ops-task-launch"
+        url = "/resources/task/launch"
         field_mapping = {
             "name": "name",
             "hold": "hold",

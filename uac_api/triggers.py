@@ -331,7 +331,7 @@ class Triggers:
         return self.uc.get(url, query=parameters)
 
     def enable_disable(self, payload=None, **args):
-        url = "/resources/trigger/ops-enable-disable-trigger"
+        url = "/resources/trigger/enabledisable"
         field_mapping = {
             "enable": "enable",
             "name": "name",
