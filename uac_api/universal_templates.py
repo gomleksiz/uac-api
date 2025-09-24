@@ -99,7 +99,6 @@ class UniversalTemplates:
         url = "/resources/universaltemplate"
         field_mapping = {
             "sysId": "sysId",
-            "excludeRelated": "excludeRelated",
             "name": "name",
             "description": "description",
             "variablePrefix": "variablePrefix",
