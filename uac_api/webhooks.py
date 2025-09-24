@@ -77,8 +77,6 @@ class Webhooks:
         url = "/resources/webhook"
         field_mapping = {
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "description": "description",
             "action": "action",

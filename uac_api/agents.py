@@ -127,7 +127,6 @@ class Agents:
             "tlsSniHostName": "tlsSniHostName",
             "transient": "transient",
             "type": "type",
-            "version": "version",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload)

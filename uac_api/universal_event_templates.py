@@ -29,10 +29,7 @@ class UniversalEventTemplates:
     def update_universal_event_template(self, payload=None, **args):
         url = "/resources/universaleventtemplate"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "label": "label",
             "description": "description",

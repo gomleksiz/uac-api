@@ -933,11 +933,8 @@ class TaskInstances:
             "scope": "scope",
         }
         payload_fields = {
-            "version": "version",
             "sysId": "sysId",
             "excludeRelated": "excludeRelated",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "notes": "notes",
             "actions": "actions",
             "outputs": "outputs",

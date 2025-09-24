@@ -134,8 +134,6 @@ class Bundles:
         field_mapping = {
             "sysId": "sysId",
             "excludeRelated": "excludeRelated",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "businessServices": "businessServices",
             "typesToInclude": "typesToInclude",
@@ -149,8 +147,6 @@ class Bundles:
         url = "/resources/bundle/bybusinessservices"
         field_mapping = {
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "businessServices": "businessServices",
             "typesToInclude": "typesToInclude",
@@ -282,8 +278,6 @@ class Bundles:
         url = "/resources/promotiontarget"
         field_mapping = {
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "description": "description",
             "uri": "uri",

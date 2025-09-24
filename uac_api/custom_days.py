@@ -31,10 +31,7 @@ class CustomDays:
     def update_custom_day(self, payload=None, **args):
         url = "/resources/customday"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "comments": "comments",
             "category": "category",

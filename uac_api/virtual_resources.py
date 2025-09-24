@@ -31,14 +31,11 @@ class VirtualResources:
     def update_virtual_resource(self, payload=None, **args):
         url = "/resources/virtual"
         field_mapping = {
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "limit": "limit",
             "name": "name",
             "summary": "summary",
             "sysId": "sysId",
             "type": "type",
-            "version": "version",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)

@@ -44,10 +44,7 @@ class Credentials:
     def update_credential(self, payload=None, **args):
         url = "/resources/credential"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "description": "description",
             "runtimeUser": "runtimeUser",

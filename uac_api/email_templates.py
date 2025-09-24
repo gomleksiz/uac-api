@@ -24,10 +24,7 @@ class EmailTemplates:
     def update_email_template(self, payload=None, **args):
         url = "/resources/emailtemplate"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "templateName": "templateName",
             "description": "description",
             "connection": "connection",
