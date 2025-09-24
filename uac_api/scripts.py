@@ -22,8 +22,27 @@ class Scripts:
         return self.uc.get(url, query=parameters)
 
     def update_script(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - scriptName: scriptName
+        - scriptType: scriptType
+        - description: description
+        - content: content
+        - resolveVariables: resolveVariables
+        - retainSysIds: retainSysIds
+        """
         url = "/resources/script"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "scriptName": "scriptName",
+            "scriptType": "scriptType",
+            "description": "description",
+            "content": "content",
+            "resolveVariables": "resolveVariables",
+            "retainSysIds": "retainSysIds",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_script(self, payload=None, **args):
