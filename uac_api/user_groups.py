@@ -22,8 +22,27 @@ class UserGroups:
         return self.uc.get(url, query=parameters)
 
     def update_user_group(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - retainSysIds: retainSysIds
+        - name: name
+        - email: email
+        - description: description
+        - parent: parent
+        - ctrlNavigationVisibility: ctrlNavigationVisibility
+        """
         url = "/resources/usergroup"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "retainSysIds": "retainSysIds",
+            "name": "name",
+            "email": "email",
+            "description": "description",
+            "parent": "parent",
+            "ctrlNavigationVisibility": "ctrlNavigationVisibility",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_user_group(self, payload=None, **args):

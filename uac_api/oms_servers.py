@@ -26,7 +26,34 @@ class OmsServers:
         return self.uc.get(url, query=parameters)
 
     def update_oms_server(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - serverAddress: serverAddress
+        - description: description
+        - status: status
+        - timeout: timeout
+        - sessionStatus: sessionStatus
+        - suspended: suspended
+        - lastConnected: lastConnected
+        - lastConnectedTime: lastConnectedTime
+        - authenticate: authenticate
+        - retainSysIds: retainSysIds
+        """
         url = "/resources/omsserver"
+        field_mapping = {
+            "sysId": "sysId",
+            "serverAddress": "serverAddress",
+            "description": "description",
+            "status": "status",
+            "timeout": "timeout",
+            "sessionStatus": "sessionStatus",
+            "suspended": "suspended",
+            "lastConnected": "lastConnected",
+            "lastConnectedTime": "lastConnectedTime",
+            "authenticate": "authenticate",
+            "retainSysIds": "retainSysIds",
+        }
         _payload = payload
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
