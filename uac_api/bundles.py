@@ -133,7 +133,6 @@ class Bundles:
         url = "/resources/bundle/bydate"
         field_mapping = {
             "sysId": "sysId",
-            "excludeRelated": "excludeRelated",
             "exportReleaseLevel": "exportReleaseLevel",
             "exportTable": "exportTable",
             "name": "name",

@@ -30,10 +30,7 @@ class OAuthClients:
     def update_oauth_client(self, payload=None, **args):
         url = "/resources/oauthclient"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "description": "description",
             "provider": "provider",

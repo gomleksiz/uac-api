@@ -32,10 +32,7 @@ class Variables:
     def update_variable(self, payload=None, **args):
         url = "/resources/variable"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "value": "value",
             "description": "description",

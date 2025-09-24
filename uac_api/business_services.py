@@ -30,8 +30,6 @@ class BusinessServices:
         url = "/resources/businessservice"
         field_mapping = {
             "description": "description",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "sysId": "sysId",
         }

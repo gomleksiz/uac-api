@@ -31,10 +31,7 @@ class Connections:
     def update_database_connection(self, payload=None, **args):
         url = "/resources/databaseconnection"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "dbType": "dbType",
             "dbUrl": "dbUrl",
@@ -109,10 +106,7 @@ class Connections:
     def update_email_connection(self, payload=None, **args):
         url = "/resources/emailconnection"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "smtp": "smtp",
             "smtpPort": "smtpPort",
@@ -226,10 +220,7 @@ class Connections:
     def update_peoplesoft_connection(self, payload=None, **args):
         url = "/resources/peoplesoftconnection"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "description": "description",
             "server": "server",
@@ -301,10 +292,7 @@ class Connections:
     def update_sap_connection(self, payload=None, **args):
         url = "/resources/sapconnection"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "sapConnectionType": "sapConnectionType",
             "sapAshost": "sapAshost",
@@ -453,8 +441,6 @@ class Connections:
             - sysId: sysId
             - retainSysIds: retainSysIds
             - excludeRelated: excludeRelated
-            - exportReleaseLevel: exportReleaseLevel
-            - exportTable: exportTable
             - name: name
             - managerAddress: managerAddress
             - managerPort: managerPort
@@ -464,12 +450,9 @@ class Connections:
         """
         url = "/resources/snmpmanager"
         field_mapping = {
-            "version": "version",
             "sysId": "sysId",
             "retainSysIds": "retainSysIds",
             "excludeRelated": "excludeRelated",
-            "exportReleaseLevel": "exportReleaseLevel",
-            "exportTable": "exportTable",
             "name": "name",
             "managerAddress": "managerAddress",
             "managerPort": "managerPort",

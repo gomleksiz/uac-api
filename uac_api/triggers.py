@@ -165,7 +165,6 @@ class Triggers:
         url = "/resources/trigger"
         field_mapping = {
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
             "name": "name",
             "description": "description",
             "calendar": "calendar",
@@ -223,7 +222,6 @@ class Triggers:
         field_mapping = {
             "sysId": "sysId",
             "excludeRelated": "excludeRelated",
-            "exportReleaseLevel": "exportReleaseLevel",
             "retainSysIds": "retainSysIds",
             "name": "name",
             "description": "description",

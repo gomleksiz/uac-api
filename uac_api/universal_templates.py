@@ -37,7 +37,6 @@ class UniversalTemplates:
         url = "/resources/universaltemplate"
         field_mapping = {
             "sysId": "sysId",
-            "exportReleaseLevel": "exportReleaseLevel",
             "name": "name",
             "description": "description",
             "variablePrefix": "variablePrefix",
@@ -100,8 +99,6 @@ class UniversalTemplates:
         url = "/resources/universaltemplate"
         field_mapping = {
             "sysId": "sysId",
-            "excludeRelated": "excludeRelated",
-            "exportReleaseLevel": "exportReleaseLevel",
             "name": "name",
             "description": "description",
             "variablePrefix": "variablePrefix",
