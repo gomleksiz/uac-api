@@ -207,7 +207,7 @@ class Triggers:
             "dayOfMonth": "dayOfMonth",
             "month": "month",
             "dayOfWeek": "dayOfWeek",
-            "dayLogic": "dayLogic"
+            "dayLogic": "dayLogic",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
@@ -265,7 +265,7 @@ class Triggers:
             "dayOfMonth": "dayOfMonth",
             "month": "month",
             "dayOfWeek": "dayOfWeek",
-            "dayLogic": "dayLogic"
+            "dayLogic": "dayLogic",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)
