@@ -167,8 +167,8 @@ class Webhooks:
             "webhookid": "webhookid",
             "webhookname": "webhookname",
         }
-        _payload = prepare_query_params(query, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=parameters)
 
     def enable_webhook(self, query=None, **args):
         """
@@ -181,8 +181,8 @@ class Webhooks:
             "webhookid": "webhookid",
             "webhookname": "webhookname",
         }
-        _payload = prepare_query_params(query, field_mapping, args)
-        return self.uc.post(url, json_data=_payload)
+        parameters = prepare_query_params(query, field_mapping, args)
+        return self.uc.post(url, query=parameters)
 
     def list_webhooks(self, query=None, **args):
         """
