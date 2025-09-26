@@ -156,7 +156,7 @@ class Webhooks:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.delete(url, query=parameters, parse_response=False)
 
-    def disable_webhook(self, payload=None, **args):
+    def disable_webhook(self, query=None, **args):
         """
         Arguments:
         - webhookid: webhookid
@@ -167,10 +167,10 @@ class Webhooks:
             "webhookid": "webhookid",
             "webhookname": "webhookname",
         }
-        _payload = prepare_payload(payload, field_mapping, args)
+        _payload = prepare_query_params(query, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
-    def enable_webhook(self, payload=None, **args):
+    def enable_webhook(self, query=None, **args):
         """
         Arguments:
         - webhookid: webhookid
@@ -181,7 +181,7 @@ class Webhooks:
             "webhookid": "webhookid",
             "webhookname": "webhookname",
         }
-        _payload = prepare_payload(payload, field_mapping, args)
+        _payload = prepare_query_params(query, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
     def list_webhooks(self, query=None, **args):
