@@ -24,4 +24,6 @@ class Ldaps:
         url = "/resources/ldap/changebindpwd"
         _payload = password
         headers = {"accept": "text/plain", "Content-Type": "text/plain"}
-        return self.uc.post(url, json_data=_payload, headers=headers, parse_response=False)
+        return self.uc.post(
+            url, json_data=_payload, headers=headers, parse_response=False
+        )
