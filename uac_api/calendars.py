@@ -30,7 +30,7 @@ class Calendars:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def add_custom_day(self, payload=None, **args):
+    def add_custom_day(self, query=None, **args):
         """
         Arguments:
         - calendarid: calendarid
@@ -45,7 +45,7 @@ class Calendars:
             "customdayid": "customdayid",
             "customdayname": "customdayname",
         }
-        _payload = prepare_payload(payload, field_mapping, args)
+        _payload = prepare_query_params(query, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
 
     def remove_custom_day(self, query=None, **args):
