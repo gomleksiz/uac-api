@@ -83,7 +83,7 @@ class Calendars:
     def update_calendar(self, payload=None, **args):
         url = "/resources/calendar"
         _payload = payload
-        return self.uc.put(url, json_data=_payload)
+        return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_calendar(self, payload=None, **args):
         """
