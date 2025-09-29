@@ -19,14 +19,11 @@ class Properties:
         parameters = prepare_query_params(query, field_mapping, args)
         return self.uc.get(url, query=parameters)
 
-    def update_property(self, payload=None, query=None, **args):
+    def update_property(self, query=None, **args):
         url = "/resources/property"
         query_fields = {"propertyname": "propertyname", "value": "value"}
-        payload_fields = {}
-        _query, _payload = prepare_query_payload(
-            query, query_fields, payload, payload_fields, args
-        )
-        return self.uc.put(url, query=_query, json_data=_payload, parse_response=False)
+        _query = prepare_query_params(query, query_fields, args)
+        return self.uc.put(url, query=_query, parse_response=False)
 
     def list_properties(self):
         url = "/resources/property/list"
