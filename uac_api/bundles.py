@@ -75,8 +75,37 @@ class Bundles:
         return self.uc.get(url, query=parameters)
 
     def update_bundle(self, payload=None, **args):
+        """
+        Arguments:
+        - name: name
+        - sysId: sysId
+        - description: description
+        - defaultPromotionTarget: defaultPromotionTarget
+        - excludeOnExistence: excludeOnExistence
+        - followReferences: followReferences
+        - promoteBundleDefinition: promoteBundleDefinition
+        - visibleTo: visibleTo
+        - updated: updated
+        - updatedBy: updatedBy
+        - created: created
+        - createdBy: createdBy
+        """
         url = "/resources/bundle"
-        _payload = payload
+        field_mapping = {
+            "name": "name",
+            "sysId": "sysId",
+            "description": "description",
+            "defaultPromotionTarget": "defaultPromotionTarget",
+            "excludeOnExistence": "excludeOnExistence",
+            "followReferences": "followReferences",
+            "promoteBundleDefinition": "promoteBundleDefinition",
+            "visibleTo": "visibleTo",
+            "updated": "updated",
+            "updatedBy": "updatedBy",
+            "created": "created",
+            "createdBy": "createdBy",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_bundle(self, payload=None, **args):

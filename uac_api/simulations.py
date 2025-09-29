@@ -30,8 +30,46 @@ class Simulations:
         return self.uc.get(url, query=parameters)
 
     def update_simulation(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - retainSysIds: retainSysIds
+        - task: task
+        - workflow: workflow
+        - vertexId: vertexId
+        - status: status
+        - exitCode: exitCode
+        - publishStatus: publishStatus
+        - publishLateStart: publishLateStart
+        - publishLateFinish: publishLateFinish
+        - publishEarlyFinish: publishEarlyFinish
+        - abortActions: abortActions
+        - emailNotificationActions: emailNotificationActions
+        - variableActions: variableActions
+        - snmpNotificationActions: snmpNotificationActions
+        - systemOperationActions: systemOperationActions
+        - otherOptions: otherOptions
+        """
         url = "/resources/simulation"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "task": "task",
+            "workflow": "workflow",
+            "vertexId": "vertexId",
+            "status": "status",
+            "exitCode": "exitCode",
+            "publishStatus": "publishStatus",
+            "publishLateStart": "publishLateStart",
+            "publishLateFinish": "publishLateFinish",
+            "publishEarlyFinish": "publishEarlyFinish",
+            "abortActions": "abortActions",
+            "emailNotificationActions": "emailNotificationActions",
+            "variableActions": "variableActions",
+            "snmpNotificationActions": "snmpNotificationActions",
+            "systemOperationActions": "systemOperationActions",
+            "otherOptions": "otherOptions",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_simulation(self, payload=None, **args):

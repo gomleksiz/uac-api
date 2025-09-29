@@ -16,8 +16,43 @@ class Ldaps:
         return self.uc.get(url)
 
     def update_ldap(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - url: url
+        - bindDn: bindDn
+        - bindPassword: bindPassword
+        - useForAuthentication: useForAuthentication
+        - allowLocalLogin: allowLocalLogin
+        - baseDn: baseDn
+        - userIdAttribute: userIdAttribute
+        - userFilter: userFilter
+        - groupFilter: groupFilter
+        - connectTimeout: connectTimeout
+        - readTimeout: readTimeout
+        - userMembershipAttribute: userMembershipAttribute
+        - groupMemberAttribute: groupMemberAttribute
+        - loginMethod: loginMethod
+        """
         url = "/resources/ldap"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "url": "url",
+            "bindDn": "bindDn",
+            "bindPassword": "bindPassword",
+            "useForAuthentication": "useForAuthentication",
+            "allowLocalLogin": "allowLocalLogin",
+            "baseDn": "baseDn",
+            "userIdAttribute": "userIdAttribute",
+            "userFilter": "userFilter",
+            "groupFilter": "groupFilter",
+            "connectTimeout": "connectTimeout",
+            "readTimeout": "readTimeout",
+            "userMembershipAttribute": "userMembershipAttribute",
+            "groupMemberAttribute": "groupMemberAttribute",
+            "loginMethod": "loginMethod",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def update_ldap_bind_password(self, password=None, **args):

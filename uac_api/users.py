@@ -80,19 +80,103 @@ class Users:
         return self.uc.get(url, query=parameters)
 
     def update_user(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - userName: userName
+        - userPassword: userPassword
+        - firstName: firstName
+        - middleName: middleName
+        - lastName: lastName
+        - email: email
+        - title: title
+        - active: active
+        - lockedOut: lockedOut
+        - passwordNeedsReset: passwordNeedsReset
+        - businessPhone: businessPhone
+        - mobilePhone: mobilePhone
+        - timeZone: timeZone
+        - department: department
+        - manager: manager
+        - browserAccess: browserAccess
+        - commandLineAccess: commandLineAccess
+        - webServiceAccess: webServiceAccess
+        - loginMethod: loginMethod
+        """
         url = "/resources/user"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "userName": "userName",
+            "userPassword": "userPassword",
+            "firstName": "firstName",
+            "middleName": "middleName",
+            "lastName": "lastName",
+            "email": "email",
+            "title": "title",
+            "active": "active",
+            "lockedOut": "lockedOut",
+            "passwordNeedsReset": "passwordNeedsReset",
+            "businessPhone": "businessPhone",
+            "mobilePhone": "mobilePhone",
+            "timeZone": "timeZone",
+            "department": "department",
+            "manager": "manager",
+            "browserAccess": "browserAccess",
+            "commandLineAccess": "commandLineAccess",
+            "webServiceAccess": "webServiceAccess",
+            "loginMethod": "loginMethod",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_user(self, payload=None, **args):
         """
         Arguments:
+        - sysId: sysId
         - retainSysIds: retainSysIds
-            False will ignore sysIds in the payload and create a new task
+        - userName: userName
+        - userPassword: userPassword
+        - firstName: firstName
+        - middleName: middleName
+        - lastName: lastName
+        - email: email
+        - title: title
+        - active: active
+        - lockedOut: lockedOut
+        - passwordNeedsReset: passwordNeedsReset
+        - businessPhone: businessPhone
+        - mobilePhone: mobilePhone
+        - timeZone: timeZone
+        - department: department
+        - manager: manager
+        - browserAccess: browserAccess
+        - commandLineAccess: commandLineAccess
+        - webServiceAccess: webServiceAccess
+        - loginMethod: loginMethod
         """
         url = "/resources/user"
         field_mapping = {
+            "sysId": "sysId",
             "retainSysIds": "retainSysIds",
+            "userName": "userName",
+            "userPassword": "userPassword",
+            "firstName": "firstName",
+            "middleName": "middleName",
+            "lastName": "lastName",
+            "email": "email",
+            "title": "title",
+            "active": "active",
+            "lockedOut": "lockedOut",
+            "passwordNeedsReset": "passwordNeedsReset",
+            "businessPhone": "businessPhone",
+            "mobilePhone": "mobilePhone",
+            "timeZone": "timeZone",
+            "department": "department",
+            "manager": "manager",
+            "browserAccess": "browserAccess",
+            "commandLineAccess": "commandLineAccess",
+            "webServiceAccess": "webServiceAccess",
+            "loginMethod": "loginMethod",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload, parse_response=False)

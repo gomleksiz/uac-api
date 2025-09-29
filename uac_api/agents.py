@@ -265,8 +265,57 @@ class AgentClusters:
         return self.uc.get(url, query=parameters)
 
     def update_agent_cluster(self, payload=None, **args):
+        """
+        Arguments:
+        - sysId: sysId
+        - name: name
+        - description: description
+        - strictBsrvcMembership: strictBsrvcMembership
+        - distribution: distribution
+        - networkAlias: networkAlias
+        - networkAliasPort: networkAliasPort
+        - resolutionStatus: resolutionStatus
+        - resolutionDescription: resolutionDescription
+        - lastResolution: lastResolution
+        - limitType: limitType
+        - limitAmount: limitAmount
+        - currentCount: currentCount
+        - suspended: suspended
+        - suspendedOn: suspendedOn
+        - resumedOn: resumedOn
+        - agentLimitType: agentLimitType
+        - agentLimitAmount: agentLimitAmount
+        - lastAgentUsed: lastAgentUsed
+        - ignoreInactiveAgents: ignoreInactiveAgents
+        - ignoreSuspendedAgents: ignoreSuspendedAgents
+        - type: type
+        """
         url = "/resources/agentcluster"
-        _payload = payload
+        field_mapping = {
+            "sysId": "sysId",
+            "name": "name",
+            "description": "description",
+            "strictBsrvcMembership": "strictBsrvcMembership",
+            "distribution": "distribution",
+            "networkAlias": "networkAlias",
+            "networkAliasPort": "networkAliasPort",
+            "resolutionStatus": "resolutionStatus",
+            "resolutionDescription": "resolutionDescription",
+            "lastResolution": "lastResolution",
+            "limitType": "limitType",
+            "limitAmount": "limitAmount",
+            "currentCount": "currentCount",
+            "suspended": "suspended",
+            "suspendedOn": "suspendedOn",
+            "resumedOn": "resumedOn",
+            "agentLimitType": "agentLimitType",
+            "agentLimitAmount": "agentLimitAmount",
+            "lastAgentUsed": "lastAgentUsed",
+            "ignoreInactiveAgents": "ignoreInactiveAgents",
+            "ignoreSuspendedAgents": "ignoreSuspendedAgents",
+            "type": "type",
+        }
+        _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.put(url, json_data=_payload, parse_response=False)
 
     def create_agent_cluster(self, payload=None, **args):
