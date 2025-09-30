@@ -45,6 +45,9 @@ class BusinessServices:
         url = "/resources/businessservice"
         field_mapping = {
             "retainSysIds": "retainSysIds",
+            "description": "description",
+            "name": "name",
+            "sysId": "sysId",
         }
         _payload = prepare_payload(payload, field_mapping, args)
         return self.uc.post(url, json_data=_payload)
